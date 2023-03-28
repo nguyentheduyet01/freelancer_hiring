@@ -1,9 +1,17 @@
-.buttonSubmit{
-  background-color: 'transparent' !important;
-  width: '35px' !important;
-  height: '35px' !important;
-  position: 'absolute';
-  top: '3px';
-  right: '0';
-  color: #5a645a;
+.menu-item{
+  padding: 27px 0 27px 0;
+  font-weight: 500 !important;
+  cursor: pointer;
 }
+
+.menu-item:hover{
+  color: #108a00;
+}
+
+/* .dropdown{
+  display: none;
+}
+
+.dropdown.active{
+  display: block;
+} */
