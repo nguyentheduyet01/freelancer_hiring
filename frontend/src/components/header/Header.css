@@ -1,0 +1,17 @@
+.menu-item{
+  padding: 27px 0 27px 0;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.menu-item:hover{
+  color: #108a00;
+}
+
+/* .dropdown{
+  display: none;
+}
+
+.dropdown.active{
+  display: block;
+} */
