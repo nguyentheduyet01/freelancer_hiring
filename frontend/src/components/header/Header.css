@@ -8,6 +8,24 @@
   color: #108a00;
 }
 
+#dropdown-basic-button{
+  background-color: transparent !important;
+  border: none;
+  color: #5a645a;
+  padding: 0%;
+}
+
+.Notification{
+  position: relative;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecebeb;
+  margin-left: 10px;
+}
 /* .dropdown{
   display: none;
 }
