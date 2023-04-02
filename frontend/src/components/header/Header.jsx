@@ -3,8 +3,13 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Search, ChevronDown } from "react-bootstrap-icons";
 import DDFreelance from "../dropdown/DDFreelance";
 import "./Header.css";
+import DDFindJob from "./../dropdown/DDFindJob";
+import Avatar from "../avatar/Avatar";
+
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
+  const [isShowJob, setIsShowJob] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <>
@@ -31,10 +36,11 @@ const Header = () => {
               <Col xm lg='5'>
                 <span
                   className='menu-item'
-                  // onMouseLeave={() => setIsShow(() => false)}
-                  // onMouseEnter={() => setIsShow(() => true)}
+                  onMouseLeave={() => setIsShowJob(() => false)}
+                  onMouseEnter={() => setIsShowJob(() => true)}
                 >
                   Tuyển dụng
+                  {isShowJob && <DDFindJob />}
                 </span>
                 <span>
                   <ChevronDown size={12} />
@@ -42,13 +48,16 @@ const Header = () => {
               </Col>
             </Row>
           </Col>
-          <Col xs xm lg='4'>
+          <Col xs xm lg='3'>
             <Row className='mt-3'>
-              <Col xm lg='3'></Col>
               <Col style={{ padding: "15  px 0 0 0" }}>
                 <Form style={{ width: "90%", position: "relative" }}>
                   <Form.Group className='mb-3' controlId='formBasicEmail'>
-                    <Form.Control type='text' placeholder='search' style={{ fontSize: "110%" }} />
+                    <Form.Control
+                      type='text'
+                      placeholder='search'
+                      style={{ fontSize: "110%", borderRadius: "100px" }}
+                    />
                   </Form.Group>
                   <Button
                     type='submit'
@@ -64,9 +73,13 @@ const Header = () => {
                     }}
                   >
                     <Search
-                      size={25}
+                      size={20}
                       color='#5a645a'
-                      style={{ position: "absolute", top: "5px", right: "5" }}
+                      style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "7px",
+                      }}
                     />
                   </Button>
                 </Form>
@@ -80,14 +93,20 @@ const Header = () => {
               justifyContent: "center",
             }}
           >
-            <Row>
-              <Col>
-                <Button variant='light'>Login</Button>
-              </Col>
-              <Col>
-                <Button variant='success'>Register</Button>
-              </Col>
-            </Row>
+            {isLogin ? (
+              <>
+                <Avatar />
+              </>
+            ) : (
+              <Row>
+                <Col>
+                  <Button variant='light'>Login</Button>
+                </Col>
+                <Col>
+                  <Button variant='success'>Register</Button>
+                </Col>
+              </Row>
+            )}
           </Col>
         </Row>
       </div>
