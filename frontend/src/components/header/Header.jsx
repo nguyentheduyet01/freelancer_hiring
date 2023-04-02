@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Search, ChevronDown } from "react-bootstrap-icons";
+import { Search, ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import DDFreelance from "../dropdown/DDFreelance";
 import "./Header.css";
 import DDFindJob from "./../dropdown/DDFindJob";
@@ -29,9 +29,7 @@ const Header = () => {
                   Tìm kiếm việc làm
                   {isShow && <DDFreelance />}
                 </span>
-                <span>
-                  <ChevronDown size={12} />
-                </span>
+                <span>{isShow ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
               <Col xm lg='5'>
                 <span
@@ -42,9 +40,7 @@ const Header = () => {
                   Tuyển dụng
                   {isShowJob && <DDFindJob />}
                 </span>
-                <span>
-                  <ChevronDown size={12} />
-                </span>
+                <span>{isShowJob ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
             </Row>
           </Col>

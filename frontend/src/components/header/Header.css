@@ -5,7 +5,7 @@
 }
 
 .menu-item:hover{
-  color: #108a00;
+  color: #362FD9;
 }
 
 #dropdown-basic-button{
@@ -26,10 +26,10 @@
   background-color: #ecebeb;
   margin-left: 10px;
 }
-/* .dropdown{
-  display: none;
-}
 
-.dropdown.active{
-  display: block;
-} */
+.dropdown-item{
+  height: 40px !important;
+  padding: 0;
+  display: flex !important;
+  align-items: center;
+}
