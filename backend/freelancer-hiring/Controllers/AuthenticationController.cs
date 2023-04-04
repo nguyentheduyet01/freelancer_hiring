@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using freelancer_hiring.Models;
+using freelancer_hiring.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,22 @@ namespace freelancer_hiring.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        // GET: api/<AuthenticationController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IAuthenticationServices _authenticationService;
+        public AuthenticationController(IAuthenticationServices authenticationService)
         {
-            return new string[] { "value12", "value2" };
+            _authenticationService = authenticationService;
         }
-
-        // GET api/<AuthenticationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<AuthenticationController>
+        [Route("login")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Account>> Login(string username, string password)
         {
-        }
+            var account = await _authenticationService.Login(username, password);
 
-        // PUT api/<AuthenticationController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AuthenticationController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (account == null)
+            {
+                return NotFound();
+            }
+            return Ok(account);
         }
     }
 }
