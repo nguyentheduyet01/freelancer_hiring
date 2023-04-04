@@ -6,7 +6,7 @@
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
-   "OutputContextPath": null,
+   "OutputContextPath": "Data",
    "OutputPath": "Models",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "freelancer_hiring",
@@ -24,6 +24,10 @@
       },
       {
          "Name": "[dbo].[CV]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[images]",
          "ObjectType": 0
       },
       {
