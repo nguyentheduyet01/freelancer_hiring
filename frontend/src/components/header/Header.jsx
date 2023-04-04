@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Search, ChevronDown, ChevronUp } from "react-bootstrap-icons";
+import { Search, ChevronDown, ChevronUp, ChevronRight } from "react-bootstrap-icons";
 import DDFreelance from "../dropdown/DDFreelance";
 import "./Header.css";
 import DDFindJob from "./../dropdown/DDFindJob";
@@ -26,7 +26,7 @@ const Header = () => {
                   onMouseLeave={() => setIsShow(() => false)}
                   onMouseEnter={() => setIsShow(() => true)}
                 >
-                  Tìm kiếm việc làm
+                  <span>Tìm kiếm việc làm</span>
                   {isShow && <DDFreelance />}
                 </span>
                 <span>{isShow ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
@@ -34,10 +34,10 @@ const Header = () => {
               <Col xm lg='5'>
                 <span
                   className='menu-item'
-                  onMouseLeave={() => setIsShowJob(() => false)}
+                  onMouseLeave={() => setIsShowJob(() => true)}
                   onMouseEnter={() => setIsShowJob(() => true)}
                 >
-                  Tuyển dụng
+                  <span>Tuyển dụng</span>
                   {isShowJob && <DDFindJob />}
                 </span>
                 <span>{isShowJob ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
@@ -47,12 +47,21 @@ const Header = () => {
           <Col xs xm lg='3'>
             <Row className='mt-3'>
               <Col style={{ padding: "15  px 0 0 0" }}>
-                <Form style={{ width: "90%", position: "relative" }}>
-                  <Form.Group className='mb-3' controlId='formBasicEmail'>
+                <Form
+                  style={{
+                    position: "relative",
+                    borderRadius: "100px",
+                    border: "1px solid black",
+                    height: "38px",
+                    overflow: "hidden",
+                  }}
+                  className='formSearch'
+                >
+                  <Form.Group className='' controlId='formBasicEmail' style={{ width: "260px" }}>
                     <Form.Control
                       type='text'
                       placeholder='search'
-                      style={{ fontSize: "110%", borderRadius: "100px" }}
+                      style={{ fontSize: "110%", border: "none", padding: "0 0 0 8px" }}
                     />
                   </Form.Group>
                   <Button
