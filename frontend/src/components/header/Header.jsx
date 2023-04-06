@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Search, ChevronDown, ChevronUp, ChevronRight } from "react-bootstrap-icons";
-import DDFreelance from "../dropdown/DDFreelance";
-import "./Header.css";
-import DDFindJob from "./../dropdown/DDFindJob";
+import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
 import Avatar from "../avatar/Avatar";
+import DDFreelance from "../dropdown/DDFreelance";
+import DDFindJob from "./../dropdown/DDFindJob";
+import "./Header.css";
 
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
@@ -34,7 +34,7 @@ const Header = () => {
               <Col xm lg='5'>
                 <span
                   className='menu-item'
-                  onMouseLeave={() => setIsShowJob(() => true)}
+                  onMouseLeave={() => setIsShowJob(() => false)}
                   onMouseEnter={() => setIsShowJob(() => true)}
                 >
                   <span>Tuyển dụng</span>
