@@ -9,6 +9,7 @@
   justify-content: between;
   align-items: center;
 }
+
 .menu-item{
   padding: 27px 0 27px 0;
   font-weight: 500 !important;
@@ -57,7 +58,8 @@
   color: rgb(151, 150, 150) !important;
   font-weight: 400;
   font-size: 90%;
-  word-wrap: break-word
+  word-wrap: break-word;
+  border-radius: 5px;
 }
 .block-title{
   width: 310px !important;
@@ -67,6 +69,7 @@
   align-items: start;
   justify-content: center;
   position: relative;
+  border-radius:10px ;
 }
 
 .block-title:hover{
@@ -93,3 +96,4 @@
   background-color: transparent !important;
   color: #6ad8cd !important;
 }
+

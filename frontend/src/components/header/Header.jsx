@@ -51,13 +51,13 @@ const Header = () => {
                   style={{
                     position: "relative",
                     borderRadius: "100px",
-                    border: "1px solid black",
+                    border: "2px solid #e4ebe4",
                     height: "38px",
                     overflow: "hidden",
                   }}
                   className='formSearch'
                 >
-                  <Form.Group className='' controlId='formBasicEmail' style={{ width: "260px" }}>
+                  <Form.Group className='' controlId='formBasicEmail' style={{ width: "240px" }}>
                     <Form.Control
                       type='text'
                       placeholder='search'
@@ -69,12 +69,13 @@ const Header = () => {
                     className='buttonSubmit'
                     style={{
                       backgroundColor: "transparent",
-                      width: "35px",
+                      width: "60px",
                       height: "35px",
                       position: "absolute",
-                      top: "3px",
+                      top: "0px",
                       right: "0",
                       border: "none",
+                      borderRadius: "50px",
                     }}
                   >
                     <Search
@@ -82,8 +83,8 @@ const Header = () => {
                       color='#5a645a'
                       style={{
                         position: "absolute",
-                        top: "5px",
-                        right: "7px",
+                        top: "7px",
+                        right: "15px",
                       }}
                     />
                   </Button>
