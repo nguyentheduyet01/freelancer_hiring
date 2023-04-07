@@ -1,4 +1,5 @@
 ﻿using freelancer_hiring.Data;
+using freelancer_hiring.DTO;
 using freelancer_hiring.Models;
 using freelancer_hiring.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -7,20 +8,20 @@ namespace freelancer_hiring.Repositories
 {
     public class AuthenticationRepository :IAuthenticationRepository
     {
-        private readonly Database _dBShop;
+        private readonly DataContext _db;
 
         public AuthenticationRepository()
         {
         }
 
-        public AuthenticationRepository(Database dBShop)
+        public AuthenticationRepository(DataContext db)
         {
-            _dBShop = dBShop;
+            _db = db;
         }
 
         public async Task<Account> FindByUsernameAsync(string username)
         {
-            return await _dBShop.Account.Where(n => n.Username == username).FirstOrDefaultAsync();
+            return await _db.Account.Where(n => n.Username == username).FirstOrDefaultAsync();
         }
     }
 }

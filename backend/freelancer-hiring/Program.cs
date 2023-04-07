@@ -14,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IAuthenticationServices, AuthenticationServices>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
@@ -21,10 +22,10 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<freelancer_hiring.Data.Database>(
+builder.Services.AddDbContext<freelancer_hiring.Data.DataContext>(
     options =>
     {
-        options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:connectdata").Value);
+        options.UseSqlServer(builder.Configuration.GetConnectionString("connectdata"));
     });
 
 var app = builder.Build();
