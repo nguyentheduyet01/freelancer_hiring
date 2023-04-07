@@ -1,4 +1,5 @@
-﻿using freelancer_hiring.Models;
+﻿using freelancer_hiring.DTO;
+using freelancer_hiring.Models;
 using freelancer_hiring.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +18,15 @@ namespace freelancer_hiring.Controllers
         }
         [Route("login")]
         [HttpPost]
-        public async Task<ActionResult<Account>> Login(string username, string password)
+        public async Task<ActionResult<LoginOutput>> Login([FromBody] AccountDTO account)
         {
-            var account = await _authenticationService.Login(username, password);
+            var acc = await _authenticationService.Login(account.username, account.password);
 
-            if (account == null)
+            if (acc == null)
             {
                 return NotFound();
             }
-            return Ok(account);
+            return Ok(acc);
         }
     }
 }
