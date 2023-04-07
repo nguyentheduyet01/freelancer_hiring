@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import {Card, Button, Col, Form, Row } from "react-bootstrap";
 import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
 import Avatar from "../avatar/Avatar";
 import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
+import Logo from "../../images/icon_page.png";
 import "./Header.css";
 
 const Header = () => {
@@ -16,7 +17,7 @@ const Header = () => {
       <div style={{ borderBottom: "1px #BECCBE solid" }}>
         <Row style={{ width: "95%", margin: "0 auto", lineHeight: "70px" }}>
           <Col xs xm lg='2'>
-            <div className='logo'>hello</div>
+          <Card.Img  src={Logo} style={{width:"160px"}} />
           </Col>
           <Col xs xm lg='4'>
             <Row>
