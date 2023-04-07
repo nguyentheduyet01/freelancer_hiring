@@ -7,6 +7,11 @@ namespace freelancer_hiring.Models
 {
     public partial class Users
     {
+        public Users()
+        {
+            Images = new HashSet<Images>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int? Gentle { get; set; }
@@ -19,5 +24,6 @@ namespace freelancer_hiring.Models
 
         public virtual Account Account { get; set; }
         public virtual Cv Cv { get; set; }
+        public virtual ICollection<Images> Images { get; set; }
     }
 }
