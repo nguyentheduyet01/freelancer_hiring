@@ -6,6 +6,7 @@ import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
 import Logo from "../../images/icon_page.png";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
@@ -107,7 +108,9 @@ const Header = () => {
             ) : (
               <Row>
                 <Col>
-                  <Button variant='light'>Login</Button>
+                  <Button variant='light'>
+                    <Link to='/login'>Login</Link>
+                  </Button>
                 </Col>
                 <Col>
                   <Button variant='success'>Register</Button>

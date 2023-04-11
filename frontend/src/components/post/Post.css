@@ -1,0 +1,43 @@
+
+/* .cartPost:first-child, .cartPost:last-child {
+  border-radius: 20px !important;
+} */
+.postLink{
+  text-decoration: none;
+}
+
+.cartPost:hover{
+  background-color: #f3f8f8;
+}
+
+.linkPost{
+  text-decoration: none;
+  /* color: b; */
+}
+
+.linkPost:hover{
+  text-decoration: underline;
+  color: #314644;
+}
+
+.skillButton{
+  border: none;
+  border-radius: 50px;
+  font-size: 80%;
+  display: block;
+ 
+}
+
+.skillButton:not(:first-child){
+  margin-left: 8px;
+}
+
+.skillButton:hover{
+  background-color: rgb(226, 223, 223);
+}
+
+.linkSkill{
+  text-decoration: none;
+  color: rgb(27, 27, 27);
+  font-weight: 500;
+}
