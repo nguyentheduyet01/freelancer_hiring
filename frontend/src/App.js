@@ -1,15 +1,17 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
+import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import Slider from "./components/slider/Slider";
+
 function App() {
   return (
     <div>
       <Header />
-      <Login />
-      {/* <Slider /> */}
       <Routes>
-        <Route path='/'></Route>
+        <Route path='/' element={<Outlet />}>
+          <Route element={<Home />} />
+        </Route>
+        <Route path='login' element={<Login />} />
       </Routes>
     </div>
   );

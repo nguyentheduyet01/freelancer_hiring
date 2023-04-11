@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Card, Button, Col, Form, Row } from "react-bootstrap";
+import { Card, Button, Col, Form, Row } from "react-bootstrap";
 import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
 import Avatar from "../avatar/Avatar";
 import DDFreelance from "../dropdown/DDFreelance";
@@ -10,14 +10,14 @@ import "./Header.css";
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
       <div style={{ borderBottom: "1px #BECCBE solid" }}>
         <Row style={{ width: "95%", margin: "0 auto", lineHeight: "70px" }}>
           <Col xs xm lg='2'>
-          <Card.Img  src={Logo} style={{width:"160px"}} />
+            <Card.Img src={Logo} style={{ width: "160px" }} />
           </Col>
           <Col xs xm lg='4'>
             <Row>
