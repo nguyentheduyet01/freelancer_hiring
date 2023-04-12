@@ -7,7 +7,7 @@
 }
 
 .cartPost:hover{
-  background-color: #f3f8f8;
+  background-color: #e5f0f0;
 }
 
 .linkPost{
@@ -40,4 +40,8 @@
   text-decoration: none;
   color: rgb(27, 27, 27);
   font-weight: 500;
+}
+
+.skillButton:hover .linkSkill{
+  color: #314644;
 }
