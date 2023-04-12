@@ -49,7 +49,15 @@ const DDFreelance = () => {
 
   return (
     <div
-      style={{ margin: "0 auto", position: "absolute", top: "73px", left: "0", width: "100%" }}
+      style={{
+        margin: "0 auto",
+        position: "absolute",
+        top: "71px",
+        left: "0",
+        width: "100%",
+        backgroundColor: "white",
+        zIndex: "10000",
+      }}
       className='dropdown'
     >
       <Row

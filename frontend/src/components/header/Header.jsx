@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import {Card, Button, Col, Form, Row } from "react-bootstrap";
+import { Card, Button, Col, Form, Row } from "react-bootstrap";
 import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
 import Avatar from "../avatar/Avatar";
 import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
 import Logo from "../../images/icon_page.png";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
       <div style={{ borderBottom: "1px #BECCBE solid" }}>
         <Row style={{ width: "95%", margin: "0 auto", lineHeight: "70px" }}>
           <Col xs xm lg='2'>
-          <Card.Img  src={Logo} style={{width:"160px"}} />
+            <Card.Img src={Logo} style={{ width: "160px" }} />
           </Col>
           <Col xs xm lg='4'>
             <Row>
@@ -107,7 +108,9 @@ const Header = () => {
             ) : (
               <Row>
                 <Col>
-                  <Button variant='light'>Login</Button>
+                  <Button variant='light'>
+                    <Link to='/login'>Login</Link>
+                  </Button>
                 </Col>
                 <Col>
                   <Button variant='success'>Register</Button>

@@ -1,0 +1,30 @@
+.listFooter{
+  text-decoration: none !important;
+  list-style: none;
+  padding: inherit !important;
+}
+
+.linkFooter{
+  text-decoration: none;
+  color: white;
+  line-height: 30px;
+}
+
+.linkFooter:hover{
+  text-decoration: underline;
+  color: white;
+}
+.iconMedia{
+  width: 40px;
+  height: 40px;
+  border:1px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120%;
+}
+
+.iconMedia:hover{
+  background-color: rgba(231, 227, 227,0.4);
+}
