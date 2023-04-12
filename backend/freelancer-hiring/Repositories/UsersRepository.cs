@@ -1,4 +1,5 @@
-﻿using freelancer_hiring.Data;
+﻿using AutoMapper;
+using freelancer_hiring.Data;
 using freelancer_hiring.DTO;
 using freelancer_hiring.Models;
 using freelancer_hiring.Repositories.Interfaces;
@@ -9,19 +10,22 @@ namespace freelancer_hiring.Repositories
     public class UsersRepository : IUsersRepository
     {
         private readonly DataContext _dataContext;
-        public UsersRepository(DataContext dataContext)
+        private readonly IMapper _mapper;
+        public UsersRepository(DataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
+            _mapper = mapper;
         }
-        public async  Task<IEnumerable<Users>> GetListUser()
+        public async  Task<IEnumerable<UserDTO>> GetListUser(int? pageindex, int? pagesize)
         {
             var listuser = _dataContext.Users.Skip(100).ToList();
-            return listuser;
+            return _mapper.Map<IEnumerable<UserDTO>>(listuser);
         }
 
-        public async Task<Users> GetUserById(int id)
+        public async Task<UserDTO> GetUserById(int id)
         {
-            return await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var res = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return _mapper.Map<UserDTO>(res);
         }
 
         public async Task<Users> GetUserByIdAccount(int id)
@@ -50,6 +54,11 @@ namespace freelancer_hiring.Repositories
                 {
                 return false;
                 }
+        }
+
+        Task<UserDTO> IUsersRepository.GetUserByIdAccount(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace freelancer_hiring.Models
         public string LinkApply { get; set; }
         public string Descriptions { get; set; }
         public string Requirement { get; set; }
+        public string? Address { get; set; }
         public decimal? Budget { get; set; }
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
