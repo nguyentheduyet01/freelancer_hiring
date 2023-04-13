@@ -1,10 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import LeftDropdown from "./LeftDropdown";
 
 const DDFindJob = () => {
+  const [isShow, setIsShow] = useState(false);
+  const [isShowRight, setIsShowRight] = useState(false);
+
+  const itemsLeft = [
+    {
+      id: "1",
+      title: "Tìm & Đăng Tin",
+      subtitle: "Nơi hội tụ các freelancer chuyên nghiệp nhất",
+      chevronRight: "ChevronRight",
+      enter: () => setIsShowRight(() => true),
+      leave: () => setIsShowRight(() => false),
+      isShow: isShowRight,
+    },
+  ];
+
+  const itemsRight = [
+    {
+      subtitle: "Đăng tin nhận báo giá",
+      chevronRight: "ChevronRight",
+      enter: () => setIsShow(() => true),
+      leave: () => setIsShow(() => false),
+      isShow: isShow,
+    },
+    {
+      subtitle: "Tìm theo freelancer",
+    },
+    {
+      subtitle: "Tìm theo dự án đã làm",
+    },
+  ];
+
+  const itemsFinal = [
+    {
+      subtitle: "Đăng tin nhận báo giá",
+      chevronRight: "ChevronRight",
+    },
+    {
+      subtitle: "Tìm theo freelancer",
+    },
+    {
+      subtitle: "Tìm theo dự án đã làm",
+    },
+  ];
   return (
     <div
-      style={{ margin: "0 auto", position: "absolute", top: "73px", left: "0", width: "100%" }}
+      style={{
+        margin: "0 auto",
+        position: "absolute",
+        top: "71px",
+        left: "0",
+        width: "100%",
+        backgroundColor: "white",
+        zIndex: "10000",
+      }}
       className='dropdown'
     >
       <Row
@@ -15,9 +67,18 @@ const DDFindJob = () => {
           borderBottom: "1px solid #BECCBE",
           boxShadow: "43px 15px 50px -14px #BECCBE",
           margin: "0",
+          lineHeight: "20px",
+          backgroundColor: "white",
         }}
       >
-        <Col style={{ borderRight: "1.5px solid #BECCBE" }} xm lg='4'></Col>
+        <Col
+          style={{ borderRight: "1.5px solid #BECCBE" }}
+          xm
+          lg='4'
+          className='d-flex align-items-center flex-column pt-3'
+        >
+          <LeftDropdown itemsLeft={itemsLeft} itemsRight={itemsRight} itemsFinal={itemsFinal} />
+        </Col>
         <Col></Col>
       </Row>
     </div>
