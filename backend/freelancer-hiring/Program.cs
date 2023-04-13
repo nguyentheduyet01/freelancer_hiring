@@ -1,4 +1,3 @@
-using AutoMapper;
 using freelancer_hiring.Repositories;
 using freelancer_hiring.Repositories.Interfaces;
 using freelancer_hiring.Services;
@@ -37,22 +36,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
- void ConfigureServices(IServiceCollection services)
-{
-    // .... Ignore code before this
-
-    // Auto Mapper Configurations
-    var mapperConfig = new MapperConfiguration(mc =>
-    {
-        mc.AddProfile(new MappingProfile());
-    });
-
-    IMapper mapper = mapperConfig.CreateMapper();
-    services.AddSingleton(mapper);
-
-    services.AddMvc();
-
 }
 //Remaining code has been removed
 app.UseHttpsRedirection();

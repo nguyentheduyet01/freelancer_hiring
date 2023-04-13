@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using freelancer_hiring.DTO;
+﻿using freelancer_hiring.DTO;
 using freelancer_hiring.Models;
 using freelancer_hiring.Repositories.Interfaces;
 using freelancer_hiring.Services.Interfaces;
@@ -16,12 +15,10 @@ namespace freelancer_hiring.Services
         private readonly IAuthenticationRepository _repository;
         private readonly ILogger<AuthenticationServices> _logger;
         private readonly IUsersRepository _users;
-        private readonly IMapper _mapper;
 
-        public AuthenticationServices( IAuthenticationRepository repository, IMapper mapper, IUsersRepository users)
+        public AuthenticationServices( IAuthenticationRepository repository, IUsersRepository users)
         {
             _repository = repository;
-            _mapper = mapper;
             _users = users;
         }
         public async Task<LoginOutput> Login(string username, string password)
