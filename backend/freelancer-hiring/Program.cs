@@ -14,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IAuthenticationServices, AuthenticationServices>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 
@@ -36,7 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+//Remaining code has been removed
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

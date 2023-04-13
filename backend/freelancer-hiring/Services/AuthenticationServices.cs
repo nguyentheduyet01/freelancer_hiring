@@ -16,9 +16,8 @@ namespace freelancer_hiring.Services
         private readonly ILogger<AuthenticationServices> _logger;
         private readonly IUsersRepository _users;
 
-        public AuthenticationServices(IConfiguration config, IAuthenticationRepository repository, IUsersRepository users)
+        public AuthenticationServices( IAuthenticationRepository repository, IUsersRepository users)
         {
-            _config = config;
             _repository = repository;
             _users = users;
         }
