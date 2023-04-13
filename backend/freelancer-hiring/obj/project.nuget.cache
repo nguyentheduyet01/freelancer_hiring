@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Xgav3UgQ+PwWKwDAf4YENegM7JYX8Q7y289Gs7j/R0kUeEVpNXTqAgcqlPGjIlfbUgB3Zo4ZzkS9ahiWcM+EGw==",
+  "dgSpecHash": "NS5t3ItmYveRlPN3jfdUTn9FyGOrJcItE80mACIpwRlrqJAmHolh2Ck+k4STi3u7IEIBgDqS2Wovz6KX6CsvSg==",
   "success": true,
   "projectFilePath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\freelancer-hiring\\freelancer-hiring.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\SIZZAN\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\SIZZAN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.3\\microsoft.aspnetcore.openapi.7.0.3.nupkg.sha512",
@@ -54,6 +56,7 @@
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\SIZZAN\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",

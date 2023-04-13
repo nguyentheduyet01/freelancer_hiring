@@ -1,3 +1,4 @@
+using AutoMapper;
 using freelancer_hiring.Repositories;
 using freelancer_hiring.Repositories.Interfaces;
 using freelancer_hiring.Services;
@@ -14,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IAuthenticationServices, AuthenticationServices>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 
@@ -36,7 +38,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+ void ConfigureServices(IServiceCollection services)
+{
+    // .... Ignore code before this
 
+    // Auto Mapper Configurations
+    var mapperConfig = new MapperConfiguration(mc =>
+    {
+        mc.AddProfile(new MappingProfile());
+    });
+
+    IMapper mapper = mapperConfig.CreateMapper();
+    services.AddSingleton(mapper);
+
+    services.AddMvc();
+
+}
+//Remaining code has been removed
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

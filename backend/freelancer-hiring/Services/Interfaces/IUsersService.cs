@@ -5,9 +5,9 @@ namespace freelancer_hiring.Services.Interfaces
 {
     public interface IUsersService
     {
-        Task<IEnumerable<Users>> GetUsersAsync();
-        Task<Users> GetUsersByIdAsync(int id);
-        Task<Users> GetUsersByUsername(string username);
+        Task<IEnumerable<UserDTO>> GetUsersAsync(int? pageindex, int? pagesize);
+        Task<UserDTO> GetUsersByIdAsync(int id);
+        Task<UserDTO> GetUsersByUsername(string username);
         Task<OutputDTO> InsertUser(UserDTO user);
 
     }

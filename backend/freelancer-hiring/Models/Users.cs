@@ -19,6 +19,7 @@ namespace freelancer_hiring.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Experince { get; set; }
+        public string? Address { get; set; }
         public int? AccountId { get; set; }
         public int? CvId { get; set; }
 
