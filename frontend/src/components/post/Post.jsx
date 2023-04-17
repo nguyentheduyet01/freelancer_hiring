@@ -7,8 +7,8 @@ import "./Post.css";
 const Post = () => {
   return (
     <div>
-      <Link to='login' className='postLink'>
-        <Card style={{ width: "70vw", margin: "0 auto", padding: "30px" }} className='cartPost'>
+      <Card style={{ width: "70vw", margin: "0 auto", padding: "30px" }} className='cartPost'>
+        <Link to='login' className='postLink'>
           <Card.Body>
             <Card.Title style={{ fontSize: "120%", lineHeight: "50px" }}>
               <Link to='' className='linkPost'>
@@ -22,12 +22,23 @@ const Post = () => {
               <span>Fixed-price - Entry level - Est. Budget: $5</span>
               <span>Posted {formatVi("Tue Apr 11 2023 22:00:04", "locate")}</span>
             </Card.Subtitle>
-            <Card.Text style={{ color: "black" }}>
+            <Card.Text
+              style={{
+                color: "black",
+                height: "43px",
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
               Hello, We are looking for a lead Generation Expert who have the access with the
               LinkedIn Sales navigator . We want IT Owners from the Uk. We want 100 leads for now.
               Data required: Name (Ceo) Website Company name LinkedIn Url Contact number Email.
               Apply with your best proposal for more information. Thanks
             </Card.Text>
+            <Link>Xem thêm</Link>
+
             <div className='d-flex'>
               <button className='skillButton'>
                 <Link className='linkSkill' to=''>
@@ -45,8 +56,8 @@ const Post = () => {
               </button>
             </div>
           </Card.Body>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     </div>
   );
 };
