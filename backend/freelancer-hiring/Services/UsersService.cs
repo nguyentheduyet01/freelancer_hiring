@@ -11,16 +11,14 @@ namespace freelancer_hiring.Services
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
-        public UsersService(IUsersRepository usersRepository, ILogger logger, IConfiguration configuration,IAuthenticationRepository authenticationRepository)
+        public UsersService(IUsersRepository usersRepository, IAuthenticationRepository authenticationRepository)
         {
             _usersRepository = usersRepository;
             _authenticationRepository = authenticationRepository;
-            _logger = logger;
-            _configuration = configuration;
         }
-        public async Task<IEnumerable<Users>> GetUsersAsync()
+        public async Task<IEnumerable<Users>> GetUsersAsync(int? pageindex, int? pagesize)
         {
-            return await _usersRepository.GetListUser();
+            return await _usersRepository.GetListUser(pageindex,pagesize);
         }
 
         public async Task<Users> GetUsersByIdAsync(int id)
@@ -28,7 +26,7 @@ namespace freelancer_hiring.Services
             return await _usersRepository.GetUserById(id);
         }
 
-        public async Task<Users> GetUsersByUsername(string username)
+        public async Task<UserDTO> GetUsersByUsername(string username)
         {
             var acc = await _authenticationRepository.FindByUsernameAsync(username);
             return await _usersRepository.GetUserByIdAccount(acc.Id);

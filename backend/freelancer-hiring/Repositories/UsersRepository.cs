@@ -13,10 +13,10 @@ namespace freelancer_hiring.Repositories
         {
             _dataContext = dataContext;
         }
-        public async  Task<IEnumerable<Users>> GetListUser()
+        public async  Task<IEnumerable<Users>> GetListUser(int? pageindex, int? pagesize)
         {
-            var listuser = _dataContext.Users.Skip(100).ToList();
-            return listuser;
+            return _dataContext.Users.Skip(100).ToList();
+
         }
 
         public async Task<Users> GetUserById(int id)
@@ -50,6 +50,11 @@ namespace freelancer_hiring.Repositories
                 {
                 return false;
                 }
+        }
+
+        Task<UserDTO> IUsersRepository.GetUserByIdAccount(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

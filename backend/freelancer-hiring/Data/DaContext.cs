@@ -147,6 +147,7 @@ namespace freelancer_hiring.Data
                 entity.Property(e => e.Title).HasColumnName("title");
 
                 entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+                entity.Property(e => e.Address).HasColumnName("address");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Posts)
@@ -201,6 +202,7 @@ namespace freelancer_hiring.Data
                 entity.Property(e => e.AccountId).HasColumnName("account_id");
 
                 entity.Property(e => e.Age).HasColumnName("age");
+                entity.Property(e => e.Address).HasColumnName("address");
 
                 entity.Property(e => e.CvId).HasColumnName("cv_id");
 

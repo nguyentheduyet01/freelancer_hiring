@@ -11,6 +11,6 @@ namespace freelancer_hiring.DTO
     {
         public bool isSuccess { get; set; }
         public string message { get; set; }
-        public Users data { get; set; }
+        public UserDTO? data { get; set; }
     }
 }
