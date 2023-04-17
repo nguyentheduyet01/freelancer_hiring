@@ -59,7 +59,7 @@ const Header = () => {
                   }}
                   className='formSearch'
                 >
-                  <Form.Group className='' controlId='formBasicEmail' style={{ width: "240px" }}>
+                  <Form.Group className='' controlId='' style={{ width: "240px" }}>
                     <Form.Control
                       type='text'
                       placeholder='search'
