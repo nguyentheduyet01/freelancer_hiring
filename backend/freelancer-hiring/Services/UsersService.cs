@@ -16,12 +16,12 @@ namespace freelancer_hiring.Services
             _usersRepository = usersRepository;
             _authenticationRepository = authenticationRepository;
         }
-        public async Task<IEnumerable<UserDTO>> GetUsersAsync(int? pageindex, int? pagesize)
+        public async Task<IEnumerable<Users>> GetUsersAsync(int? pageindex, int? pagesize)
         {
             return await _usersRepository.GetListUser(pageindex,pagesize);
         }
 
-        public async Task<UserDTO> GetUsersByIdAsync(int id)
+        public async Task<Users> GetUsersByIdAsync(int id)
         {
             return await _usersRepository.GetUserById(id);
         }

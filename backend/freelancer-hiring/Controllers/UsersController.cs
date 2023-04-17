@@ -20,7 +20,7 @@ namespace freelancer_hiring.Controllers
         }
         // GET: api/<UsersController>
         [HttpGet]
-        public async Task<ResultDTO> GetListUser(int? pageindex, int? pagesize)
+        public async Task<ResultDTO> GetListUser(int? pageindex = 1, int? pagesize = 10)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace freelancer_hiring.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public async Task<UserDTO> Get(int id)
+        public async Task<Users> Get(int id)
         {
             return await _usersService.GetUsersByIdAsync(id);
         }
