@@ -1,0 +1,17 @@
+.infoProject{
+  color: black;
+  font-size: 100%;
+  font-weight: 400;
+}
+
+.rowspan{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 45%;
+}
+
+.image{
+  width: "32px" !important;
+  height: "32px" !important;
+}

@@ -20,7 +20,7 @@ const Post = () => {
               style={{ fontSize: "100%" }}
             >
               <span>Fixed-price - Entry level - Est. Budget: $5</span>
-              <span>Posted {formatVi("Tue Apr 11 2023 22:00:04", "locate")}</span>
+              <span>Đã đăng {formatVi("Tue Apr 18 2023 20:00:04")}</span>
             </Card.Subtitle>
             <Card.Text
               style={{

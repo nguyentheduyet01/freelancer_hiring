@@ -4,15 +4,15 @@ import icon1 from "../../images/icon1.png";
 import icon2 from "../../images/icon2.png";
 import icon3 from "../../images/icon3.png";
 import icon4 from "../../images/icon4.png";
-import icon5 from "../../images/icon5.png";
-import icon6 from "../../images/icon6.png";
 
+// #044B04
 const PostProject = () => {
   return (
     <Container>
       <h4 style={{ textAlign: "center" }} className='mt-3 mb-3'>
         Đăng Tin
       </h4>
+
       <Row style={{ width: "60%", margin: "0 auto" }}>
         <Form>
           <div className='d-flex flex-row' style={{ width: "100%" }}>
@@ -92,10 +92,67 @@ const PostProject = () => {
               </div>
             </div>
           </div>
-
-          <Button variant='primary' type='submit'>
-            Submit
-          </Button>
+          <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
+            <div>
+              <img src={icon3} alt='icon1' />
+            </div>
+            <div style={{ width: "80%", marginLeft: "30px" }}>
+              <h5>Yêu cầu khác với freelancer</h5>
+              <div style={{ width: "60%" }}>
+                <Form.Group className='mb-3' controlId='nct'>
+                  <Form.Label>Cần tuyển freelancer làm việc tại</Form.Label>
+                  <Form.Select aria-label='Default select example'>
+                    <option value=''>- Nơi cần tuyển -</option>
+                  </Form.Select>
+                </Form.Group>
+              </div>
+            </div>
+          </div>
+          <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
+            <div>
+              <img src={icon4} alt='icon1' />
+            </div>
+            <div style={{ width: "80%", marginLeft: "30px" }}>
+              <h5>Ngân sách dự kiến chi cho công việc này</h5>
+              <div>
+                <Form.Group className='mb-3' controlId='httl' style={{ width: "60%" }}>
+                  <Form.Label>Hình thức trả lương</Form.Label>
+                  <Form.Select aria-label='Default select example'>
+                    <option value='project'>Trả theo dự án</option>
+                    <option value='hour'>Trả theo giờ</option>
+                    <option value='month'>Trả theo tháng</option>
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Số tiền tối đa có thể trả</Form.Label>
+                  <div className='d-flex justify-content-between'>
+                    <Form.Control
+                      type='number'
+                      aria-label='Default select example'
+                      style={{ width: "49%" }}
+                      placeholder='Từ'
+                    ></Form.Control>
+                    <Form.Control
+                      type='number'
+                      aria-label='Default select example'
+                      style={{ width: "49%" }}
+                      placeholder='Đến'
+                    ></Form.Control>
+                  </div>
+                </Form.Group>
+              </div>
+            </div>
+          </div>
+          <Form.Group>
+            <div style={{ width: "20%" }}></div>
+            <Button
+              variant='warning'
+              type='submit'
+              style={{ width: "80%", marginLeft: "111px", fontWeight: "500" }}
+            >
+              Submit
+            </Button>
+          </Form.Group>
         </Form>
       </Row>
     </Container>

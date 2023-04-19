@@ -36,14 +36,13 @@ const DDFreelance = () => {
 
   const itemsFinal = [
     {
-      subtitle: "Đăng tin nhận báo giá",
-      chevronRight: "ChevronRight",
+      subtitle: "Đăng việc theo thời gian",
     },
     {
-      subtitle: "Tìm theo freelancer",
+      subtitle: "Đăng việc bán thời gian",
     },
     {
-      subtitle: "Tìm theo dự án đã làm",
+      subtitle: "Đăng việc toàn thời gian",
     },
   ];
 
@@ -66,7 +65,7 @@ const DDFreelance = () => {
           height: "60vh",
           padding: "20px 10px 30px 10px",
           borderBottom: "1px solid #BECCBE",
-          boxShadow: "43px 15px 50px -14px #BECCBE",
+          boxShadow: "1px 2px 8px 0px #BECCBE",
           margin: "0",
           lineHeight: "20px",
         }}
