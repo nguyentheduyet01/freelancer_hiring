@@ -7,7 +7,7 @@ import { Youtube, Facebook, Instagram, Linkedin, Twitter } from "react-bootstrap
 const Footer = () => {
   return (
     <footer
-      className='footer mb-3'
+      className='footer mb-3 mt-4'
       style={{ backgroundColor: "#001e00", width: "100%", color: "white", padding: "40px 0" }}
     >
       <Container>

@@ -18,7 +18,9 @@ const Header = () => {
       <div style={{ borderBottom: "1px #BECCBE solid" }}>
         <Row style={{ width: "95%", margin: "0 auto", lineHeight: "70px" }}>
           <Col xs xm lg='2'>
-            <Card.Img src={Logo} style={{ width: "160px" }} />
+            <Link to=''>
+              <Card.Img src={Logo} style={{ width: "160px" }} />
+            </Link>
           </Col>
           <Col xs xm lg='4'>
             <Row>
@@ -59,7 +61,7 @@ const Header = () => {
                   }}
                   className='formSearch'
                 >
-                  <Form.Group className='' controlId='formBasicEmail' style={{ width: "240px" }}>
+                  <Form.Group className='' controlId='' style={{ width: "240px" }}>
                     <Form.Control
                       type='text'
                       placeholder='search'
