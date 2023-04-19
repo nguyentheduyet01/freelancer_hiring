@@ -16,7 +16,11 @@ const FinalDrop = ({ items }) => {
       {items.length !== 0 &&
         items.map((item, index) => (
           <div className='d-flex'>
-            <Link className='subtitle rightDrop finalDrop' style={{ fontSize: "105%" }}>
+            <Link
+              to='project'
+              className='subtitle rightDrop finalDrop'
+              style={{ fontSize: "105%" }}
+            >
               {item.subtitle}
 
               {item?.chevronRight === "ChevronRight" ? (
