@@ -73,7 +73,7 @@
 }
 
 .block-title:hover{
-  background-color: #DEFCF9;
+  background-color: #f2f7f2;
 }
 
 .form-control:focus{
@@ -89,11 +89,11 @@
 }
 
 .rightDrop:hover {
-  background-color: #DEFCF9;
+  background-color: #f2f7f2;
 }
 
 .finalDrop:hover {
   background-color: transparent !important;
-  color: #6ad8cd !important;
+  color: #001e00 !important;
 }
 

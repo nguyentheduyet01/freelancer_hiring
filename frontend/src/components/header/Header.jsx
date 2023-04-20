@@ -111,11 +111,17 @@ const Header = () => {
               <Row>
                 <Col>
                   <Button variant='light'>
-                    <Link to='/login'>Login</Link>
+                    <Link style={{ textDecoration: "none", color: "black" }} to='login'>
+                      Login
+                    </Link>
                   </Button>
                 </Col>
                 <Col>
-                  <Button variant='success'>Register</Button>
+                  <Button variant='success'>
+                    <Link style={{ textDecoration: "none", color: "white" }} to='register'>
+                      Register
+                    </Link>
+                  </Button>
                 </Col>
               </Row>
             )}
