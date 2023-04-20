@@ -95,7 +95,7 @@ const Footer = () => {
           </Col>
         </Row>
         <hr />
-        <p style={{ fontSize: "12px", textAlign: "center" }}>© 2015 - 2023 Molas® Global Inc.</p>
+        <p style={{ fontSize: "12px", textAlign: "center" }}>© 2019 - 2023 Molas® Đồ án ra trường.</p>
       </Container>
     </footer>
   );
