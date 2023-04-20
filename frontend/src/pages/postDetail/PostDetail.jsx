@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import formatVi from "../../utils/vi";
 import "./PostDetail.css";
@@ -15,7 +15,7 @@ const PostDetail = () => {
   return (
     <Container className='mt-3'>
       <Row style={{ width: "90%", margin: "0 auto" }}>
-        <div className='mt-3 border rounded-4 p-3 mt-3'>
+        <div className='mt-3 border rounded-4 p-3 mt-3 mb-3'>
           <h4>Lead generations expertLead generations expertLead</h4>
           <div className='' style={{ fontSize: "90%", fontWeight: "700" }}>
             <div className='d-flex mt-3' style={{ width: "20%" }}>
@@ -79,7 +79,7 @@ const PostDetail = () => {
             </div>
           </div>
         </div>
-        <div className='border rounded-4 p-3 mt-3'>
+        <div className='border rounded-4 p-3 mt-3 mb-3'>
           <h5>Chi tiết</h5>
           Hello, We are looking for a lead Generation Expert who have the access with the LinkedIn
           Sales navigator . We want IT Owners from the Uk. We want 100 leads for now. Data required:
@@ -102,7 +102,7 @@ const PostDetail = () => {
             </button>
           </div>
         </div>
-        <div className='border rounded-4 p-3 mt-3'>
+        <div className='border rounded-4 p-3 mt-3 mb-3'>
           <h5>Yêu cầu</h5>
           - Nam/ nữ 20 tuổi trở lên. <br />
           - Không yêu cầu kinh nghiệm, được cầm tay chỉ việc, hỗ trợ trực tiếp 1-1 với Trưởng phòng
@@ -116,6 +116,63 @@ const PostDetail = () => {
         <div className='border rounded-4 p-3 mt-3'>
           <h5>Thông tin chào giá</h5>
           <hr />
+          <Form>
+            <Row>
+              <Col xm='4' lg='4'>
+                <Form.Group className='mb-3' controlId='cp'>
+                  <Form.Label>
+                    <h6 className=''>Đề xuất chi phí</h6>
+                  </Form.Label>
+                  <Form.Control type='number' placeholder='2.000.000VNĐ' />
+                </Form.Group>
+                <Form.Group className='mb-3' controlId='dk'>
+                  <Form.Label>
+                    <h6 className=''>Dự kiến hoàn thành trong bao lâu</h6>
+                  </Form.Label>
+                  <Form.Select aria-label='Default select example'>
+                    <option value='1d'>1 Ngày</option>
+                    <option value='2d'>2 Ngày</option>
+                    <option value='3d'>3 Ngày</option>
+                    <option value='5d'>5 Ngày</option>
+                    <option value='7d'>7 Ngày</option>
+                    <option value='10d'>10 Ngày</option>
+                    <option value='2w'>2 Tuần</option>
+                    <option value='3w'>3 Tuần</option>
+                    <option value='4w'>4 Tuần</option>
+                    <option value='6w'>6 Tuần</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col xm='1' lg='1' className='p-0'></Col>
+              <Col>
+                <Form.Group className='mb-3' controlId=''>
+                  <Form.Label>
+                    <h6>Đề xuất thuyết phục khách hàng</h6>
+                  </Form.Label>
+                  <Form.Control
+                    as='textarea'
+                    rows={5}
+                    placeholder='- Tôi đã có XX năm kinh nghiệm trong lĩnh vực'
+                  />
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Form.Label style={{ color: "#0093be", fontSize: "90%", cursor: "pointer" }}>
+                    Thêm tài liệu đính kèm
+                  </Form.Label>
+                  <div style={{ fontSize: "80%" }}>
+                    Định dạng được hỗ trợ: png, jpg, gif, pdf, psd, xls, xlsx, doc, docx, ppt, pptx,
+                    ods, odt, zip, rar <br />
+                    Dung lượng tối đa: 10MB <br />
+                    Kích thước tối đa: 3000x3000 px <br />
+                    <Form.Control type='file' />
+                  </div>
+                </Form.Group>
+                <Button variant='warning' type='submit' style={{ width: "100%" }}>
+                  Gửi chào giá
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </div>
       </Row>
     </Container>

@@ -1,9 +1,10 @@
 import React from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
-import icon1 from "../../images/icon1.png";
-import icon2 from "../../images/icon2.png";
-import icon3 from "../../images/icon3.png";
-import icon4 from "../../images/icon4.png";
+import icon1 from "../../images/headhunting.png";
+import icon2 from "../../images/file.png";
+import icon3 from "../../images/requirements.png";
+import icon4 from "../../images/financial.png";
+import "./postProject.css";
 
 // #044B04
 const PostProject = () => {
@@ -16,7 +17,7 @@ const PostProject = () => {
       <Row style={{ width: "60%", margin: "0 auto" }}>
         <Form>
           <div className='d-flex flex-row' style={{ width: "100%" }}>
-            <div>
+            <div className='iconPost'>
               <img src={icon1} alt='icon1' />
             </div>
             <div style={{ width: "80%", marginLeft: "30px" }}>
@@ -48,7 +49,7 @@ const PostProject = () => {
             </div>
           </div>
           <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-            <div>
+            <div className='iconPost'>
               <img src={icon2} alt='icon1' />
             </div>
             <div style={{ width: "80%", marginLeft: "30px" }}>
@@ -93,7 +94,7 @@ const PostProject = () => {
             </div>
           </div>
           <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-            <div>
+            <div className='iconPost'>
               <img src={icon3} alt='icon1' />
             </div>
             <div style={{ width: "80%", marginLeft: "30px" }}>
@@ -109,7 +110,7 @@ const PostProject = () => {
             </div>
           </div>
           <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-            <div>
+            <div className='iconPost'>
               <img src={icon4} alt='icon1' />
             </div>
             <div style={{ width: "80%", marginLeft: "30px" }}>
