@@ -9,7 +9,7 @@ import "./postProject.css";
 // #044B04
 const PostProject = () => {
   return (
-    <Container>
+    <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
       <h4 style={{ textAlign: "center" }} className='mt-3 mb-3'>
         Đăng Tin
       </h4>

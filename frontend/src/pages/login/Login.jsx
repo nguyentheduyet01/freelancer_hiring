@@ -37,7 +37,12 @@ const Login = () => {
 
                 <div className='d-flex justify-content-around align-items-center mb-2'>
                   <div className='form-check'>
-                    <input className='form-check-input' type='checkbox' value='' id='form1Example3' />
+                    <input
+                      className='form-check-input'
+                      type='checkbox'
+                      value=''
+                      id='form1Example3'
+                    />
                     <label className='form-check-label' htmlFor='form1Example3'>
                       {" "}
                       Remember me{" "}
@@ -48,8 +53,8 @@ const Login = () => {
 
                 <button
                   type='submit'
-                  className='btn btn-primary  btn-lg btn-block'
-                  style={{ width: "100%" }}
+                  className='btn btn-lg btn-block'
+                  style={{ width: "100%", backgroundColor: "#557977", color: "white" }}
                 >
                   Sign in
                 </button>

@@ -6,7 +6,7 @@ import Footer from "./components/footer/Footer";
 import PostProject from "./pages/postProject/PostProject";
 import PostDetail from "./pages/postDetail/PostDetail";
 import Search from "./pages/Search/Search";
-
+import "./App.css";
 function App() {
   return (
     <div style={{ overflowX: "hidden" }}>

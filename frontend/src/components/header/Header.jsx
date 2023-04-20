@@ -65,7 +65,12 @@ const Header = () => {
                     <Form.Control
                       type='text'
                       placeholder='search'
-                      style={{ fontSize: "110%", border: "none", padding: "0 0 0 8px" }}
+                      style={{
+                        fontSize: "110%",
+                        border: "none",
+                        padding: "0 0 0 8px",
+                      }}
+                      className='input-none'
                     />
                   </Form.Group>
                   <Button
