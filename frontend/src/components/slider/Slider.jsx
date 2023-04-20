@@ -9,24 +9,24 @@ function Slider() {
       <Carousel.Item>
         <img className='d-block w-100' src={bg1} alt='First slide' />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Chào mừng đến với Molas</h3>
+          <p>Nơi kết nối giữa nhà tuyển dụng và các chuyên gia đa lĩnh vực.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img className='d-block w-100' src={bg2} alt='Second slide' />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Nền tảng tuyển dụng freelancer tốt nhất</h3>
+          <p>Mang đến cho bạn những giải pháp tốt nhất cho dự án của bạn.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img className='d-block w-100' src={bg3} alt='Third slide' />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <h3>Tìm kiếm chuyên gia freelancer tốt nhất</h3>
+          <p>Chúng tôi giúp bạn tiếp cận với những tài năng đa dạng nhất.</p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
