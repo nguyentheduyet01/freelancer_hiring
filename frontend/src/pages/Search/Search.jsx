@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import "./Search.css";
 import Post from "./../../components/post/Post";
+import Pagination from "react-js-pagination";
+import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
 const Search = () => {
   const location = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
   let q = location.search.split("=")[1] || "all";
 
   const items = [
@@ -25,6 +28,9 @@ const Search = () => {
       link: "?q=fulltime",
     },
   ];
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e);
+  };
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
@@ -64,6 +70,22 @@ const Search = () => {
             <Post />
             <Post />
             <Post />
+          </div>
+          <div className='paginationBox'>
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={2}
+              totalItemsCount={10}
+              onChange={setCurrentPageNo}
+              nextPageText={<ChevronRight />}
+              prevPageText={<ChevronLeft />}
+              // firstPageText='1st'
+              // lastPageText='Last'
+              itemClass='page-item'
+              linkClass='page-link'
+              activeClass='pageItemActive'
+              activeLinkClass='pageLinkActive'
+            />
           </div>
         </Col>
       </Row>
