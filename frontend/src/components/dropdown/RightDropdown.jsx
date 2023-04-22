@@ -3,7 +3,7 @@ import { ChevronRight } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import FinalDrop from "./FinalDrop";
 
-const RightDropdown = ({ items, itemsFinal }) => {
+const RightDropdown = ({ items }) => {
   return (
     <div
       className='d-flex flex-column'
@@ -25,6 +25,7 @@ const RightDropdown = ({ items, itemsFinal }) => {
               style={{ fontSize: "105%" }}
               onMouseLeave={item.leave}
               onMouseEnter={item.enter}
+              to={item.link}
             >
               {item.subtitle}
 
@@ -33,7 +34,7 @@ const RightDropdown = ({ items, itemsFinal }) => {
                   <div style={{ marginLeft: "20px" }}>
                     <ChevronRight size={20} />
                   </div>
-                  {item.isShow && <FinalDrop items={itemsFinal} />}
+                  {item.isShow && <FinalDrop items={item.itemsFinal} />}
                 </>
               ) : (
                 <></>

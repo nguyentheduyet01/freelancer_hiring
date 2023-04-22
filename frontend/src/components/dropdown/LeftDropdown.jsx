@@ -2,10 +2,10 @@ import React from "react";
 import { ChevronRight } from "react-bootstrap-icons";
 import RightDropdown from "./RightDropdown";
 
-const LeftDropdown = ({ itemsLeft, itemsRight, itemsFinal }) => {
+const LeftDropdown = ({ itemsLeft: items }) => {
   return (
     <>
-      {itemsLeft.map((item, index) => (
+      {items.map((item, index) => (
         <div
           key={index}
           className={
@@ -22,7 +22,7 @@ const LeftDropdown = ({ itemsLeft, itemsRight, itemsFinal }) => {
           </div>
           {item?.chevronRight === "ChevronRight" ? <ChevronRight size={30} /> : <></>}
 
-          {item.isShow && <RightDropdown items={itemsRight} itemsFinal={itemsFinal} />}
+          {item.isShow && <RightDropdown items={item.itemsRight} />}
           {/* {item?.chevronRight === "ChevronRight" && isShow && (
           )} */}
         </div>

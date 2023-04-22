@@ -6,45 +6,55 @@ const DDFindJob = () => {
   const [isShow, setIsShow] = useState(false);
   const [isShowRight, setIsShowRight] = useState(false);
 
-  const itemsLeft = [
+  const items = [
     {
       id: "1",
-      title: "Tìm & Đăng Tin",
-      subtitle: "Nơi hội tụ các freelancer chuyên nghiệp nhất",
+      title: "Tìm Việc làm",
+      subtitle: "Hàng ngàn công việc mới được đăng mỗi này",
       chevronRight: "ChevronRight",
       enter: () => setIsShowRight(() => true),
       leave: () => setIsShowRight(() => false),
       isShow: isShowRight,
+      itemsRight: [
+        // {
+        //   subtitle: "Đăng tin nhận báo giá",
+        //   chevronRight: "ChevronRight",
+        //   enter: () => setIsShow(() => true),
+        //   leave: () => setIsShow(() => false),
+        //   isShow: isShow,
+        //   itemsFinal: [
+        //     {
+        //       subtitle: "Đăng việc theo thời gian",
+        //     },
+        //     {
+        //       subtitle: "Đăng việc bán thời gian",
+        //     },
+        //     {
+        //       subtitle: "Đăng việc toàn thời gian",
+        //     },
+        //   ],
+        // },
+        {
+          subtitle: "Việc online",
+          link: "search/online",
+        },
+        {
+          subtitle: "Việc toàn thời gian",
+          link: "search/fulltime",
+        },
+        {
+          subtitle: "Việc bán thời gian",
+          link: "search/pasttime",
+        },
+      ],
+    },
+    {
+      id: "2",
+      title: "Tìm gói dịch vụ",
+      subtitle: "Kết nối làm việc với chuyên gia trong lĩnh vực",
     },
   ];
 
-  const itemsRight = [
-    {
-      subtitle: "Đăng tin nhận báo giá",
-      chevronRight: "ChevronRight",
-      enter: () => setIsShow(() => true),
-      leave: () => setIsShow(() => false),
-      isShow: isShow,
-    },
-    {
-      subtitle: "Tìm theo freelancer",
-    },
-    {
-      subtitle: "Tìm theo dự án đã làm",
-    },
-  ];
-
-  const itemsFinal = [
-    {
-      subtitle: "Đăng việc theo thời gian",
-    },
-    {
-      subtitle: "Đăng việc bán thời gian",
-    },
-    {
-      subtitle: "Đăng việc toàn thời gian",
-    },
-  ];
   return (
     <div
       style={{
@@ -76,7 +86,7 @@ const DDFindJob = () => {
           lg='4'
           className='d-flex align-items-center flex-column pt-3'
         >
-          <LeftDropdown itemsLeft={itemsLeft} itemsRight={itemsRight} itemsFinal={itemsFinal} />
+          <LeftDropdown itemsLeft={items} />
         </Col>
         <Col></Col>
       </Row>

@@ -5,9 +5,31 @@ import icon2 from "../../images/file.png";
 import icon3 from "../../images/requirements.png";
 import icon4 from "../../images/financial.png";
 import "./postProject.css";
+import { useLocation } from "react-router-dom";
 
 // #044B04
 const PostProject = () => {
+  const location = useLocation();
+  let ht = location.search.split("=")[1];
+  if (ht == "") {
+    ht = "fulltime";
+  }
+
+  const hts = [
+    {
+      value: "pasttime",
+      context: "Việc làm bán thời gian",
+    },
+    {
+      value: "fulltime",
+      context: "Việc làm toàn thời gian",
+    },
+    {
+      value: "project",
+      context: "Việc làm theo dự án",
+    },
+  ];
+
   return (
     <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
       <h4 style={{ textAlign: "center" }} className='mt-3 mb-3'>
@@ -78,9 +100,20 @@ const PostProject = () => {
                 <Form.Group className='mb-3' controlId='lh'>
                   <Form.Label>Loại hình làm việc</Form.Label>
                   <Form.Select aria-label='Default select example'>
-                    <option value='parttime'>Việc làm bán thời gian</option>
-                    <option value='fulltime'>Việc làm toàn thời gian</option>
-                    <option value='project'>Việc làm theo dự án</option>
+                    {hts.map((item, index) => {
+                      if (item.value === ht) {
+                        return (
+                          <option key={index} selected value='pasttime'>
+                            {item.context}
+                          </option>
+                        );
+                      }
+                      return (
+                        <option key={index} value='pasttime'>
+                          {item.context}
+                        </option>
+                      );
+                    })}
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='ht'>

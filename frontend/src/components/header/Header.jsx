@@ -31,7 +31,7 @@ const Header = () => {
                   onMouseEnter={() => setIsShow(() => true)}
                 >
                   <span>Tìm kiếm việc làm</span>
-                  {isShow && <DDFreelance />}
+                  {isShow && <DDFindJob />}
                 </span>
                 <span>{isShow ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
@@ -42,7 +42,7 @@ const Header = () => {
                   onMouseEnter={() => setIsShowJob(() => true)}
                 >
                   <span>Tuyển dụng</span>
-                  {isShowJob && <DDFindJob />}
+                  {isShowJob && <DDFreelance />}
                 </span>
                 <span>{isShowJob ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
