@@ -79,12 +79,12 @@ const Search = () => {
               onChange={setCurrentPageNo}
               nextPageText={<ChevronRight />}
               prevPageText={<ChevronLeft />}
-              // firstPageText='1st'
-              // lastPageText='Last'
               itemClass='page-item'
               linkClass='page-link'
               activeClass='pageItemActive'
               activeLinkClass='pageLinkActive'
+              // firstPageText='1st'
+              // lastPageText='Last'
             />
           </div>
         </Col>
