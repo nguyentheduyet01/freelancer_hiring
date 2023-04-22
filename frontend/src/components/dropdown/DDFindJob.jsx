@@ -36,15 +36,15 @@ const DDFindJob = () => {
         // },
         {
           subtitle: "Việc online",
-          link: "search/online",
+          link: "search",
         },
         {
           subtitle: "Việc toàn thời gian",
-          link: "search/fulltime",
+          link: "search?q=fulltime",
         },
         {
           subtitle: "Việc bán thời gian",
-          link: "search/pasttime",
+          link: "search?q=pasttime",
         },
       ],
     },

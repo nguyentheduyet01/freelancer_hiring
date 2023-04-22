@@ -27,17 +27,6 @@ const Header = () => {
               <Col xm lg='5'>
                 <span
                   className='menu-item'
-                  onMouseLeave={() => setIsShow(() => false)}
-                  onMouseEnter={() => setIsShow(() => true)}
-                >
-                  <span>Tìm kiếm việc làm</span>
-                  {isShow && <DDFindJob />}
-                </span>
-                <span>{isShow ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
-              </Col>
-              <Col xm lg='5'>
-                <span
-                  className='menu-item'
                   onMouseLeave={() => setIsShowJob(() => false)}
                   onMouseEnter={() => setIsShowJob(() => true)}
                 >
@@ -45,6 +34,17 @@ const Header = () => {
                   {isShowJob && <DDFreelance />}
                 </span>
                 <span>{isShowJob ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
+              </Col>
+              <Col xm lg='5'>
+                <span
+                  className='menu-item'
+                  onMouseLeave={() => setIsShow(() => false)}
+                  onMouseEnter={() => setIsShow(() => true)}
+                >
+                  <span>Tìm kiếm việc làm</span>
+                  {isShow && <DDFindJob />}
+                </span>
+                <span>{isShow ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
             </Row>
           </Col>

@@ -1,0 +1,16 @@
+.searchItem{
+  line-height: 50px;
+  width: 227px;
+  font-size: 105%;
+  text-align: center;
+}
+
+.searchItem.active{
+  border-bottom: 2px solid black ;
+}
+
+.cartPost.card{
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 0;
+}
