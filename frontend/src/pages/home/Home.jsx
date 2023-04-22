@@ -8,7 +8,9 @@ const Home = () => {
     <>
       <Slider />
       <h2 className='mt-3 mb-3 text-center'>CÁC CÔNG VIỆC ĐƯỢC QUAN TÂM NHẤT</h2>
-      <Post />
+      <div style={{ width: "70vw", margin: "0 auto" }}>
+        <Post />
+      </div>
       <DetailQuotes />
     </>
   );

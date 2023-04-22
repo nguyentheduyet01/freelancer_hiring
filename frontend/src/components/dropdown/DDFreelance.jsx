@@ -12,16 +12,16 @@ const DDFreelance = () => {
       title: "Tìm Việc làm",
       subtitle: "Hàng ngàn công việc mới được đăng mỗi này",
       chevronRight: "ChevronRight",
-      enter: () => setIsShowRight(() => true),
-      leave: () => setIsShowRight(() => false),
-      isShow: isShowRight,
+      enter: () => setIsShow(() => true),
+      leave: () => setIsShow(() => false),
+      isShow: isShow,
       itemsRight: [
         {
           subtitle: "Đăng tin nhận báo giá",
           chevronRight: "ChevronRight",
-          enter: () => setIsShow(() => true),
-          leave: () => setIsShow(() => false),
-          isShow: isShow,
+          enter: () => setIsShowRight(() => true),
+          leave: () => setIsShowRight(() => false),
+          isShow: isShowRight,
           itemsFinal: [
             {
               subtitle: "Đăng việc theo dự án",

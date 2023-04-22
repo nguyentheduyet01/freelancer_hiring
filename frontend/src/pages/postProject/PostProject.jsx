@@ -11,9 +11,9 @@ import { useLocation } from "react-router-dom";
 const PostProject = () => {
   const location = useLocation();
   let ht = location.search.split("=")[1];
-  if (ht == "") {
-    ht = "fulltime";
-  }
+  // if (ht == "") {
+  //   ht = "fulltime";
+  // }
 
   const hts = [
     {

@@ -7,7 +7,7 @@ import "./Post.css";
 const Post = () => {
   return (
     <div>
-      <Card style={{ width: "70vw", margin: "0 auto", padding: "30px" }} className='cartPost'>
+      <Card style={{ padding: "30px" }} className='cartPost'>
         <Link to='login' className='postLink'>
           <Card.Body>
             <Card.Title style={{ fontSize: "120%", lineHeight: "50px" }}>
