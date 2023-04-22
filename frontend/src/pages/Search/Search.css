@@ -14,3 +14,17 @@
   border-bottom: 1px solid #dee2e6;
   border-radius: 0;
 }
+
+.paginationBox {
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+}
+
+.page-link:focus.pageLinkActive{
+  box-shadow: 0 0 0 0.1rem rgba(94, 133, 103, 0.25) !important;
+  /* outline: none !important; */
+}
+.page-link.pageLinkActive{
+  box-shadow: 0 0 0 0 rgba(94, 133, 103, 0.25) !important;
+}
