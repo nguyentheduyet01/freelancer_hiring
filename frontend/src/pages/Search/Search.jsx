@@ -1,47 +1,53 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import "./Search.css";
-import Post from "./../../components/post/Post";
-import Pagination from "react-js-pagination";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
+import Pagination from "react-js-pagination";
+import { Link, useLocation } from "react-router-dom";
+import Filter from "../../components/filter/Filter";
+import wireless from "../../images/wireless.png";
+import Post from "./../../components/post/Post";
+import "./Search.css";
 
 const Search = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
-  let q = location.search.split("=")[1] || "all";
+  let ht = location.pathname.split("/")[2] || "all";
 
   const items = [
     {
       value: "all",
       context: "Tất cả công việc",
-      link: "?q=all",
+      link: "",
     },
     {
       value: "passtime",
       context: "Việc bán thời gian",
-      link: "?q=passtime",
+      link: "passtime",
     },
     {
       value: "fulltime",
       context: "Việc toàn thời gian",
-      link: "?q=fulltime",
+      link: "fulltime",
     },
   ];
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
       <Row>
-        <Col className='border' lg='3'>
-          hello
+        <Col lg='3'>
+          <Filter />
         </Col>
         <Col className='border p-0'>
           <div className='searchHeader d-flex mb-3'>
             {items.map((item, index) => {
-              if (item.value === q) {
+              if (item.value === ht) {
                 return (
                   <div key={index} className='searchItem active'>
                     <Link
@@ -66,8 +72,17 @@ const Search = () => {
               }
             })}
           </div>
+          <div style={{ padding: "5px 46px" }} className='d-flex mt-3 mb-3'>
+            <div className='d-flex'>
+              <img src={wireless} alt='wireless' style={{ width: "18px", height: "18px" }} />
+              <span style={{ marginLeft: "10px" }}>
+                <span style={{ fontWeight: "700" }}>100.000</span> công việc
+              </span>
+            </div>
+            <div></div>
+          </div>
           <div className='mb-3'>
-            <Post />
+            <Post active='active' />
             <Post />
             <Post />
           </div>
@@ -85,6 +100,7 @@ const Search = () => {
               activeLinkClass='pageLinkActive'
               // firstPageText='1st'
               // lastPageText='Last'
+              // onClick={scrollChange}
             />
           </div>
         </Col>

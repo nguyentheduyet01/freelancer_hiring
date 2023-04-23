@@ -6,8 +6,14 @@
   text-decoration: none;
 }
 
+
 .cartPost:hover{
   background-color: #edf8f8;
+}
+
+.cartPost.active {
+  background-color: #edf8f8;
+  border-radius: 20px 20px 0px 0px !important;
 }
 
 .linkPost{

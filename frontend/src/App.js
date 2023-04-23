@@ -14,7 +14,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Outlet />}>
           <Route path='/' element={<Home />} />
-          <Route path='search' element={<Search />} />
+          <Route path='search' element={<Search />}>
+            <Route path='passtime' />
+            <Route path='fulltime' />
+          </Route>
           <Route path='posts' element={<PostProject />} />
           <Route path='posts/:id' element={<PostDetail />} />
           <Route path='login' element={<Login />} />
