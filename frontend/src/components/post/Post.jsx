@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import formatVi from "../../utils/vi";
 import "./Post.css";
 
-const Post = () => {
+const Post = ({ active }) => {
+  // 'cartPost'
   return (
     <div>
-      <Card style={{ padding: "30px" }} className='cartPost'>
+      <Card
+        style={{ padding: "30px" }}
+        className={`${active === "active" ? "cartPost active" : "cartPost"}`}
+      >
         <Link to='login' className='postLink'>
           <Card.Body>
             <Card.Title style={{ fontSize: "120%", lineHeight: "50px" }}>
