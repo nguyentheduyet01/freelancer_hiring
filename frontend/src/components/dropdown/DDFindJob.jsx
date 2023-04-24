@@ -4,7 +4,7 @@ import LeftDropdown from "./LeftDropdown";
 
 const DDFindJob = () => {
   const [isShow, setIsShow] = useState(false);
-  const [isShowRight, setIsShowRight] = useState(false);
+  // const [isShowRight, setIsShowRight] = useState(false);
 
   const items = [
     {
@@ -12,16 +12,16 @@ const DDFindJob = () => {
       title: "Tìm Việc làm",
       subtitle: "Hàng ngàn công việc mới được đăng mỗi này",
       chevronRight: "ChevronRight",
-      enter: () => setIsShowRight(() => true),
-      leave: () => setIsShowRight(() => false),
-      isShow: isShowRight,
+      enter: () => setIsShow(() => true),
+      leave: () => setIsShow(() => false),
+      isShow: isShow,
       itemsRight: [
         // {
         //   subtitle: "Đăng tin nhận báo giá",
         //   chevronRight: "ChevronRight",
-        //   enter: () => setIsShow(() => true),
-        //   leave: () => setIsShow(() => false),
-        //   isShow: isShow,
+        //   enter: () => setIsShowRight(() => true),
+        //   leave: () => setIsShowRight(() => false),
+        //   isShow: isShowRight,
         //   itemsFinal: [
         //     {
         //       subtitle: "Đăng việc theo thời gian",
@@ -86,7 +86,7 @@ const DDFindJob = () => {
           lg='4'
           className='d-flex align-items-center flex-column pt-3'
         >
-          <LeftDropdown itemsLeft={items} />
+          <LeftDropdown items={items} />
         </Col>
         <Col></Col>
       </Row>
