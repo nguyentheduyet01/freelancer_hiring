@@ -6,7 +6,7 @@ const DDFreelance = () => {
   const [isShow, setIsShow] = useState(false);
   const [isShowRight, setIsShowRight] = useState(false);
 
-  const itemsLeft = [
+  const items = [
     {
       id: "1",
       title: "Tìm Việc làm",
@@ -82,7 +82,7 @@ const DDFreelance = () => {
           lg='4'
           className='d-flex align-items-center flex-column pt-3'
         >
-          <LeftDropdown itemsLeft={itemsLeft} />
+          <LeftDropdown items={items} />
         </Col>
         <Col></Col>
       </Row>
