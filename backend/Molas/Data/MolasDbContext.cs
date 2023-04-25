@@ -140,6 +140,18 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("name");
         });
+        modelBuilder.Entity<Skill>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("SkillPK");
+
+            entity.ToTable("skill");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id_Category).HasColumnName("id_category");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("name");
+        });
 
         modelBuilder.Entity<UserPost>(entity =>
         {
