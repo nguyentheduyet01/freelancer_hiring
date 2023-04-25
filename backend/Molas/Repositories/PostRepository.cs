@@ -17,7 +17,7 @@ namespace Molas.Repositories
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<PostDTO>> GetListPostsAsync(int pageindex, int pagesize)
+        public async Task<IEnumerable<PostDTO>> GetListPostsAsync(int pagesize, int pageindex)
         {
             try
             {
