@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronRight } from "react-bootstrap-icons";
 import RightDropdown from "./RightDropdown";
 
-const LeftDropdown = ({ itemsLeft: items }) => {
+const LeftDropdown = ({ items }) => {
   return (
     <>
       {items.map((item, index) => (

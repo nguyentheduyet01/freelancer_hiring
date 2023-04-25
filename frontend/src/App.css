@@ -6,3 +6,12 @@
 .input-none.form-control:focus{
   box-shadow: 0 0 0 0 rgba(94, 133, 103, 0.25) !important;
 }
+
+.rbt-token-label{
+  font-size: 81% !important;
+}
+
+.rbt-input-multi.form-control.rbt-input.focus{
+  box-shadow: 0 0 0 0.1rem rgba(94, 133, 103, 0.25) !important;
+  border-color: rgba(73, 104, 80, 0.25) !important;
+}
