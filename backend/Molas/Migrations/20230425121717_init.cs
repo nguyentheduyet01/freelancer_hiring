@@ -19,6 +19,7 @@ namespace Molas.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
+                
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Category__3213E83F21DEFD49", x => x.id);
