@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "swZRfrwqBEKYpKjUxjuF1jdpVUmghRMsmyosYg2XEbnXY1vftHV+rJLp2O2Dc7bKERPQpSDLU5nFv84Ojlq/ig==",
+  "dgSpecHash": "WrGKLMR46aHq3s5qNer27AIFhvldT927hzUiMjCWlz37NzT4sLqCxE2G6SQ8pX+gEWyBfcCmyN4I4gLRwYJL9w==",
   "success": true,
-  "projectFilePath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+  "projectFilePath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\Molas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SIZZAN\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\SIZZAN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj": {}
+    "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\Molas.csproj": {}
   },
   "projects": {
-    "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj": {
+    "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\Molas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+        "projectUniqueName": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\Molas.csproj",
         "projectName": "Molas",
-        "projectPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+        "projectPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\Molas.csproj",
         "packagesPath": "C:\\Users\\SIZZAN\\.nuget\\packages\\",
-        "outputPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\obj\\",
+        "outputPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\molas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SIZZAN\\AppData\\Roaming\\NuGet\\NuGet.Config",

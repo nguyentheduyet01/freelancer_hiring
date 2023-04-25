@@ -219,6 +219,31 @@ namespace Molas.Migrations
                     b.ToTable("role", (string)null);
                 });
 
+            modelBuilder.Entity("Molas.Models.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Id_Category")
+                        .HasColumnType("int")
+                        .HasColumnName("id_category");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("SkillPK");
+
+                    b.ToTable("skill", (string)null);
+                });
+
             modelBuilder.Entity("Molas.Models.UserPost", b =>
                 {
                     b.Property<DateTime?>("CreatedAt")
