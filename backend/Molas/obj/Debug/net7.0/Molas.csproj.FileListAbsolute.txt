@@ -572,3 +572,13 @@ D:\DO_AN_TOT_NGHIEP\freelancer_hiring\backend\Molas\obj\Debug\net7.0\refint\Mola
 D:\DO_AN_TOT_NGHIEP\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.pdb
 D:\DO_AN_TOT_NGHIEP\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.genruntimeconfig.cache
 D:\DO_AN_TOT_NGHIEP\freelancer_hiring\backend\Molas\obj\Debug\net7.0\ref\Molas.dll
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.csproj.AssemblyReference.cache
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.GeneratedMSBuildEditorConfig.editorconfig
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.AssemblyInfoInputs.cache
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.AssemblyInfo.cs
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.csproj.CoreCompileInputs.cache
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.MvcApplicationPartsAssemblyInfo.cs
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.MvcApplicationPartsAssemblyInfo.cache
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.dll
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\refint\Molas.dll
+E:\freelancer_hiring\backend\Molas\obj\Debug\net7.0\Molas.pdb
