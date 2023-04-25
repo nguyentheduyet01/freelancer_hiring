@@ -3,6 +3,7 @@
   "dgSpecHash": "CcRBx4icJ2T47DVRT9+nkfmB9Y4+9WiFwycckpAyu46ksMSUFrrMFVThNJNjD5S/28omE+K6pLBCAYX67Fg5vg==",
   "success": true,
   "projectFilePath": "E:\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+
   "expectedPackageFiles": [
     "C:\\Users\\THEVU\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

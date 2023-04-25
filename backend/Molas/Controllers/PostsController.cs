@@ -40,7 +40,7 @@ namespace Molas.Controllers
         }
         [Route("getlistpost")]
         [HttpGet]
-        public async Task<ActionResult<ResultDTO>> GetListPostsAsync(int pageindex = 1, int pagesize = 15)
+        public async Task<ActionResult<ResultDTO>> GetListPostsAsync(int pagesize = 15, int pageindex = 1)
         {
             try
             {

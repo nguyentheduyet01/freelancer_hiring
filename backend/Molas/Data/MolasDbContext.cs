@@ -29,6 +29,7 @@ public partial class MolasDbContext : DbContext
     public virtual DbSet<UserPost> UserPost { get; set; }
 
     public virtual DbSet<Users> Users { get; set; }
+    public virtual DbSet<Skill> Skill { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
