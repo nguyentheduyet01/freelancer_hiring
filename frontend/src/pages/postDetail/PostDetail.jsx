@@ -23,7 +23,7 @@ const PostDetail = () => {
               <div style={{ marginLeft: "20px" }}>
                 Người đăng
                 <div className='infoProject'>
-                  <Link>the vu</Link>
+                  <Link>the duyet</Link>
                 </div>
               </div>
             </div>

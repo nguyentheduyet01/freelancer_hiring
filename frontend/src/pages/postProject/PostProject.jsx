@@ -36,7 +36,7 @@ const PostProject = () => {
         Đăng Tin
       </h4>
 
-      <Row style={{ width: "60%", margin: "0 auto" }}>
+      <Row style={{ width: "80%", margin: "0 auto" }}>
         <Form>
           <div className='d-flex flex-row' style={{ width: "100%" }}>
             <div className='iconPost'>
@@ -87,11 +87,14 @@ const PostProject = () => {
                   placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
                 />
               </Form.Group>
-              <div style={{ width: "60%" }}>
                 <Form.Group className='mb-3' controlId='skill'>
                   <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
-                  <Form.Control type='text' placeholder='VD: Thiết kế bán hàng' />
+                  <Form.Control as='textarea' 
+                    type='text' 
+                    row={2}
+                    placeholder='VD: Thiết kế bán hàng' />
                 </Form.Group>
+              <div style={{ width: "80%" }}>
                 <Form.Group className='mb-3' controlId='date'>
                   <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>
                   <Form.Control type='date' placeholder='VD: Thiết kế bán hàng' />
@@ -163,15 +166,15 @@ const PostProject = () => {
                     <Form.Control
                       type='number'
                       aria-label='Default select example'
-                      style={{ width: "49%" }}
-                      placeholder='Từ'
+                      style={{ width: "60%" }}
+                      placeholder='Khoảng'
                     ></Form.Control>
-                    <Form.Control
+                    {/* <Form.Control
                       type='number'
                       aria-label='Default select example'
                       style={{ width: "49%" }}
                       placeholder='Đến'
-                    ></Form.Control>
+                    ></Form.Control> */}
                   </div>
                 </Form.Group>
               </div>
