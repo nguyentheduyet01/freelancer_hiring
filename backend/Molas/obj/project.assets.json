@@ -11281,19 +11281,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SIZZAN\\.nuget\\packages\\": {}
+    "C:\\Users\\THEVU\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+      "projectUniqueName": "E:\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
       "projectName": "Molas",
-      "projectPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
-      "packagesPath": "C:\\Users\\SIZZAN\\.nuget\\packages\\",
-      "outputPath": "D:\\DO_AN_TOT_NGHIEP\\freelancer_hiring\\backend\\Molas\\obj\\",
+      "projectPath": "E:\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
+      "packagesPath": "C:\\Users\\THEVU\\.nuget\\packages\\",
+      "outputPath": "E:\\freelancer_hiring\\backend\\Molas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\SIZZAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\THEVU\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11395,7 +11395,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
