@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
-
+import { useDispatch } from "react-redux";
 import "./Login.css";
+import { loginAction } from "../../reducer/actions/accountAction";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const [account, setAccount] = useState({});
+  const loginHandle = (e) => {
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const loginSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(account));
+  };
   return (
     <>
       <section className='vh-500'>
@@ -20,16 +33,28 @@ const Login = () => {
               />
             </div>
             <div className='col-md-7 col-lg-5 col-xl-5 offset-xl-1'>
-              <form style={{ width: "70%" }}>
+              <form style={{ width: "70%" }} onSubmit={loginSubmit} method='POST'>
                 <div className='form-outline '>
-                  <input type='email' id='form1Example13' className='form-control' />
+                  <input
+                    type='email'
+                    id='form1Example13'
+                    className='form-control'
+                    name='username'
+                    onChange={loginHandle}
+                  />
                   <label className='form-label' htmlFor='form1Example13'>
                     Email address
                   </label>
                 </div>
 
                 <div className='form-outline '>
-                  <input type='password' id='form1Example23' className='form-control ' />
+                  <input
+                    type='password'
+                    id='form1Example23'
+                    className='form-control'
+                    name='password'
+                    onChange={loginHandle}
+                  />
                   <label className='form-label' htmlFor='form1Example23'>
                     Password
                   </label>
