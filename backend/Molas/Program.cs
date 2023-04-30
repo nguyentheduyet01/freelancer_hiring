@@ -22,6 +22,10 @@ builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 // Add services to the container.
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
 builder.Services.AddDbContext<Molas.Molas.MolasDbContext>(
     options =>
     {
@@ -31,10 +35,6 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-{
-    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
 builder.Services.AddSwaggerGen(options => {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
