@@ -115,18 +115,14 @@ const Header = () => {
             ) : (
               <Row>
                 <Col>
-                  <Button variant='light'>
-                    <Link style={{ textDecoration: "none", color: "black" }} to='login'>
-                      Login
-                    </Link>
-                  </Button>
+                  <Link style={{ textDecoration: "none", color: "black" }} to='login'>
+                    <Button variant='light'>Login</Button>
+                  </Link>
                 </Col>
                 <Col>
-                  <Button variant='success'>
-                    <Link style={{ textDecoration: "none", color: "white" }} to='register'>
-                      Register
-                    </Link>
-                  </Button>
+                  <Link style={{ textDecoration: "none", color: "white" }} to='register'>
+                    <Button variant='success'>Register</Button>
+                  </Link>
                 </Col>
               </Row>
             )}
