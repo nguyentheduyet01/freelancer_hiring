@@ -8,14 +8,16 @@ import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
 import "./Header.css";
 
-const Header = ({ user, success }) => {
+const Header = ({ success }) => {
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (success) {
+    if (success === true) {
       setIsLogin(true);
+    } else {
+      setIsLogin(false);
     }
   }, [success]);
 

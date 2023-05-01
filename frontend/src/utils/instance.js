@@ -5,7 +5,19 @@ const instance = axios.create({
   timeout: 3 * 1000,
 });
 
-// instance.interceptors.request.use();
+const account = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : {};
+
+instance.interceptors.request.use(
+  (config) => {
+    // if (config.url !== "/login") {
+    // }
+    config.headers.Authorization = `Bearer ${account.token}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 // instance.interceptors.response.use((response) => {
 //   const { data } = response;
 //   return data;

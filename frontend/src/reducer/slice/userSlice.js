@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserAction } from "../actions/userAction";
+import { getAllUserAction, getUserAction } from "../actions/userAction";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
     user: {},
+    users: [],
   },
   reducers: {},
   extraReducers: {
@@ -18,6 +19,19 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     [getUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [getAllUserAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getAllUserAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.users = action.payload;
+    },
+    [getAllUserAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

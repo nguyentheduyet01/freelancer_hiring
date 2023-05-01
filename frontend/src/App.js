@@ -13,16 +13,15 @@ import { getUserAction } from "./reducer/actions/userAction";
 
 function App() {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.account);
-  const { user } = useSelector((state) => state.user);
+  const { account } = useSelector((state) => state.account);
 
   useEffect(() => {
-    dispatch(getUserAction(data?.data?.id));
-  }, [dispatch, data]);
+    dispatch(getUserAction(account?.data?.id));
+  }, [dispatch, account]);
 
   return (
     <div style={{ overflowX: "hidden" }}>
-      <Header user={user} success={data?.isSuccess} />
+      <Header success={account?.isSuccess} />
       <Routes>
         <Route path='/' element={<Outlet />}>
           <Route path='/' element={<Home />} />
