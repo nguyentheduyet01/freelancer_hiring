@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginAction } from "../actions/accountAction";
+import { loginAction, logoutAction } from "../actions/accountAction";
+
+const initialState = {
+  account: localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : {},
+};
 
 const accountSlice = createSlice({
   name: "account",
-  initialState: {
-    token: "",
-    data: {},
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: {
     [loginAction.pending]: (state, action) => {
@@ -16,9 +17,22 @@ const accountSlice = createSlice({
     [loginAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.data = action.payload;
+      state.account = action.payload;
     },
     [loginAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [logoutAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [logoutAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.account = {};
+    },
+    [logoutAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

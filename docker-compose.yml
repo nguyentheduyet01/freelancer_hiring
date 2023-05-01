@@ -1,19 +1,5 @@
 version: "3"
 services:
-  backend:
-    image: backend:v1
-    ports:
-      - "80:80"
-    environment:
-      DB_HOST: mssql
-
-    depends_on:
-      - mssql
-    restart: always
-
-    networks:
-      - my-network
-
   mssql:
     image: mcr.microsoft.com/mssql/server:2017-latest
     restart: always
@@ -31,6 +17,32 @@ services:
 
     volumes:
       - db:/var/opt/mssql
+    networks:
+      - my-network
+
+  backend:
+    image: backend:latest
+    ports:
+      - "80:80"
+    environment:
+      DB_HOST: mssql
+
+    depends_on:
+      - mssql
+    restart: always
+
+    networks:
+      - my-network
+
+  frontend:
+    image: frontend:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mssql
+      - backend
+    restart: always
+
     networks:
       - my-network
 

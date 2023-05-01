@@ -1,10 +1,21 @@
 import React from "react";
 import { Card, Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
-import avatar from "../../images/avatar.png";
 import { Bell } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import avatar from "../../images/avatar.png";
+import { logoutAction } from "../../reducer/actions/accountAction";
 
 const Avatar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
+  const handleLogout = () => {
+    dispatch(logoutAction());
+    navigate("/");
+  };
+
   return (
     <Row style={{ width: "100%" }}>
       <Col xm lg='2' style={{ display: "flex", alignItems: "center", padding: "0" }}>
@@ -22,18 +33,18 @@ const Avatar = () => {
         }}
       >
         <Card style={{ width: "40px", borderRadius: "50%", overflow: "hidden" }}>
-          <Card.Img src={avatar} />
+          <Card.Img src={pathImage} />
         </Card>
       </Col>
       <Col xm lg='7' style={{ padding: "0 5px" }}>
         <DropdownButton
           id='dropdown-basic-button'
-          title='Nguyễn Thế Vũ'
+          title={`${user?.name}`}
           style={{ width: "30px !important" }}
         >
           <Dropdown>
             <Dropdown.Item href='#/action-1'>Hồ sơ cá nhân</Dropdown.Item>
-            <Dropdown.Item href='#/action-2'>Logout</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             {/* <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item> */}
           </Dropdown>
         </DropdownButton>
