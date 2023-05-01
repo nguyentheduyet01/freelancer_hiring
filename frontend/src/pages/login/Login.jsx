@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import "./Login.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loginAction } from "../../reducer/actions/accountAction";
+import "./Login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.account);
   const [account, setAccount] = useState({});
+  const navigate = useNavigate();
+  const location = useLocation();
   const loginHandle = (e) => {
     setAccount({
       ...account,
@@ -17,6 +21,16 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginAction(account));
   };
+
+  useEffect(() => {
+    if (data?.isSuccess) {
+      if (location.state?.from) {
+        navigate(location.state?.from);
+      }
+      navigate("/");
+    }
+  }, [data, navigate, location]);
+
   return (
     <>
       <section className='vh-500'>

@@ -4,8 +4,8 @@ import { loginAction } from "../actions/accountAction";
 const accountSlice = createSlice({
   name: "account",
   initialState: {
-    user: [],
     token: "",
+    data: {},
   },
   reducers: {},
   extraReducers: {
@@ -16,7 +16,7 @@ const accountSlice = createSlice({
     [loginAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.data = action.data;
+      state.data = action.payload;
     },
     [loginAction.rejected]: (state, action) => {
       state.isLoad = false;
