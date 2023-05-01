@@ -1,17 +1,23 @@
-import React, { useState } from "react";
-import { Card, Button, Col, Form, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import Logo from "../../images/icon_page.png";
 import Avatar from "../avatar/Avatar";
 import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
-import Logo from "../../images/icon_page.png";
 import "./Header.css";
-import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ user, success }) => {
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      setIsLogin(true);
+    }
+  }, [success]);
 
   return (
     <>
