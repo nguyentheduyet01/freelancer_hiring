@@ -82,7 +82,7 @@ const DDFindJob = () => {
       >
         <Col
           style={{ borderRight: "1.5px solid #BECCBE" }}
-          xm
+          xm='4'
           lg='4'
           className='d-flex align-items-center flex-column pt-3'
         >

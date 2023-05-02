@@ -44,7 +44,7 @@ const Search = () => {
         <Col lg='3'>
           <Filter />
         </Col>
-        <Col className='border p-0'>
+        <Col className='border p-0 rounded-4'>
           <div className='searchHeader d-flex mb-3'>
             {items.map((item, index) => {
               if (item.value === ht) {

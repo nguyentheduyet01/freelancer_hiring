@@ -10,6 +10,7 @@ import Login from "./pages/login/Login";
 import PostDetail from "./pages/postDetail/PostDetail";
 import PostProject from "./pages/postProject/PostProject";
 import { getUserAction } from "./reducer/actions/userAction";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,13 +26,14 @@ function App() {
       <Routes>
         <Route path='/' element={<Outlet />}>
           <Route path='/' element={<Home />} />
+          <Route path='login' element={<Login />} />
           <Route path='search' element={<Search />}>
             <Route path='passtime' />
             <Route path='fulltime' />
           </Route>
+          <Route path='profile' element={<Profile />} />
           <Route path='posts' element={<PostProject />} />
           <Route path='posts/:id' element={<PostDetail />} />
-          <Route path='login' element={<Login />} />
         </Route>
       </Routes>
       <Footer />

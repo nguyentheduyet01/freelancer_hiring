@@ -18,13 +18,13 @@ const Avatar = () => {
 
   return (
     <Row style={{ width: "100%" }}>
-      <Col xm lg='2' style={{ display: "flex", alignItems: "center", padding: "0" }}>
+      <Col xm='2' lg='2' style={{ display: "flex", alignItems: "center", padding: "0" }}>
         <Link className='Notification'>
           <Bell size={20} color='#5a645a' />
         </Link>
       </Col>
       <Col
-        xm
+        xm='3'
         lg='3'
         style={{
           display: "flex",
@@ -36,15 +36,19 @@ const Avatar = () => {
           <Card.Img src={pathImage} />
         </Card>
       </Col>
-      <Col xm lg='7' style={{ padding: "0 5px" }}>
+      <Col xm='7' lg='7' style={{ padding: "0 5px" }}>
         <DropdownButton
           id='dropdown-basic-button'
           title={`${user?.name}`}
           style={{ width: "30px !important" }}
         >
           <Dropdown>
-            <Dropdown.Item href='#/action-1'>Hồ sơ cá nhân</Dropdown.Item>
-            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            <Dropdown.Item>
+              <Link to='profile' style={{ textDecoration: "none", color: "black" }}>
+                Hồ sơ cá nhân
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={handleLogout}>Đăng xuất</Dropdown.Item>
             {/* <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item> */}
           </Dropdown>
         </DropdownButton>
