@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import formatVi from "../../utils/vi";
-import "./PostDetail.css";
-import user from "../../images/user.png";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import budgeting from "../../images/budgeting.png";
 import calendar from "../../images/calendar.png";
 import hourglass from "../../images/hourglass.png";
 import placeholder from "../../images/placeholder.png";
-import budgeting from "../../images/budgeting.png";
-import working from "../../images/working.png";
+import user from "../../images/user.png";
 import wage from "../../images/wage.png";
+import working from "../../images/working.png";
+import formatVi from "../../utils/vi";
+import "./PostDetail.css";
+import { getPostAction } from "../../reducer/actions/postAction";
+import formatVND from "./../../utils/formatVND";
+import paragraphFormat from "../../utils/paragraphFormat";
 
 const PostDetail = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const { post } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getPostAction(id));
+  }, [dispatch, id]);
+
   return (
     <Container className='mt-3'>
       <Row style={{ width: "90%", margin: "0 auto" }}>
         <div className='mt-3 border rounded-4 p-3 mt-3 mb-3'>
-          <h4>Lead generations expertLead generations expertLead</h4>
+          <h4>{post?.title}</h4>
           <div className='' style={{ fontSize: "90%", fontWeight: "700" }}>
             <div className='d-flex mt-3' style={{ width: "20%" }}>
               <img style={{ width: "32px", height: "32px" }} src={user} alt='user' />
@@ -33,7 +46,7 @@ const PostDetail = () => {
                   <img style={{ width: "32px", height: "32px" }} src={calendar} alt='calendar' />
                   <div style={{ marginLeft: "20px" }}>
                     Đã đăng
-                    <div className='infoProject'>{formatVi("Tue Apr 18 2023 20:00:04")}</div>
+                    <div className='infoProject'>{formatVi(post?.createdAt)}</div>
                   </div>
                 </div>
                 <div className='d-flex mt-3'>
@@ -52,7 +65,7 @@ const PostDetail = () => {
                   />
                   <div style={{ marginLeft: "20px" }}>
                     {" "}
-                    Địa điểm <div className='infoProject'>Hà Nội</div>
+                    Địa điểm <div className='infoProject'>{post?.location}</div>
                   </div>
                 </div>
               </div>
@@ -60,7 +73,7 @@ const PostDetail = () => {
                 <div className='d-flex mt-3'>
                   <img style={{ width: "32px", height: "32px" }} src={budgeting} alt='budgeting' />
                   <div style={{ marginLeft: "20px" }}>
-                    Ngân sách <div className='infoProject'>12.000.000VNĐ - 15.000.000VNĐ</div>
+                    Ngân sách <div className='infoProject'>{formatVND(post?.budget)}</div>
                   </div>
                 </div>
                 <div className='d-flex mt-3'>
@@ -81,10 +94,7 @@ const PostDetail = () => {
         </div>
         <div className='border rounded-4 p-3 mt-3 mb-3'>
           <h5>Chi tiết</h5>
-          Hello, We are looking for a lead Generation Expert who have the access with the LinkedIn
-          Sales navigator . We want IT Owners from the Uk. We want 100 leads for now. Data required:
-          Name (Ceo) Website Company name LinkedIn Url Contact number Email. Apply with your best
-          proposal for more information. Thanks
+          {paragraphFormat(post?.descriptions)}
           <div className='d-flex mt-1'>
             <button className='skillButton'>
               <Link className='linkSkill' to=''>
@@ -104,14 +114,7 @@ const PostDetail = () => {
         </div>
         <div className='border rounded-4 p-3 mt-3 mb-3'>
           <h5>Yêu cầu</h5>
-          - Nam/ nữ 20 tuổi trở lên. <br />
-          - Không yêu cầu kinh nghiệm, được cầm tay chỉ việc, hỗ trợ trực tiếp 1-1 với Trưởng phòng
-          kinh doanh. <br />
-          - Có laptop và phương tiện đi lại.
-          <br />
-          - Nhanh nhẹn, có tinh thần học hỏi, cầu tiến. <br />
-          - Có kỹ năng giao tiếp, đàm phán.
-          <br />
+          {paragraphFormat(post?.requirement)}
         </div>
         <div className='border rounded-4 p-3 mt-3'>
           <h5>Thông tin chào giá</h5>

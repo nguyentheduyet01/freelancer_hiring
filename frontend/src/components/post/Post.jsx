@@ -3,8 +3,9 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import formatVi from "../../utils/vi";
 import "./Post.css";
+import formatVND from "../../utils/formatVND";
 
-const Post = ({ active }) => {
+const Post = ({ item, active }) => {
   // 'cartPost'
   return (
     <div>
@@ -12,19 +13,19 @@ const Post = ({ active }) => {
         style={{ padding: "30px" }}
         className={`${active === "active" ? "cartPost active" : "cartPost"}`}
       >
-        <Link to='login' className='postLink'>
+        <Link to={`posts/${item?.id}`} className='postLink'>
           <Card.Body>
             <Card.Title style={{ fontSize: "120%", lineHeight: "50px" }}>
               <Link to='' className='linkPost'>
-                Lead generations expert
+                {item?.title}
               </Link>
             </Card.Title>
             <Card.Subtitle
               className='mb-2 text-muted d-flex flex-row justify-content-between'
               style={{ fontSize: "100%" }}
             >
-              <span>Fixed-price - Entry level - Est. Budget: $5</span>
-              <span>Đã đăng {formatVi("Tue Apr 18 2023 20:00:04")}</span>
+              <span>Ngân sách: {formatVND(item?.budget)}</span>
+              <span>Đã đăng {formatVi(item?.createdBy)}</span>
             </Card.Subtitle>
             <Card.Text
               style={{
@@ -36,10 +37,7 @@ const Post = ({ active }) => {
                 WebkitBoxOrient: "vertical",
               }}
             >
-              Hello, We are looking for a lead Generation Expert who have the access with the
-              LinkedIn Sales navigator . We want IT Owners from the Uk. We want 100 leads for now.
-              Data required: Name (Ceo) Website Company name LinkedIn Url Contact number Email.
-              Apply with your best proposal for more information. Thanks
+              {item?.descriptions}
             </Card.Text>
             <Link>Xem thêm</Link>
 

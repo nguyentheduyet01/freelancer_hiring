@@ -7,7 +7,7 @@ import "./Login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.account);
+  const { account: accountUser } = useSelector((state) => state.account);
   const [account, setAccount] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,13 +23,13 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (data?.isSuccess) {
+    if (accountUser?.isSuccess) {
       if (location.state?.from) {
         navigate(location.state?.from);
       }
       navigate("/");
     }
-  }, [data, navigate, location]);
+  }, [accountUser, navigate, location]);
 
   return (
     <>

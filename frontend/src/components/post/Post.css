@@ -8,11 +8,11 @@
 
 
 .cartPost:hover{
-  background-color: #edf8f8;
+  background-color: #e3fce3;
 }
 
 .cartPost.active {
-  background-color: #edf8f8;
+  background-color: #e3fce3;
   border-radius: 20px 20px 0px 0px !important;
 }
 

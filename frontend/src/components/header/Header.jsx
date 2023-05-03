@@ -8,14 +8,16 @@ import DDFreelance from "../dropdown/DDFreelance";
 import DDFindJob from "./../dropdown/DDFindJob";
 import "./Header.css";
 
-const Header = ({ user, success }) => {
+const Header = ({ success }) => {
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (success) {
+    if (success === true) {
       setIsLogin(true);
+    } else {
+      setIsLogin(false);
     }
   }, [success]);
 
@@ -23,14 +25,14 @@ const Header = ({ user, success }) => {
     <>
       <div style={{ borderBottom: "1px #BECCBE solid" }}>
         <Row style={{ width: "95%", margin: "0 auto", lineHeight: "70px" }}>
-          <Col xs xm lg='2'>
+          <Col xm='2' lg='2'>
             <Link to=''>
               <Card.Img src={Logo} style={{ width: "160px" }} />
             </Link>
           </Col>
-          <Col xs xm lg='4'>
+          <Col xm='4' lg='4'>
             <Row>
-              <Col xm lg='5'>
+              <Col xm='5' lg='5'>
                 <span
                   className='menu-item'
                   onMouseLeave={() => setIsShowJob(() => false)}
@@ -41,7 +43,7 @@ const Header = ({ user, success }) => {
                 </span>
                 <span>{isShowJob ? <ChevronUp size={12} /> : <ChevronDown size={12} />}</span>
               </Col>
-              <Col xm lg='5'>
+              <Col xm='5' lg='5'>
                 <span
                   className='menu-item'
                   onMouseLeave={() => setIsShow(() => false)}
@@ -54,7 +56,7 @@ const Header = ({ user, success }) => {
               </Col>
             </Row>
           </Col>
-          <Col xs xm lg='3'>
+          <Col xm='3' lg='3'>
             <Row className='mt-3'>
               <Col style={{ padding: "15  px 0 0 0" }}>
                 <Form
