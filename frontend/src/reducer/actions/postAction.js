@@ -6,8 +6,8 @@ export const getAllPostAction = createAsyncThunk("post/getAllPost", async () => 
   return data;
 });
 
-export const getPostAction = createAsyncThunk("post/getAllPost", async () => {
-  const { data } = await axios.get("posts");
+export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
+  const { data } = await axios.get(`posts/${id}`);
   return data;
 });
 
