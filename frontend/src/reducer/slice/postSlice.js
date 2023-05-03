@@ -16,7 +16,7 @@ const postSlice = createSlice({
     [getPostAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.Post = action.payload;
+      state.post = action.payload;
     },
     [getPostAction.rejected]: (state, action) => {
       state.isLoad = false;
@@ -29,7 +29,7 @@ const postSlice = createSlice({
     [getAllPostAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.Posts = action.payload;
+      state.posts = action.payload;
     },
     [getAllPostAction.rejected]: (state, action) => {
       state.isLoad = false;
