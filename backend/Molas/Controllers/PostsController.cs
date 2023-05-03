@@ -28,17 +28,17 @@ namespace Molas.Controllers
         }
 
         // GET: api/Posts
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<Posts>>> GetPosts()
-        {
-          if (_context.Posts == null)
-          {
-              return NotFound();
-          }
-            return await _context.Posts.ToListAsync();
-        }
-        [Route("getlistpost")]
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<ActionResult<IEnumerable<Posts>>> GetPosts()
+        //{
+        //  if (_context.Posts == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    return await _context.Posts.ToListAsync();
+        //}
+        [Route("posts")]
         [HttpGet]
         public async Task<ActionResult<ResultDTO>> GetListPostsAsync(int pagesize = 15, int pageindex = 1)
         {
@@ -56,20 +56,17 @@ namespace Molas.Controllers
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Posts>> GetPosts(int id)
+        public async Task<ActionResult<PostDTO>> GetPostsById(int id)
         {
-          if (_context.Posts == null)
-          {
-              return NotFound();
-          }
-            var posts = await _context.Posts.FindAsync(id);
-
-            if (posts == null)
+            try
             {
-                return NotFound();
+                var res = await _postService.GetPostByIdAsync(id);
+                return res;
             }
-
-            return posts;
+            catch 
+            {
+                throw;
+            }
         }
 
         // PUT: api/Posts/5

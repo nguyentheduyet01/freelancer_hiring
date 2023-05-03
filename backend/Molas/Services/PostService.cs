@@ -22,5 +22,10 @@ namespace Molas.Services
             result.data = res;
             return result;
         }
+
+        public Task<PostDTO> GetPostByIdAsync(int id)
+        {
+           return _postRepository.GetPostByIdAsync(id);
+        }
     }
 }
