@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Molas.DTO;
+using Molas.Models;
 using Molas.Molas;
 using Molas.Repositories.Interfaces;
 using static Molas.DTO.CommonDTO;
@@ -47,6 +48,21 @@ namespace Molas.Repositories
         {
             var res = await _dbContext.Posts.Where(n => n.Id == id).FirstOrDefaultAsync();
             return _mapper.Map<PostDTO>(res);
+        }
+
+        public async Task<bool> PostPostAsync(PostDTO post)
+        {
+            try
+            {
+                Posts posts = _mapper.Map<Posts>(post);
+                _dbContext.Posts.Add(posts);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

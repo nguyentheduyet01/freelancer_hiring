@@ -22,5 +22,20 @@ namespace Molas.Services
         {
            return _postRepository.GetPostByIdAsync(id);
         }
+        public async Task<OutputDTO> PostPostAsync(PostDTO post)
+        {
+            OutputDTO result = new OutputDTO();
+            var res = await _postRepository.PostPostAsync(post);
+            if (res)
+            {
+                result.isSuccess = true;
+            }
+            else
+            {
+                result.isSuccess = false;
+                result.message = "Post did not successfully";
+            }
+            return result;
+        }
     }
 }

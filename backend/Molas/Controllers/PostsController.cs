@@ -102,16 +102,10 @@ namespace Molas.Controllers
         // POST: api/Posts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Posts>> PostPosts(Posts posts)
+        public async Task<ActionResult<OutputDTO>> PostPosts(PostDTO posts)
         {
-          if (_context.Posts == null)
-          {
-              return Problem("Entity set 'MolasDbContext.Posts'  is null.");
-          }
-            _context.Posts.Add(posts);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPosts", new { id = posts.Id }, posts);
+            var res = await _postService.PostPostAsync(posts);
+            return Ok(res);
         }
 
         // DELETE: api/Posts/5
