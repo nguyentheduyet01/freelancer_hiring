@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
 import { Link, useLocation } from "react-router-dom";
 import Filter from "../../components/filter/Filter";
-import wireless from "../../images/wireless.png";
 import Post from "../../components/post/Post";
+import wireless from "../../images/wireless.png";
 import "./Search.css";
 
 const Search = () => {
