@@ -20,11 +20,11 @@ const Filter = () => {
   };
 
   return (
-    <div className='searchHeader d-flex mb-3 '>
+    <div className='searchHeader d-flex mb-3'>
       <div className='searchItem text-start' style={{ width: "100%" }}>
         <span style={{ color: "black", fontWeight: "500", fontSize: "130%" }}>Lọc theo</span>
         <div style={{ position: "relative" }}>
-          <span style={{ fontWeight: "500", fontSize: "95%", color: "#003342" }}>Thành phố</span>
+          <span style={{ fontWeight: "500", fontSize: "95%", color: "#677967" }}>Thành phố</span>
 
           <Typeahead
             // defaultSelected={options.slice(0, 4)}
@@ -59,7 +59,7 @@ const Filter = () => {
           <hr />
         </div>
         <div>
-          <span style={{ fontWeight: "500", fontSize: "95%", color: "#003342" }}>Khoảng giá</span>
+          <span style={{ fontWeight: "500", fontSize: "95%", color: "#677967" }}>Khoảng giá</span>
           <div className='d-flex'>
             <label class='label d-flex align-items-center'>
               <input type='checkbox' />
@@ -99,7 +99,7 @@ const Filter = () => {
           <hr />
         </div>
         <div>
-          <span style={{ fontWeight: "500", fontSize: "95%", color: "#003342" }}>
+          <span style={{ fontWeight: "500", fontSize: "95%", color: "#677967" }}>
             Hình thức làm việc
           </span>
           <div className='d-flex'>
