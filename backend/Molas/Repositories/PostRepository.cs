@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Molas.DTO;
 using Molas.Molas;
 using Molas.Repositories.Interfaces;
+using static Molas.DTO.CommonDTO;
 
 namespace Molas.Repositories
 {
@@ -17,14 +18,23 @@ namespace Molas.Repositories
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<PostDTO>> GetListPostsAsync(int pagesize, int pageindex)
+        public async Task<ResultDTO> GetListPostsAsync(int pageindex, int pagesize, int? category_id)
         {
             try
             {
-                var result = await _dbContext.Posts.Skip(pagesize)
-                .Take(pageindex)
+                var res = await _dbContext.Posts.Skip(pageindex-1)
+                .Take(pagesize)
                 .ToListAsync();
-                return _mapper.Map<IEnumerable<PostDTO>>(result);
+                ResultDTO result = new ResultDTO();
+                result.totalCount = await _dbContext.Posts.CountAsync();
+                result.pageSize = pagesize;
+                result.pageIndex = pageindex;
+                result.data = res;
+                if (category_id != null && category_id != 0)
+                {
+                result.data = res.Where(n =>n.CategoryId == category_id);
+                }
+                return result;
             }
             catch (Exception ex)
             {

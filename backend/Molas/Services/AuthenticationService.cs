@@ -6,9 +6,8 @@ using Molas.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using Microsoft.AspNet.Identity;
 using System.Text;
-using System.Web.Providers.Entities;
+using static Molas.DTO.CommonDTO;
 
 namespace Molas.Services
 {
@@ -150,6 +149,30 @@ namespace Molas.Services
                     return result;
                 }
             }
+        }
+
+        public async Task<OutputDTO> CreateAccount(string username, string password, int role)
+        {
+            Account account = new Account();
+            OutputDTO output = new OutputDTO();
+            account.Username = username;
+            account.Password = EncryptString(password);
+            account.RoleId = role;
+            var acc = await _repository.FindByUsernameAsync(username);
+            if (acc == null)
+            {
+                 var res = await _repository.CreateAccount(account);
+                if (res)
+                {
+                    output.isSuccess = true;
+                    output.data = account;
+                    return output;
+                }
+            }
+            output.isSuccess = false;
+            output.data = acc;
+            output.message = "Tài khoản đã tồn tại!";
+            return output;
         }
     }
 

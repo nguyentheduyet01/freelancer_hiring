@@ -12,15 +12,10 @@ namespace Molas.Services
         {
             _postRepository = postRepository;
         }
-        public async Task<ResultDTO> GetListPostAsync(int pagesize, int pagenumber)
+        public async Task<ResultDTO> GetListPostAsync(int pagesize, int pagenumber, int? category_id)
         {
-            var res = await _postRepository.GetListPostsAsync(pagesize, pagenumber);
-            ResultDTO result = new ResultDTO();
-            result.totalCount = 0;
-            result.pageSize = pagesize;
-            result.pageIndex = pagenumber;
-            result.data = res;
-            return result;
+            return await _postRepository.GetListPostsAsync(pagesize, pagenumber,category_id);
+           
         }
 
         public Task<PostDTO> GetPostByIdAsync(int id)

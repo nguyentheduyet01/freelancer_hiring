@@ -18,6 +18,19 @@ namespace Molas.Repositories
             _db = db;
         }
 
+        public async Task<bool> CreateAccount(Account account)
+        {
+            try
+            {
+                var acc = await _db.AddAsync(account);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<Account> FindByUsernameAsync(string username)
         {
             return await _db.Account.Where(n => n.Username == username).FirstOrDefaultAsync();
