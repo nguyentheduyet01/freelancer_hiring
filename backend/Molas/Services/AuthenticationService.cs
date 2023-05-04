@@ -6,7 +6,9 @@ using Molas.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNet.Identity;
 using System.Text;
+using System.Web.Providers.Entities;
 
 namespace Molas.Services
 {

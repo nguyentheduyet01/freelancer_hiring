@@ -32,5 +32,11 @@ namespace Molas.Repositories
                 throw;
             }
         }
+
+        public async Task<PostDTO> GetPostByIdAsync(int id)
+        {
+            var res = await _dbContext.Posts.Where(n => n.Id == id).FirstOrDefaultAsync();
+            return _mapper.Map<PostDTO>(res);
+        }
     }
 }
