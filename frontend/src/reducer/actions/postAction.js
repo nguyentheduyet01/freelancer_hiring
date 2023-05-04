@@ -1,10 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../utils/instance";
 
-export const getAllPostAction = createAsyncThunk("post/getAllPost", async () => {
-  const { data } = await axios.get("posts");
-  return data;
-});
+export const getAllPostAction = createAsyncThunk(
+  "post/getAllPost",
+  async ({ pagesize = 1, pageindex = 0 }) => {
+    const { data } = await axios.get(`posts/posts?pagesize=${pagesize}&pageindex=${pageindex}`);
+    console.log(data);
+    return data;
+  },
+);
 
 export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
   const { data } = await axios.get(`posts/${id}`);

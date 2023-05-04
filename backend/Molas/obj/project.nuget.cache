@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3mu1K/2esKWzpNsn3x/lN1R7wGZT/uT6LY4WDn3EsOXXzKAdNYQ+7BrIoj6j8vcyKhNbx1PVg2rTH1rL9xFs2Q==",
+  "dgSpecHash": "xhotlhqYuNRRHL2r2BGRoq04YetDaw7258wcj792FU2eZCpPREBhi0z7HweLNHcPFuy6IaoLpyrK7xnLB3/ZgA==",
   "success": true,
   "projectFilePath": "E:\\freelancer_hiring\\backend\\Molas\\Molas.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,10 @@
     "C:\\Users\\THEVU\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\azure.security.keyvault.certificates\\4.1.0\\azure.security.keyvault.certificates.4.1.0.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\azure.security.keyvault.secrets\\4.1.0\\azure.security.keyvault.secrets.4.1.0.nupkg.sha512",
+    "C:\\Users\\THEVU\\.nuget\\packages\\entityframework\\6.0.0\\entityframework.6.0.0.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\THEVU\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
+    "C:\\Users\\THEVU\\.nuget\\packages\\microsoft.aspnet.providers.core\\2.0.0\\microsoft.aspnet.providers.core.2.0.0.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.3\\microsoft.aspnetcore.authentication.jwtbearer.7.0.3.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\7.0.3\\microsoft.aspnetcore.authentication.openidconnect.7.0.3.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
@@ -203,5 +206,36 @@
     "C:\\Users\\THEVU\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\THEVU\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EntityFramework 6.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Providers.Core 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Providers.Core",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }
