@@ -8,11 +8,11 @@
 
 
 .cartPost:hover{
-  background-color: #eefaee;
+  background-color: #f2f7f2;
 }
 
 .cartPost.active {
-  background-color: #eefaee;
+  background-color: #f2f7f2;
   border-radius: 20px 20px 0px 0px !important;
 }
 
@@ -23,31 +23,5 @@
 
 .linkPost:hover{
   text-decoration: underline;
-  color: #314644;
-}
-
-.skillButton{
-  border: none;
-  border-radius: 50px;
-  font-size: 80%;
-  display: block;
- 
-}
-
-.skillButton:not(:first-child){
-  margin-left: 8px;
-}
-
-.skillButton:hover{
-  background-color: rgb(226, 223, 223);
-}
-
-.linkSkill{
-  text-decoration: none;
-  color: rgb(27, 27, 27);
-  font-weight: 500;
-}
-
-.skillButton:hover .linkSkill{
   color: #314644;
 }

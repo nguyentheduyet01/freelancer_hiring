@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
-import { Button, Col, Pagination, Row } from "react-bootstrap";
-import { ChevronLeft, ChevronRight, XCircle } from "react-bootstrap-icons";
-import wireless from "../../images/wireless.png";
-import "./Search.css";
-import Post from "../../components/post/Post";
 import { State } from "country-state-city";
+import React, { useRef, useState } from "react";
+import { Button, Col, Form, Pagination, Row } from "react-bootstrap";
+import { ChevronLeft, ChevronRight, XCircle } from "react-bootstrap-icons";
 import { Typeahead } from "react-bootstrap-typeahead";
+import Post from "../../components/post/Post";
+import "./Search.css";
+import Freelancer from "../../components/freelancer/Freelancer";
 
 const FreelanceSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +38,7 @@ const FreelanceSearch = () => {
               <span style={{ color: "black", fontWeight: "500", fontSize: "130%" }}>Lọc theo</span>
               <div>
                 <span style={{ fontWeight: "500", fontSize: "95%", color: "#003342" }}>
-                  Khoảng giá
+                  Kỹ năng
                 </span>
                 <div className='d-flex'>
                   <label class='label d-flex align-items-center'>
@@ -146,21 +146,27 @@ const FreelanceSearch = () => {
           </div>
         </Col>
         <Col className='border p-0 rounded-4'>
-          <div className='searchHeader d-flex mb-3'></div>
-          <div style={{ padding: "5px 46px" }} className='d-flex mt-3 mb-3'>
-            <div className='d-flex'>
-              <img src={wireless} alt='wireless' style={{ width: "18px", height: "18px" }} />
-              <span style={{ marginLeft: "10px" }}>
-                <span style={{ fontWeight: "700" }}>100.000</span> công việc
-              </span>
+          <div style={{ padding: "5px 46px" }} className=' mt-3 mb-3'>
+            <div>
+              <Form>
+                <Form.Group className='mb-3 d-flex' controlId='search'>
+                  <Form.Control
+                    type='text'
+                    placeholder='Tìm kiếm freelancer'
+                    style={{ borderRadius: "10px 0 0 10px " }}
+                  />
+                  <button type='submit' className='btnSearch'>
+                    Tìm kiếm
+                  </button>
+                </Form.Group>
+              </Form>
             </div>
             <div></div>
           </div>
-          <div className='mb-3'>
-            <Post active='active' />
-            <Post />
-            <Post />
-          </div>
+          <div>
+            <Freelancer style={{/>
+          </div>  
+          <div className='mb-3'></div>
           <div className='paginationBox'>
             <Pagination
               activePage={currentPage}
