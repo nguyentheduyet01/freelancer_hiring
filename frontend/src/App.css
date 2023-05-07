@@ -1,3 +1,5 @@
+/* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; */
+
 .form-control:focus, .form-select:focus {
   border-color: rgba(73, 104, 80, 0.25) !important;
   box-shadow: 0 0 0 0.1rem rgba(94, 133, 103, 0.25) !important;
@@ -14,4 +16,31 @@
 .rbt-input-multi.form-control.rbt-input.focus{
   box-shadow: 0 0 0 0.1rem rgba(94, 133, 103, 0.25) !important;
   border-color: rgba(73, 104, 80, 0.25) !important;
+}
+
+
+.skillButton{
+  border: none;
+  border-radius: 50px;
+  font-size: 80%;
+  display: block;
+ 
+}
+
+.skillButton:not(:first-child){
+  margin-left: 8px;
+}
+
+.skillButton:hover{
+  background-color: rgb(226, 223, 223);
+}
+
+.linkSkill{
+  text-decoration: none;
+  color: rgb(27, 27, 27);
+  font-weight: 500;
+}
+
+.skillButton:hover .linkSkill{
+  color: #314644;
 }

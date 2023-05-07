@@ -107,3 +107,19 @@
 	border-radius: 50%;
 	background: white;
 }
+
+.btnSearch{
+  width: 100px;
+  background-color: #106e03;
+  color: white;
+  border: none;
+  border-radius: 0 10px 10px 0;
+}
+
+.btnSearch:hover{
+  background-color: #17a804;
+}
+
+.freelancerBox:hover{
+  background-color: #f2f7f2;
+}
