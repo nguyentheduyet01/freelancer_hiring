@@ -27,7 +27,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[images]",
+         "Name": "[dbo].[Image]",
          "ObjectType": 0
       },
       {
@@ -35,11 +35,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[role]",
+         "Name": "[dbo].[Role]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Skill]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[user_post]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[user_skill]",
          "ObjectType": 0
       },
       {

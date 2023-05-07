@@ -20,6 +20,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 // Add services to the container.
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>

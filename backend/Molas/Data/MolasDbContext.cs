@@ -20,16 +20,19 @@ public partial class MolasDbContext : DbContext
 
     public virtual DbSet<Cv> Cv { get; set; }
 
-    public virtual DbSet<Images> Images { get; set; }
+    public virtual DbSet<Image> Image { get; set; }
 
     public virtual DbSet<Posts> Posts { get; set; }
 
     public virtual DbSet<Role> Role { get; set; }
 
+    public virtual DbSet<Skill> Skill { get; set; }
+
     public virtual DbSet<UserPost> UserPost { get; set; }
 
+    public virtual DbSet<UserSkill> UserSkill { get; set; }
+
     public virtual DbSet<Users> Users { get; set; }
-    public virtual DbSet<Skill> Skill { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,13 +80,12 @@ public partial class MolasDbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("link");
             entity.Property(e => e.Title).HasColumnName("title");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
-        modelBuilder.Entity<Images>(entity =>
+        modelBuilder.Entity<Image>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__images__3213E83FC8EAB19E");
-
-            entity.ToTable("images");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Link)
@@ -96,7 +98,7 @@ public partial class MolasDbContext : DbContext
                 .HasColumnName("namefile");
             entity.Property(e => e.UserId).HasColumnName("userId");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Images)
+            entity.HasOne(d => d.User).WithMany(p => p.Image)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_images_Users");
@@ -116,6 +118,7 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Expired)
                 .HasColumnType("datetime")
                 .HasColumnName("expired");
+            entity.Property(e => e.IdUserPost).HasColumnName("id_user_post");
             entity.Property(e => e.LinkApply)
                 .HasMaxLength(200)
                 .IsUnicode(false)
@@ -134,24 +137,24 @@ public partial class MolasDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__role__3213E83F0D113C99");
 
-            entity.ToTable("role");
-
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
         });
+
         modelBuilder.Entity<Skill>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SkillPK");
-
-            entity.ToTable("skill");
-
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Id_Category).HasColumnName("id_category");
+            entity.Property(e => e.IdCategory).HasColumnName("id_category");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
+                .IsFixedLength()
                 .HasColumnName("name");
+
+            entity.HasOne(d => d.IdCategoryNavigation).WithMany(p => p.Skill)
+                .HasForeignKey(d => d.IdCategory)
+                .HasConstraintName("FK_Skill_Category");
         });
 
         modelBuilder.Entity<UserPost>(entity =>
@@ -176,6 +179,24 @@ public partial class MolasDbContext : DbContext
             entity.HasOne(d => d.User).WithMany()
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK_user_post_Users");
+        });
+
+        modelBuilder.Entity<UserSkill>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("user_skill");
+
+            entity.Property(e => e.IdSkill).HasColumnName("id_skill");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdSkillNavigation).WithMany()
+                .HasForeignKey(d => d.IdSkill)
+                .HasConstraintName("FK_user_skill_Skill");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany()
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK_user_skill_Users");
         });
 
         modelBuilder.Entity<Users>(entity =>
@@ -206,10 +227,6 @@ public partial class MolasDbContext : DbContext
             entity.HasOne(d => d.Account).WithMany(p => p.Users)
                 .HasForeignKey(d => d.AccountId)
                 .HasConstraintName("FK_Users_Account");
-
-            entity.HasOne(d => d.Cv).WithMany(p => p.Users)
-                .HasForeignKey(d => d.CvId)
-                .HasConstraintName("FK_Users_CV");
         });
 
         OnModelCreatingPartial(modelBuilder);

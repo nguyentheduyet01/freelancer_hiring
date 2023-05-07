@@ -17,5 +17,5 @@ public partial class Cv
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual ICollection<Users> Users { get; } = new List<Users>();
+    public int? UserId { get; set; }
 }
