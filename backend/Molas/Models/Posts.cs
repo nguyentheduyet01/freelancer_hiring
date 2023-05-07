@@ -29,5 +29,7 @@ public partial class Posts
 
     public int? CategoryId { get; set; }
 
+    public int? IdUserPost { get; set; }
+
     public virtual Category Category { get; set; }
 }

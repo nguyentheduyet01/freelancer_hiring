@@ -23,18 +23,28 @@ namespace Molas.Repositories
         {
             try
             {
-                var res = await _dbContext.Posts.Skip(pageindex-1)
-                .Take(pagesize)
-                .ToListAsync();
                 ResultDTO result = new ResultDTO();
-                result.totalCount = await _dbContext.Posts.CountAsync();
+                var res = new List<Posts>();
+                if (category_id != null && category_id != 0)
+                {
+                    var pots  =  _dbContext.Posts.Where(n =>n.CategoryId == category_id);
+                    result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();
+                    res = await pots.Skip(pageindex-1)
+                    .Take(pagesize)
+                    .Where(s => s.Status == 1)
+                    .ToListAsync();
+                }
+                else
+                {
+                    result.totalCount = await _dbContext.Posts.Where(s => s.Status == 1).CountAsync();
+                     res = await _dbContext.Posts.Skip(pageindex-1)
+                    .Take(pagesize)
+                    .Where(s => s.Status == 1)
+                    .ToListAsync();
+                }
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
                 result.data = res;
-                if (category_id != null && category_id != 0)
-                {
-                result.data = res.Where(n =>n.CategoryId == category_id);
-                }
                 return result;
             }
             catch (Exception ex)

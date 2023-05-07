@@ -12,4 +12,6 @@ public partial class Category
     public string Name { get; set; }
 
     public virtual ICollection<Posts> Posts { get; } = new List<Posts>();
+
+    public virtual ICollection<Skill> Skill { get; } = new List<Skill>();
 }

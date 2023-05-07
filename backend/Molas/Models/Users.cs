@@ -23,13 +23,11 @@ public partial class Users
 
     public int? AccountId { get; set; }
 
-    public int? CvId { get; set; }
-
     public string Address { get; set; }
+
+    public int? CvId { get; set; }
 
     public virtual Account Account { get; set; }
 
-    public virtual Cv Cv { get; set; }
-
-    public virtual ICollection<Images> Images { get; } = new List<Images>();
+    public virtual ICollection<Image> Image { get; } = new List<Image>();
 }

@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Molas.DTO;
 using Molas.Models;
 using Molas.Molas;
+using Molas.Services.Interfaces;
 
 namespace Molas.Controllers
 {
@@ -15,10 +17,12 @@ namespace Molas.Controllers
     public class UsersController : ControllerBase
     {
         private readonly MolasDbContext _context;
+        private readonly IUsersService _usersService;
 
-        public UsersController(MolasDbContext context)
+        public UsersController(MolasDbContext context, IUsersService usersService)
         {
             _context = context;
+            _usersService = usersService;
         }
 
         // GET: api/Users
@@ -48,6 +52,38 @@ namespace Molas.Controllers
             }
 
             return users;
+        }
+        [HttpGet("{id}/posts")]
+        public async Task<ActionResult<PostDTO>> GetPostByUser(int id, int? pagesize, int? pageindex)
+        {
+          if (id == 0)
+          {
+              return NotFound();
+          }
+            var users = await _context.Users.FindAsync(id);
+
+            if (users == null)
+            {
+                return BadRequest("Can not find User have id = "+ id);
+            }
+            var res = await _usersService.GetPostByUser(id, pagesize, pageindex);
+            return Ok(res);
+        }
+        [HttpGet("{id}/skill")]
+        public async Task<ActionResult<PostDTO>> GetSkillForUser(int id, int? pagesize, int? pageindex)
+        {
+          if (id == 0)
+          {
+              return NotFound();
+          }
+            var users = await _context.Users.FindAsync(id);
+
+            if (users == null)
+            {
+                return BadRequest("Can not find User have id = "+ id);
+            }
+            var res = await _usersService.GetSkillForUser(id, pagesize, pageindex);
+            return Ok(res);
         }
 
         // PUT: api/Users/5
