@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Molas.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class initdata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,20 +25,25 @@ namespace Molas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CV",
+                name: "Posts",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    link = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true),
-                    cv_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    created_at = table.Column<DateTime>(type: "datetime", nullable: true),
-                    user_id = table.Column<int>(type: "int", nullable: true)
+                    link_apply = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true),
+                    descriptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    budget = table.Column<decimal>(type: "decimal(18,0)", nullable: true),
+                    created_by = table.Column<int>(type: "int", nullable: true),
+                    working_method = table.Column<int>(type: "int", nullable: true),
+                    expired = table.Column<DateTime>(type: "datetime", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__CV__3213E83F188E17C5", x => x.id);
+                    table.PrimaryKey("PK__Posts__3213E83F818983E9", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,34 +57,6 @@ namespace Molas.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__role__3213E83F0D113C99", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    link_apply = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true),
-                    descriptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    budget = table.Column<decimal>(type: "decimal(18,0)", nullable: true),
-                    created_by = table.Column<int>(type: "int", nullable: true),
-                    updated_by = table.Column<int>(type: "int", nullable: true),
-                    expired = table.Column<DateTime>(type: "datetime", nullable: true),
-                    status = table.Column<int>(type: "int", nullable: true),
-                    category_id = table.Column<int>(type: "int", nullable: true),
-                    id_user_post = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Posts__3213E83F818983E9", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Posts_Category",
-                        column: x => x.category_id,
-                        principalTable: "Category",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -98,6 +75,27 @@ namespace Molas.Migrations
                         name: "FK_Skill_Category",
                         column: x => x.id_category,
                         principalTable: "Category",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "category_post",
+                columns: table => new
+                {
+                    posts_id = table.Column<int>(type: "int", nullable: true),
+                    category_id = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_category_post_Category",
+                        column: x => x.category_id,
+                        principalTable: "Category",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "FK_category_post_Posts",
+                        column: x => x.posts_id,
+                        principalTable: "Posts",
                         principalColumn: "id");
                 });
 
@@ -122,6 +120,27 @@ namespace Molas.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "post_skill",
+                columns: table => new
+                {
+                    skill_id = table.Column<int>(type: "int", nullable: true),
+                    post_id = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_post_skill_Posts",
+                        column: x => x.post_id,
+                        principalTable: "Posts",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "FK_post_skill_Skill",
+                        column: x => x.skill_id,
+                        principalTable: "Skill",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -135,7 +154,9 @@ namespace Molas.Migrations
                     experince = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     account_id = table.Column<int>(type: "int", nullable: true),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    cv_id = table.Column<int>(type: "int", nullable: true)
+                    cv_id = table.Column<int>(type: "int", nullable: true),
+                    decription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    introduce = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -148,21 +169,24 @@ namespace Molas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "FileData",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    link = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true),
-                    namefile = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true),
-                    userId = table.Column<int>(type: "int", nullable: false)
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true),
+                    file_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: true),
+                    user_id = table.Column<int>(type: "int", nullable: true),
+                    type = table.Column<int>(type: "int", nullable: true, comment: "1:image, 2: cv")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__images__3213E83FC8EAB19E", x => x.id);
+                    table.PrimaryKey("PK__CV__3213E83F188E17C5", x => x.id);
                     table.ForeignKey(
-                        name: "FK_images_Users",
-                        column: x => x.userId,
+                        name: "FK_File_Users",
+                        column: x => x.user_id,
                         principalTable: "Users",
                         principalColumn: "id");
                 });
@@ -217,14 +241,29 @@ namespace Molas.Migrations
                 column: "role_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_userId",
-                table: "Image",
-                column: "userId");
+                name: "IX_category_post_category_id",
+                table: "category_post",
+                column: "category_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_category_id",
-                table: "Posts",
-                column: "category_id");
+                name: "IX_category_post_posts_id",
+                table: "category_post",
+                column: "posts_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FileData_user_id",
+                table: "FileData",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_post_skill_post_id",
+                table: "post_skill",
+                column: "post_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_post_skill_skill_id",
+                table: "post_skill",
+                column: "skill_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Skill_id_category",
@@ -261,10 +300,13 @@ namespace Molas.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.DropTable(
-            //    name: "CV");
+            //    name: "category_post");
 
             //migrationBuilder.DropTable(
-            //    name: "Image");
+            //    name: "FileData");
+
+            //migrationBuilder.DropTable(
+            //    name: "post_skill");
 
             //migrationBuilder.DropTable(
             //    name: "user_post");

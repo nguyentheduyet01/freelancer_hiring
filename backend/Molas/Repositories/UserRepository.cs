@@ -36,7 +36,7 @@ namespace Molas.Repositories
             var res = new List<Posts>();
             try
             {
-                var pots = _dataContext.Posts.Where(n => n.IdUserPost == id);
+                var pots = _dataContext.Posts.Where(n => n.CreatedBy == id);
                 result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
                 res = await pots.Skip((int)(pageindex - 1))
                 .Distinct()

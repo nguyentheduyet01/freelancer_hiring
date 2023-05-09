@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 namespace Molas.Models;
 
-public partial class Category
+public partial class PostSkill
 {
-    public int Id { get; set; }
+    public int? SkillId { get; set; }
 
-    public string Name { get; set; }
+    public int? PostId { get; set; }
 
-    public virtual ICollection<Skill> Skill { get; } = new List<Skill>();
+    public virtual Posts Post { get; set; }
+
+    public virtual Skill Skill { get; set; }
 }

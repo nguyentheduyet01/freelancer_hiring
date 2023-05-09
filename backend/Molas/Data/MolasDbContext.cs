@@ -18,9 +18,11 @@ public partial class MolasDbContext : DbContext
 
     public virtual DbSet<Category> Category { get; set; }
 
-    public virtual DbSet<Cv> Cv { get; set; }
+    public virtual DbSet<CategoryPost> CategoryPost { get; set; }
 
-    public virtual DbSet<Image> Image { get; set; }
+    public virtual DbSet<FileData> FileData { get; set; }
+
+    public virtual DbSet<PostSkill> PostSkill { get; set; }
 
     public virtual DbSet<Posts> Posts { get; set; }
 
@@ -64,44 +66,64 @@ public partial class MolasDbContext : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Cv>(entity =>
+        modelBuilder.Entity<CategoryPost>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("category_post");
+
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
+            entity.Property(e => e.PostsId).HasColumnName("posts_id");
+
+            entity.HasOne(d => d.Category).WithMany()
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK_category_post_Category");
+
+            entity.HasOne(d => d.Posts).WithMany()
+                .HasForeignKey(d => d.PostsId)
+                .HasConstraintName("FK_category_post_Posts");
+        });
+
+        modelBuilder.Entity<FileData>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__CV__3213E83F188E17C5");
-
-            entity.ToTable("CV");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.CvName).HasColumnName("cv_name");
+            entity.Property(e => e.FileName).HasColumnName("file_name");
             entity.Property(e => e.Link)
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("link");
             entity.Property(e => e.Title).HasColumnName("title");
+            entity.Property(e => e.Type)
+                .HasComment("1:image, 2: cv")
+                .HasColumnName("type");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.FileData)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_File_Users");
         });
 
-        modelBuilder.Entity<Image>(entity =>
+        modelBuilder.Entity<PostSkill>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__images__3213E83FC8EAB19E");
+            entity
+                .HasNoKey()
+                .ToTable("post_skill");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Link)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("link");
-            entity.Property(e => e.Namefile)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("namefile");
-            entity.Property(e => e.UserId).HasColumnName("userId");
+            entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.SkillId).HasColumnName("skill_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Image)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_images_Users");
+            entity.HasOne(d => d.Post).WithMany()
+                .HasForeignKey(d => d.PostId)
+                .HasConstraintName("FK_post_skill_Posts");
+
+            entity.HasOne(d => d.Skill).WithMany()
+                .HasForeignKey(d => d.SkillId)
+                .HasConstraintName("FK_post_skill_Skill");
         });
 
         modelBuilder.Entity<Posts>(entity =>
@@ -112,20 +134,14 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Budget)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("budget");
-            entity.Property(e => e.CategoryId).HasColumnName("category_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.Descriptions).HasColumnName("descriptions");
             entity.Property(e => e.Expired)
                 .HasColumnType("datetime")
                 .HasColumnName("expired");
-            entity.Property(e => e.CreaatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("cratedat");
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("updatedat");
-
-            entity.Property(e => e.IdUserPost).HasColumnName("id_user_post");
             entity.Property(e => e.LinkApply)
                 .HasMaxLength(200)
                 .IsUnicode(false)
@@ -133,11 +149,7 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Requirement).HasColumnName("requirement");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Title).HasColumnName("title");
-            entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
-
-            entity.HasOne(d => d.Category).WithMany(p => p.Posts)
-                .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK_Posts_Category");
+            entity.Property(e => e.WorkingMethod).HasColumnName("working_method");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -215,6 +227,7 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Address).HasColumnName("address");
             entity.Property(e => e.Age).HasColumnName("age");
             entity.Property(e => e.CvId).HasColumnName("cv_id");
+            entity.Property(e => e.Decription).HasColumnName("decription");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -223,6 +236,7 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("experince");
             entity.Property(e => e.Gentle).HasColumnName("gentle");
+            entity.Property(e => e.Introduce).HasColumnName("introduce");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
