@@ -22,6 +22,7 @@ public partial class Posts
     public int? CreatedBy { get; set; }
 
     public int? WorkingMethod { get; set; }
+    public int? PaymentMethod { get; set; }
 
     public DateTime? Expired { get; set; }
 
