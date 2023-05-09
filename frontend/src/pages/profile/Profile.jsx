@@ -29,7 +29,7 @@ const Profile = () => {
             <div className='d-flex flex-column justify-content-center'>
               <div className='d-flex'>
                 <h4>{user?.name}</h4>
-                <Link to='profile/update'>
+                <Link to='update'>
                   <p className='penCircle'>
                     <img src={pen} alt='pen' style={{ width: "20px" }} />
                   </p>
@@ -59,7 +59,17 @@ const Profile = () => {
             </div>
           </Col>
         </Row>
-        <Row></Row>
+        <Row className='border p-3 rounded-4 mt-5'>
+          <div>
+            <div>
+              <h5>Giới thiệu</h5>
+            </div>
+            <div>
+              <h5>Tóm lược</h5>
+            </div>
+          </div>
+          <div></div>
+        </Row>
       </Container>
     </>
   );

@@ -12,6 +12,7 @@ import PostProject from "./pages/postProject/PostProject";
 import { getUserAction } from "./reducer/actions/userAction";
 import Profile from "./pages/profile/Profile";
 import FreelanceSearch from "./pages/Search/FreelanceSearch";
+import UpdateProfile from "./pages/profile/UpdateProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
           </Route>
           <Route path='freelancer' element={<FreelanceSearch />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='profile/update' element={<UpdateProfile />}>
+            <Route path='work_profile' />
+            <Route path='capacity_profile' />
+          </Route>
           <Route path='posts' element={<PostProject />} />
           <Route path='posts/:id' element={<PostDetail />} />
         </Route>
