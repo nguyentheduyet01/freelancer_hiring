@@ -23,6 +23,8 @@ public partial class Posts
 
     public int? UpdatedBy { get; set; }
 
+    public DateTime? CreaatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
     public DateTime? Expired { get; set; }
 
     public int? Status { get; set; }

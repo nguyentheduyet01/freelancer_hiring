@@ -161,6 +161,10 @@ namespace Molas.Migrations
                         .HasColumnType("int")
                         .HasColumnName("category_id");
 
+                    b.Property<DateTime?>("CreaatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("cratedat");
+
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int")
                         .HasColumnName("created_by");
@@ -194,6 +198,10 @@ namespace Molas.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("title");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("updatedat");
 
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int")

@@ -164,7 +164,7 @@ const FreelanceSearch = () => {
             <div></div>
           </div>
           <div>
-            <Freelancer style={{/>
+            <Freelancer style={{}}/>
           </div>  
           <div className='mb-3'></div>
           <div className='paginationBox'>

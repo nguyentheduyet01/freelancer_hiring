@@ -2,7 +2,7 @@
 {
     public class PostDTO
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -18,10 +18,15 @@
 
         public int? UpdatedBy { get; set; }
 
+        public DateTime? CreaatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         public DateTime? Expired { get; set; }
 
         public int? Status { get; set; }
 
         public int? CategoryId { get; set; }
+
+        public int? IdUserPost { get; set; }
+
     }
 }

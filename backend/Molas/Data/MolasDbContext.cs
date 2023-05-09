@@ -118,6 +118,13 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Expired)
                 .HasColumnType("datetime")
                 .HasColumnName("expired");
+            entity.Property(e => e.CreaatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("cratedat");
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("updatedat");
+
             entity.Property(e => e.IdUserPost).HasColumnName("id_user_post");
             entity.Property(e => e.LinkApply)
                 .HasMaxLength(200)
