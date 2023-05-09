@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Molas.Models;
 
-public partial class Cv
+public partial class FileData
 {
     public int Id { get; set; }
 
@@ -13,9 +13,16 @@ public partial class Cv
 
     public string Link { get; set; }
 
-    public string CvName { get; set; }
+    public string FileName { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
     public int? UserId { get; set; }
+
+    /// <summary>
+    /// 1:image, 2: cv
+    /// </summary>
+    public int? Type { get; set; }
+
+    public virtual Users User { get; set; }
 }

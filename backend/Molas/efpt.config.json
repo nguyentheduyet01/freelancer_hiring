@@ -23,11 +23,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[CV]",
+         "Name": "[dbo].[category_post]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Image]",
+         "Name": "[dbo].[FileData]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[post_skill]",
          "ObjectType": 0
       },
       {

@@ -74,7 +74,24 @@ namespace Molas.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Molas.Models.Cv", b =>
+            modelBuilder.Entity("Molas.Models.CategoryPost", b =>
+                {
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("category_id");
+
+                    b.Property<int?>("PostsId")
+                        .HasColumnType("int")
+                        .HasColumnName("posts_id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PostsId");
+
+                    b.ToTable("category_post", (string)null);
+                });
+
+            modelBuilder.Entity("Molas.Models.FileData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,9 +104,9 @@ namespace Molas.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("created_at");
 
-                    b.Property<string>("CvName")
+                    b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("cv_name");
+                        .HasColumnName("file_name");
 
                     b.Property<string>("Link")
                         .HasMaxLength(200)
@@ -101,6 +118,11 @@ namespace Molas.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("title");
 
+                    b.Property<int?>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type")
+                        .HasComment("1:image, 2: cv");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("user_id");
@@ -108,40 +130,26 @@ namespace Molas.Migrations
                     b.HasKey("Id")
                         .HasName("PK__CV__3213E83F188E17C5");
 
-                    b.ToTable("CV", (string)null);
-                });
-
-            modelBuilder.Entity("Molas.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Link")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("link");
-
-                    b.Property<string>("Namefile")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("namefile");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("userId");
-
-                    b.HasKey("Id")
-                        .HasName("PK__images__3213E83FC8EAB19E");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("Image");
+                    b.ToTable("FileData");
+                });
+
+            modelBuilder.Entity("Molas.Models.PostSkill", b =>
+                {
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_id");
+
+                    b.Property<int?>("SkillId")
+                        .HasColumnType("int")
+                        .HasColumnName("skill_id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("post_skill", (string)null);
                 });
 
             modelBuilder.Entity("Molas.Models.Posts", b =>
@@ -157,13 +165,9 @@ namespace Molas.Migrations
                         .HasColumnType("decimal(18, 0)")
                         .HasColumnName("budget");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int")
-                        .HasColumnName("category_id");
-
-                    b.Property<DateTime?>("CreaatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime")
-                        .HasColumnName("cratedat");
+                        .HasColumnName("created_at");
 
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int")
@@ -176,10 +180,6 @@ namespace Molas.Migrations
                     b.Property<DateTime?>("Expired")
                         .HasColumnType("datetime")
                         .HasColumnName("expired");
-
-                    b.Property<int?>("IdUserPost")
-                        .HasColumnType("int")
-                        .HasColumnName("id_user_post");
 
                     b.Property<string>("LinkApply")
                         .HasMaxLength(200)
@@ -199,18 +199,12 @@ namespace Molas.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("title");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime")
-                        .HasColumnName("updatedat");
-
-                    b.Property<int?>("UpdatedBy")
+                    b.Property<int?>("WorkingMethod")
                         .HasColumnType("int")
-                        .HasColumnName("updated_by");
+                        .HasColumnName("working_method");
 
                     b.HasKey("Id")
                         .HasName("PK__Posts__3213E83F818983E9");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Posts");
                 });
@@ -328,6 +322,10 @@ namespace Molas.Migrations
                         .HasColumnType("int")
                         .HasColumnName("cv_id");
 
+                    b.Property<string>("Decription")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("decription");
+
                     b.Property<string>("Email")
                         .HasMaxLength(50)
                         .IsUnicode(false)
@@ -342,6 +340,10 @@ namespace Molas.Migrations
                     b.Property<int?>("Gentle")
                         .HasColumnType("int")
                         .HasColumnName("gentle");
+
+                    b.Property<string>("Introduce")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("introduce");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
@@ -372,25 +374,48 @@ namespace Molas.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Molas.Models.Image", b =>
+            modelBuilder.Entity("Molas.Models.CategoryPost", b =>
+                {
+                    b.HasOne("Molas.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .HasConstraintName("FK_category_post_Category");
+
+                    b.HasOne("Molas.Models.Posts", "Posts")
+                        .WithMany()
+                        .HasForeignKey("PostsId")
+                        .HasConstraintName("FK_category_post_Posts");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Molas.Models.FileData", b =>
                 {
                     b.HasOne("Molas.Models.Users", "User")
-                        .WithMany("Image")
+                        .WithMany("FileData")
                         .HasForeignKey("UserId")
-                        .IsRequired()
-                        .HasConstraintName("FK_images_Users");
+                        .HasConstraintName("FK_File_Users");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Molas.Models.Posts", b =>
+            modelBuilder.Entity("Molas.Models.PostSkill", b =>
                 {
-                    b.HasOne("Molas.Models.Category", "Category")
-                        .WithMany("Posts")
-                        .HasForeignKey("CategoryId")
-                        .HasConstraintName("FK_Posts_Category");
+                    b.HasOne("Molas.Models.Posts", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .HasConstraintName("FK_post_skill_Posts");
 
-                    b.Navigation("Category");
+                    b.HasOne("Molas.Models.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .HasConstraintName("FK_post_skill_Skill");
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Molas.Models.Skill", b =>
@@ -454,8 +479,6 @@ namespace Molas.Migrations
 
             modelBuilder.Entity("Molas.Models.Category", b =>
                 {
-                    b.Navigation("Posts");
-
                     b.Navigation("Skill");
                 });
 
@@ -466,7 +489,7 @@ namespace Molas.Migrations
 
             modelBuilder.Entity("Molas.Models.Users", b =>
                 {
-                    b.Navigation("Image");
+                    b.Navigation("FileData");
                 });
 #pragma warning restore 612, 618
         }

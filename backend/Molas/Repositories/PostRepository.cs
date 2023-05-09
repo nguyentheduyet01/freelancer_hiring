@@ -27,7 +27,10 @@ namespace Molas.Repositories
                 var res = new List<Posts>();
                 if (category_id != null && category_id != 0)
                 {
-                    var pots  =  _dbContext.Posts.Where(n =>n.CategoryId == category_id);
+                    var pots = from a in _dbContext.Posts
+                               join cp in _dbContext.CategoryPost on a.Id equals cp.PostsId
+                               where cp.CategoryId == category_id
+                               select a;
                     result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();
                     res = await pots.Skip(pageindex-1)
                     .Take(pagesize)

@@ -27,7 +27,11 @@ public partial class Users
 
     public int? CvId { get; set; }
 
+    public string Decription { get; set; }
+
+    public string Introduce { get; set; }
+
     public virtual Account Account { get; set; }
 
-    public virtual ICollection<Image> Image { get; } = new List<Image>();
+    public virtual ICollection<FileData> FileData { get; } = new List<FileData>();
 }

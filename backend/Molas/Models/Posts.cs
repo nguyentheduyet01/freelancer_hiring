@@ -21,17 +21,11 @@ public partial class Posts
 
     public int? CreatedBy { get; set; }
 
-    public int? UpdatedBy { get; set; }
+    public int? WorkingMethod { get; set; }
 
-    public DateTime? CreaatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
     public DateTime? Expired { get; set; }
 
     public int? Status { get; set; }
 
-    public int? CategoryId { get; set; }
-
-    public int? IdUserPost { get; set; }
-
-    public virtual Category Category { get; set; }
+    public DateTime? CreatedAt { get; set; }
 }
