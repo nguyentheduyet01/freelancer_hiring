@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import CapacityProfile from "./../../components/profile/CapacityProfile";
+import WorkProfile from "./../../components/profile/WorkProfile";
+import ProfileEdit from "./../../components/profile/ProfileEdit";
 
 const UpdateProfile = () => {
   const location = useLocation();
-  const [site, setSite] = useState("info");
+  const [site, setSite] = useState({
+    context: <ProfileEdit />,
+  });
 
   let ht = location.pathname.split("/")[3] || "info";
 
-  const handleChangeSite = (site) => {
-    setSite(site);
-  };
+  useEffect(() => {
+    if (ht === "work_profile") {
+      setSite({ context: <WorkProfile /> });
+    }
+    if (ht === "capacity_profile") {
+      setSite({ context: <CapacityProfile /> });
+    } else {
+      setSite({ context: <ProfileEdit /> });
+    }
+  }, [ht]);
 
   const items = [
     {
@@ -42,18 +54,15 @@ const UpdateProfile = () => {
               }
               return (
                 <div className={`header-item ${active}`} key={index}>
-                  <Link
-                    onChange={handleChangeSite(item.value)}
-                    to={item.link}
-                    style={{ textDecoration: "none", color: "#3399cc" }}
-                  >
+                  <Link to={item.link} style={{ textDecoration: "none", color: "#3399cc" }}>
                     {item.context}
                   </Link>
                 </div>
               );
             })}
         </div>
-        <div></div>
+        <hr />
+        <div className='mt-4'>{site.context}</div>
       </Container>
     </div>
   );
