@@ -12,3 +12,25 @@
 .information {
   box-shadow: 0px 0px 18px -4px #BECCBE;
 }
+
+.header-profile{
+  background-color: white;
+  display: flex;
+  width: 100%;
+  padding-left:50px ;
+}
+
+.header-profile{
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.header-profile .active{
+  color: #3399cc;
+  border-bottom: 3px solid #3399cc;
+}
+
+.header-item:not(:first-child){
+  margin-left: 20px;
+}
