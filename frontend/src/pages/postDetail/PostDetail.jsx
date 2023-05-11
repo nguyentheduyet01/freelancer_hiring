@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -18,6 +18,8 @@ import paragraphFormat from "../../utils/paragraphFormat";
 const PostDetail = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const [apply, setApply] = useState({});
+
   const id = location.pathname.split("/")[2];
   const { post } = useSelector((state) => state.post);
   let day = null;
@@ -28,6 +30,13 @@ const PostDetail = () => {
     const duration = end - start;
     day = Math.ceil(duration / (1000 * 60 * 60 * 24));
   }
+
+  const handleApply = (e) => {
+    setApply({
+      ...apply,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   useEffect(() => {
     dispatch(getPostAction(id));
@@ -143,13 +152,18 @@ const PostDetail = () => {
                   <Form.Label>
                     <h6 className=''>Đề xuất chi phí</h6>
                   </Form.Label>
-                  <Form.Control type='number' placeholder='2.000.000VNĐ' />
+                  <Form.Control
+                    type='number'
+                    placeholder='2.000.000VNĐ'
+                    name=''
+                    onChange={handleApply}
+                  />
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='dk'>
                   <Form.Label>
                     <h6 className=''>Dự kiến hoàn thành trong bao lâu</h6>
                   </Form.Label>
-                  <Form.Select aria-label='Default select example'>
+                  <Form.Select aria-label='Default select example' name='' onChange={handleApply}>
                     <option value='1d'>1 Ngày</option>
                     <option value='2d'>2 Ngày</option>
                     <option value='3d'>3 Ngày</option>
@@ -173,6 +187,8 @@ const PostDetail = () => {
                     as='textarea'
                     rows={5}
                     placeholder='- Tôi đã có XX năm kinh nghiệm trong lĩnh vực'
+                    onChange={handleApply}
+                    name=''
                   />
                 </Form.Group>
                 <Form.Group className='mb-3'>
@@ -184,7 +200,7 @@ const PostDetail = () => {
                     ods, odt, zip, rar <br />
                     Dung lượng tối đa: 10MB <br />
                     Kích thước tối đa: 3000x3000 px <br />
-                    <Form.Control type='file' />
+                    <Form.Control type='file' onChange={handleApply} name='' />
                   </div>
                 </Form.Group>
                 <Button variant='warning' type='submit' style={{ width: "100%" }}>

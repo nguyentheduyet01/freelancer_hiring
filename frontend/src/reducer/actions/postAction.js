@@ -17,6 +17,7 @@ export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
 
 export const createPostAction = createAsyncThunk("post/createPost", async (post) => {
   const { data } = await axios.post("posts", post);
+  console.log(data);
   return data;
 });
 
