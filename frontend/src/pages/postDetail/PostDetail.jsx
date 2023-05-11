@@ -38,6 +38,11 @@ const PostDetail = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Ứng tuyển thành công");
+  };
+
   useEffect(() => {
     dispatch(getPostAction(id));
   }, [dispatch, id]);
@@ -145,7 +150,7 @@ const PostDetail = () => {
         <div className='border rounded-4 p-3 mt-3'>
           <h5>Thông tin chào giá</h5>
           <hr />
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Row>
               <Col xm='4' lg='4'>
                 <Form.Group className='mb-3' controlId='cp'>
