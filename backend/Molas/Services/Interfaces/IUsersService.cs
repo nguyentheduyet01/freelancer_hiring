@@ -4,7 +4,8 @@ namespace Molas.Services.Interfaces
 {
     public interface IUsersService
     {
-        public Task<ResultDTO> GetPostByUser(int id, int? pagesize, int? pageindex);
-        public Task<ResultDTO> GetSkillForUser(int id, int? pagesize, int? pageindex);
+        Task<ResultDTO> GetPostByUser(int id, int? pagesize, int? pageindex);
+        Task<ResultDTO> GetSkillForUser(int id, int? pagesize, int? pageindex);
+        Task<ResultDTO> GetPostApplied(int idUser, int? pagesize, int? pageindex);
     }
 }

@@ -25,6 +25,10 @@ namespace Molas.Controllers
             {
                 return NotFound();
             }
+            else if(acc.isSuccess == false)
+            {
+                return BadRequest(acc.message);
+            }
             return Ok(acc);
         }
     }

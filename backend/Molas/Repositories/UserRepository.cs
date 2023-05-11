@@ -28,10 +28,52 @@ namespace Molas.Repositories
 
         }
 
+        public async Task<ResultDTO> GetPostApplied(int idUser, int? pagesize, int? pageindex)
+        {
+            if (pagesize == null || pagesize == 0)
+            {
+                pagesize = 15;
+            }
+            if (pageindex == null || pageindex == 0)
+            {
+                pageindex = 1;
+            }
+            ResultDTO result = new ResultDTO();
+            var res = new List<Posts>();
+            try
+            {
+                var pots = from p in _dataContext.Posts
+                           join up in _dataContext.UserPost on p.Id equals up.PostId
+                           where up.UserId == idUser
+                           select p;
+                result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
+                res = await pots.Skip((int)(pageindex - 1))
+                .Distinct()
+                .Take((int)pagesize)
+                .Where(s => s.Status == 1)
+                .ToListAsync();
+                result.pageSize = pagesize;
+                result.pageIndex = pageindex;
+                result.data = res;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "can not get list post!");
+                throw;
+            }
+        }
+
         public async Task<ResultDTO> GetPostByUser(int id, int? pagesize, int? pageindex)
         {
-            pagesize = pagesize == null ? pagesize : 15;
-            pageindex = pageindex == null ? pageindex : 1;
+            if (pagesize == null || pagesize == 0)
+            {
+                pagesize = 15;
+            }
+            if (pageindex == null || pageindex == 0)
+            {
+                pageindex = 1;
+            }
             ResultDTO result = new ResultDTO();
             var res = new List<Posts>();
             try

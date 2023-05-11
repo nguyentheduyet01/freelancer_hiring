@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Molas.Molas;
 
@@ -11,9 +12,11 @@ using Molas.Molas;
 namespace Molas.Migrations
 {
     [DbContext(typeof(MolasDbContext))]
-    partial class MolasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511075251_add_col_cvid")]
+    partial class add_col_cvid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,10 +272,6 @@ namespace Molas.Migrations
                         .HasColumnType("int")
                         .HasColumnName("cv_id");
 
-                    b.Property<DateTime>("IntendTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("intend_time");
-
                     b.Property<int?>("PostId")
                         .HasColumnType("int")
                         .HasColumnName("post_id");
@@ -280,10 +279,6 @@ namespace Molas.Migrations
                     b.Property<decimal?>("Salary")
                         .HasColumnType("decimal(18, 0)")
                         .HasColumnName("salary");
-
-                    b.Property<string>("Suggestion")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("suggestion");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int")

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Molas.Molas;
 
@@ -11,9 +12,11 @@ using Molas.Molas;
 namespace Molas.Migrations
 {
     [DbContext(typeof(MolasDbContext))]
-    partial class MolasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511084952_col-userpost")]
+    partial class coluserpost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

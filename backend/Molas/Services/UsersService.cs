@@ -21,5 +21,9 @@ namespace Molas.Services
         {
             return _userRepository.GetSkillForUser(id, pagesize, pageindex);
         }
+        public async Task<ResultDTO> GetPostApplied(int idUser, int? pagesize, int? pageindex)
+        {
+            return await _userRepository.GetPostApplied(idUser, pagesize, pageindex);
+        }
     }
 }

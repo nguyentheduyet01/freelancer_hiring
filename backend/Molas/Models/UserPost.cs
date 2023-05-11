@@ -14,7 +14,9 @@ public partial class UserPost
     public int? UserId { get; set; }
 
     public int? PostId { get; set; }
-
+    public int? CvId { get; set; }
+    public string? Suggestion { get; set; }
+    public DateTime IntendTime { get; set; }
     public virtual Posts Post { get; set; }
 
     public virtual Users User { get; set; }

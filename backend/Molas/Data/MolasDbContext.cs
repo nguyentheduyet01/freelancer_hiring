@@ -187,6 +187,9 @@ public partial class MolasDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.CvId).HasColumnName("cv_id");
+            entity.Property(e => e.Suggestion).HasColumnName("suggestion");
+            entity.Property(e => e.IntendTime).HasColumnName("intend_time");
             entity.Property(e => e.Salary)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("salary");
