@@ -21,6 +21,7 @@ const PostDetail = () => {
   const id = location.pathname.split("/")[2];
   const { post } = useSelector((state) => state.post);
   let day = null;
+
   if (post?.expired) {
     const start = new Date();
     const end = new Date(post?.expired);
@@ -71,7 +72,7 @@ const PostDetail = () => {
                   />
                   <div style={{ marginLeft: "20px" }}>
                     {" "}
-                    Địa điểm <div className='infoProject'>{post?.location}</div>
+                    Địa điểm <div className='infoProject'>{post?.address}</div>
                   </div>
                 </div>
               </div>
@@ -85,13 +86,23 @@ const PostDetail = () => {
                 <div className='d-flex mt-3'>
                   <img style={{ width: "32px", height: "32px" }} src={working} alt='working' />
                   <div style={{ marginLeft: "20px" }}>
-                    Hình thức làm việc <div className='infoProject'>Làm online</div>
+                    Hình thức làm việc{" "}
+                    <div className='infoProject'>{`${
+                      post?.workingMethod === 1 ? "Làm online" : "Làm tại văn phòng"
+                    }`}</div>
                   </div>
                 </div>
                 <div className='d-flex mt-3'>
                   <img style={{ width: "32px", height: "32px" }} src={wage} alt='wage' />
                   <div style={{ marginLeft: "20px" }}>
-                    Hình thức trả lương <div className='infoProject'>Trả lương theo dự án</div>
+                    Hình thức trả lương{" "}
+                    <div className='infoProject'>{`${
+                      post?.paymentMethod === 1
+                        ? "Trả theo dự án"
+                        : post?.paymentMethod === 2
+                        ? "Trả theo giờ"
+                        : "Trả theo tháng"
+                    }`}</div>
                   </div>
                 </div>
               </div>
