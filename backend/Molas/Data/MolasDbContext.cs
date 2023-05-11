@@ -231,7 +231,6 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.AccountId).HasColumnName("account_id");
             entity.Property(e => e.Address).HasColumnName("address");
             entity.Property(e => e.Age).HasColumnName("age");
-            entity.Property(e => e.CvId).HasColumnName("cv_id");
             entity.Property(e => e.Decription).HasColumnName("decription");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
@@ -241,7 +240,6 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("experince");
             entity.Property(e => e.Gentle).HasColumnName("gentle");
-            entity.Property(e => e.Introduce).HasColumnName("introduce");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");

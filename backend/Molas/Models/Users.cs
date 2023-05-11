@@ -25,11 +25,8 @@ public partial class Users
 
     public string Address { get; set; }
 
-    public int? CvId { get; set; }
-
     public string Decription { get; set; }
 
-    public string Introduce { get; set; }
 
     public virtual Account Account { get; set; }
 
