@@ -161,6 +161,10 @@ namespace Molas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("address");
+
                     b.Property<decimal?>("Budget")
                         .HasColumnType("decimal(18, 0)")
                         .HasColumnName("budget");

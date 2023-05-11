@@ -23,6 +23,7 @@ public partial class Posts
 
     public int? WorkingMethod { get; set; }
     public int? PaymentMethod { get; set; }
+    public string? Address { get; set; }
 
     public DateTime? Expired { get; set; }
 
