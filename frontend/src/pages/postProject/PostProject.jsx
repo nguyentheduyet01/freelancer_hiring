@@ -75,6 +75,7 @@ const PostProject = () => {
     };
 
     dispatch(createPostAction(newPost));
+    alert("Đăng bài thành công");
     // navi
   };
 
