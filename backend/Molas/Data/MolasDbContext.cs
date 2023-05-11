@@ -151,6 +151,7 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Title).HasColumnName("title");
             entity.Property(e => e.WorkingMethod).HasColumnName("working_method");
             entity.Property(e => e.PaymentMethod).HasColumnName("payment_method");
+            entity.Property(e => e.Address).HasColumnName("address");
         });
 
         modelBuilder.Entity<Role>(entity =>
