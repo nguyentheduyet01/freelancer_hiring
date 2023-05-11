@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import icon1 from "../../images/headhunting.png";
 import icon2 from "../../images/file.png";
@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 // #044B04
 const PostProject = () => {
   const location = useLocation();
+  const [post, setPost] = useState();
   let ht = location.search.split("=")[1];
   // if (ht == "") {
   //   ht = "fulltime";
@@ -87,13 +88,15 @@ const PostProject = () => {
                   placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
                 />
               </Form.Group>
-                <Form.Group className='mb-3' controlId='skill'>
-                  <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
-                  <Form.Control as='textarea' 
-                    type='text' 
-                    row={2}
-                    placeholder='VD: Thiết kế bán hàng' />
-                </Form.Group>
+              <Form.Group className='mb-3' controlId='skill'>
+                <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
+                <Form.Control
+                  as='textarea'
+                  type='text'
+                  row={2}
+                  placeholder='VD: Thiết kế bán hàng'
+                />
+              </Form.Group>
               <div style={{ width: "80%" }}>
                 <Form.Group className='mb-3' controlId='date'>
                   <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>

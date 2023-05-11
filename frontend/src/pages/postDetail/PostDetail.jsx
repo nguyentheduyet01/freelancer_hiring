@@ -20,6 +20,13 @@ const PostDetail = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const { post } = useSelector((state) => state.post);
+  let day = null;
+  if (post?.expired) {
+    const start = new Date();
+    const end = new Date(post?.expired);
+    const duration = end - start;
+    day = Math.ceil(duration / (1000 * 60 * 60 * 24));
+  }
 
   useEffect(() => {
     dispatch(getPostAction(id));
@@ -52,9 +59,8 @@ const PostDetail = () => {
                 <div className='d-flex mt-3'>
                   <img style={{ width: "32px", height: "32px" }} src={hourglass} alt='hourglass' />
                   <div style={{ marginLeft: "20px" }}>
-                    {" "}
                     Chỉ còn
-                    <div className='infoProject'>{formatVi("Tue Apr 18 2023 20:00:04")}</div>
+                    <div className='infoProject'>{`${day > 0 ? `${day} ngày` : "Hết hạn"}`}</div>
                   </div>
                 </div>
                 <div className='d-flex mt-3'>

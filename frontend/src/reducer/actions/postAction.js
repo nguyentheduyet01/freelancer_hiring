@@ -3,8 +3,8 @@ import axios from "../../utils/instance";
 
 export const getAllPostAction = createAsyncThunk(
   "post/getAllPost",
-  async ({ pagesize = 5, pageindex = 1 }) => {
-    const { data } = await axios.get(`posts/?pagesize=${pagesize}&pageindex=${pageindex}`);
+  async (input = { pagesize: 5, pageindex: 1 }) => {
+    const { data } = await axios.post(`posts/search`, input);
     console.log(data);
     return data;
   },
