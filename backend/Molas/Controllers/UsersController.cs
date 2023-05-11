@@ -101,6 +101,22 @@ namespace Molas.Controllers
             var res = await _usersService.GetPostApplied(id, pagesize, pageindex);
             return Ok(res);
         }
+        [HttpGet("{id}/cvs")]
+        public async Task<ActionResult<PostDTO>> GetCvForUser(int id, int? pagesize, int? pageindex)
+        {
+          if (id == 0)
+          {
+              return NotFound();
+          }
+            var users = await _context.Users.FindAsync(id);
+
+            if (users == null)
+            {
+                return BadRequest("Can not find User have id = "+ id);
+            }
+            var res = await _usersService.GetCvForUser(id, pagesize, pageindex);
+            return Ok(res);
+        }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

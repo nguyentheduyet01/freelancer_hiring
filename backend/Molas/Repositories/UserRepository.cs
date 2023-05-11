@@ -22,6 +22,39 @@ namespace Molas.Repositories
             _mapper = mapper;
             _logger = logger;
         }
+
+        public async Task<ResultDTO> GetCvForUser(int id, int? pagesize, int? pageindex)
+        {
+            if (pagesize == null || pagesize == 0)
+            {
+                pagesize = 15;
+            }
+            if (pageindex == null || pageindex == 0)
+            {
+                pageindex = 1;
+            }
+            ResultDTO result = new ResultDTO();
+            var res = new List<FileData>();
+            try
+            {
+                var cv = _dataContext.FileData.Where(n => n.UserId == id && n.Type == 2);
+                result.totalCount = await cv.Distinct().CountAsync();
+                res = await cv.Skip((int)(pageindex - 1))
+                .Distinct()
+                .Take((int)pagesize)
+                .ToListAsync();
+                result.pageSize = pagesize;
+                result.pageIndex = pageindex;
+                result.data = res;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "can not get list post!");
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<Users>> GetListUser(int? pageindex, int? pagesize)
         {
             return _dataContext.Users.Skip(100).ToList();
