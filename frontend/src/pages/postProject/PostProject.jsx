@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import icon1 from "../../images/headhunting.png";
 import icon2 from "../../images/file.png";
@@ -6,11 +6,15 @@ import icon3 from "../../images/requirements.png";
 import icon4 from "../../images/financial.png";
 import "./postProject.css";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAction } from "../../reducer/actions/categoryAction";
 
 // #044B04
 const PostProject = () => {
   const location = useLocation();
-  const [post, setPost] = useState();
+  const dispatch = useDispatch();
+  const [post, setPost] = useState({});
+  const { categories } = useSelector((state) => state.category);
   let ht = location.search.split("=")[1];
   // if (ht == "") {
   //   ht = "fulltime";
@@ -31,6 +35,18 @@ const PostProject = () => {
     },
   ];
 
+  const handleCreatePost = (e) => {
+    setPost({
+      ...post,
+      [e.target.name]: e.target.value,
+    });
+    console.log(post);
+  };
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
+
   return (
     <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
       <h4 style={{ textAlign: "center" }} className='mt-3 mb-3'>
@@ -47,14 +63,21 @@ const PostProject = () => {
               <h5>Việc cần tuyển</h5>
               <Form.Group className='mb-3' controlId='lv'>
                 <Form.Label>Chọn lĩnh vực cần tuyển</Form.Label>
-                <Form.Select aria-label='Default select example'>
-                  <option>- Tên Lĩnh Vực -</option>
-                  <option value='1'>One</option>
-                  <option value='2'>Two</option>
-                  <option value='3'>Three</option>
+                <Form.Select
+                  aria-label='Default select example'
+                  onChange={handleCreatePost}
+                  name='categoryId'
+                >
+                  <option value='null'>- Tên Lĩnh Vực -</option>
+                  {categories &&
+                    categories.map((item, index) => (
+                      <option value={item.id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
                 </Form.Select>
               </Form.Group>
-              <Form.Group className='mb-3' controlId='dv'>
+              {/* <Form.Group className='mb-3' controlId='dv'>
                 <Form.Label>
                   Chọn dịch vụ phù hợp với yêu cầu tuyển freelancer của bạn nhất
                 </Form.Label>
@@ -64,10 +87,15 @@ const PostProject = () => {
                   <option value='2'>Two</option>
                   <option value='3'>Three</option>
                 </Form.Select>
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group className='mb-3' controlId='name'>
                 <Form.Label>Đặt tên cụ thể cho công việc cần tuyển</Form.Label>
-                <Form.Control type='text' placeholder='VD: Thiết kế bán hàng' />
+                <Form.Control
+                  type='text'
+                  name='title'
+                  placeholder='VD: Thiết kế bán hàng'
+                  onChange={handleCreatePost}
+                />
               </Form.Group>
             </div>
           </div>
@@ -85,6 +113,8 @@ const PostProject = () => {
                 <Form.Control
                   as='textarea'
                   rows={4}
+                  name='descriptions'
+                  onChange={handleCreatePost}
                   placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
                 />
               </Form.Group>
@@ -94,13 +124,20 @@ const PostProject = () => {
                   as='textarea'
                   type='text'
                   row={2}
+                  name='requirement'
+                  onChange={handleCreatePost}
                   placeholder='VD: Thiết kế bán hàng'
                 />
               </Form.Group>
               <div style={{ width: "80%" }}>
                 <Form.Group className='mb-3' controlId='date'>
                   <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>
-                  <Form.Control type='date' placeholder='VD: Thiết kế bán hàng' />
+                  <Form.Control
+                    type='date'
+                    name='expired'
+                    onChange={handleCreatePost}
+                    placeholder='VD: Thiết kế bán hàng'
+                  />
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='lh'>
