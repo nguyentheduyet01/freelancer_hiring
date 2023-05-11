@@ -19,34 +19,34 @@ namespace Molas.Repositories
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<ResultDTO> GetListPostsAsync(int pageindex, int pagesize, int? category_id)
+        public async Task<ResultDTO> GetListPostsAsync(PostInput input)
         {
             try
             {
                 ResultDTO result = new ResultDTO();
                 var res = new List<Posts>();
-                if (category_id != null && category_id != 0)
+                if (input.category_id != null && input.category_id != 0)
                 {
                     var pots = from a in _dbContext.Posts
                                join cp in _dbContext.CategoryPost on a.Id equals cp.PostsId
-                               where cp.CategoryId == category_id
+                               where cp.CategoryId == input.category_id
                                select a;
                     result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();
-                    res = await pots.Skip(pageindex-1)
-                    .Take(pagesize)
+                    res = await pots.Skip(input.pageindex-1)
+                    .Take(input.pagesize)
                     .Where(s => s.Status == 1)
                     .ToListAsync();
                 }
                 else
                 {
                     result.totalCount = await _dbContext.Posts.Where(s => s.Status == 1).CountAsync();
-                     res = await _dbContext.Posts.Skip(pageindex-1)
-                    .Take(pagesize)
+                     res = await _dbContext.Posts.Skip(input.pageindex -1)
+                    .Take(input.pagesize)
                     .Where(s => s.Status == 1)
                     .ToListAsync();
                 }
-                result.pageSize = pagesize;
-                result.pageIndex = pageindex;
+                result.pageSize = input.pagesize;
+                result.pageIndex = input.pageindex;
                 result.data = res;
                 return result;
             }

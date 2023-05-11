@@ -5,7 +5,7 @@ namespace Molas.Repositories.Interfaces
 {
     public interface IPostRepository
     {
-        Task<ResultDTO> GetListPostsAsync(int pageindex, int pagesize,int? category_id);
+        Task<ResultDTO> GetListPostsAsync(PostInput input);
         Task<PostDTO> GetPostByIdAsync(int id);
         Task<bool> PostPostAsync(PostDTO post);
     }

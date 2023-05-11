@@ -38,12 +38,13 @@ namespace Molas.Controllers
         //  }
         //    return await _context.Posts.ToListAsync();
         //}
-        [HttpGet]
-        public async Task<ActionResult<ResultDTO>> GetListPostsAsync(int pagesize = 15, int pageindex = 1, int? category_id = 0)
+
+        [HttpPost("search")]
+        public async Task<ActionResult<ResultDTO>> GetListPostsAsync(PostInput input)
         {
             try
             {
-                var res = await _postService.GetListPostAsync(pageindex, pagesize, category_id);
+                var res = await _postService.GetListPostAsync(input);
                 return Ok(res);
             }
             catch (Exception ex)

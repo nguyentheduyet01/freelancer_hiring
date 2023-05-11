@@ -6,7 +6,7 @@ namespace Molas.Services.Interfaces
 {
     public interface IPostService
     {
-        Task<ResultDTO> GetListPostAsync(int pagesize, int pagenumber,int? category_id);
+        Task<ResultDTO> GetListPostAsync(PostInput input);
         Task<PostDTO> GetPostByIdAsync(int id);
         public Task<OutputDTO> PostPostAsync(PostDTO post);
 

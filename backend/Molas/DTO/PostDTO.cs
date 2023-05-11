@@ -29,4 +29,10 @@
         public int? IdUserPost { get; set; }
 
     }
+    public class PostInput
+    {
+        public int pagesize { get; set; }
+        public int pageindex { get; set; }
+        public int? category_id { get; set; }
+    }
 }
