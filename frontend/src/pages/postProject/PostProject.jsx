@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import icon1 from "../../images/headhunting.png";
 import icon2 from "../../images/file.png";
 import icon3 from "../../images/requirements.png";
 import icon4 from "../../images/financial.png";
 import "./postProject.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAction } from "../../reducer/actions/categoryAction";
+import { createPostAction } from "../../reducer/actions/postAction";
 
 // #044B04
 const PostProject = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [post, setPost] = useState({
+    linkApply: "null",
+    status: 1,
+  });
+  const { categories } = useSelector((state) => state.category);
+  const { account } = useSelector((state) => state.account);
   let ht = location.search.split("=")[1];
   // if (ht == "") {
   //   ht = "fulltime";
@@ -17,18 +28,59 @@ const PostProject = () => {
 
   const hts = [
     {
-      value: "pasttime",
+      type: "pasttime",
+      value: 1,
       context: "Việc làm bán thời gian",
     },
     {
-      value: "fulltime",
+      type: "fulltime",
+      value: 2,
       context: "Việc làm toàn thời gian",
     },
     {
-      value: "project",
+      type: "project",
+      value: 3,
       context: "Việc làm theo dự án",
     },
   ];
+
+  const handleCreatePost = (e) => {
+    setPost({
+      ...post,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    if (account === "") {
+      navigate("/login?post");
+    }
+    e.preventDefault();
+    // const myForm = new FormData();
+    // myForm.set("createdBy", account.data.id);
+    // myForm.set("linkApply", "null");
+    // myForm.set("descriptions", post.descriptions);
+    // myForm.set("title", post.title);
+    // myForm.set("requirement", post.requirement);
+    // myForm.set("budget", Number(post.budget));
+    // myForm.set("paymentMethod", Number(post.paymentMethod));
+    // myForm.set("expired", post.expired);
+    // myForm.set("workingMethod", Number(post.workingMethod));
+    // myForm.set("address", post.address);
+    // myForm.set("status", 1);
+
+    const newPost = {
+      ...post,
+      createdBy: account.data.id,
+    };
+
+    dispatch(createPostAction(newPost));
+    // navi
+  };
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
 
   return (
     <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
@@ -37,7 +89,7 @@ const PostProject = () => {
       </h4>
 
       <Row style={{ width: "80%", margin: "0 auto" }}>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div className='d-flex flex-row' style={{ width: "100%" }}>
             <div className='iconPost'>
               <img src={icon1} alt='icon1' />
@@ -46,14 +98,21 @@ const PostProject = () => {
               <h5>Việc cần tuyển</h5>
               <Form.Group className='mb-3' controlId='lv'>
                 <Form.Label>Chọn lĩnh vực cần tuyển</Form.Label>
-                <Form.Select aria-label='Default select example'>
-                  <option>- Tên Lĩnh Vực -</option>
-                  <option value='1'>One</option>
-                  <option value='2'>Two</option>
-                  <option value='3'>Three</option>
+                <Form.Select
+                  aria-label='Default select example'
+                  onChange={handleCreatePost}
+                  name='categoryId'
+                >
+                  <option value='null'>- Tên Lĩnh Vực -</option>
+                  {categories &&
+                    categories.map((item, index) => (
+                      <option value={item.id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
                 </Form.Select>
               </Form.Group>
-              <Form.Group className='mb-3' controlId='dv'>
+              {/* <Form.Group className='mb-3' controlId='dv'>
                 <Form.Label>
                   Chọn dịch vụ phù hợp với yêu cầu tuyển freelancer của bạn nhất
                 </Form.Label>
@@ -63,10 +122,15 @@ const PostProject = () => {
                   <option value='2'>Two</option>
                   <option value='3'>Three</option>
                 </Form.Select>
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group className='mb-3' controlId='name'>
                 <Form.Label>Đặt tên cụ thể cho công việc cần tuyển</Form.Label>
-                <Form.Control type='text' placeholder='VD: Thiết kế bán hàng' />
+                <Form.Control
+                  type='text'
+                  name='title'
+                  placeholder='VD: Thiết kế bán hàng'
+                  onChange={handleCreatePost}
+                />
               </Form.Group>
             </div>
           </div>
@@ -84,48 +148,63 @@ const PostProject = () => {
                 <Form.Control
                   as='textarea'
                   rows={4}
+                  name='descriptions'
+                  onChange={handleCreatePost}
                   placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
                 />
               </Form.Group>
-                <Form.Group className='mb-3' controlId='skill'>
-                  <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
-                  <Form.Control as='textarea' 
-                    type='text' 
-                    row={2}
-                    placeholder='VD: Thiết kế bán hàng' />
-                </Form.Group>
+              <Form.Group className='mb-3' controlId='skill'>
+                <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
+                <Form.Control
+                  as='textarea'
+                  type='text'
+                  row={2}
+                  name='requirement'
+                  onChange={handleCreatePost}
+                  placeholder='VD: Thiết kế bán hàng'
+                />
+              </Form.Group>
               <div style={{ width: "80%" }}>
                 <Form.Group className='mb-3' controlId='date'>
                   <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>
-                  <Form.Control type='date' placeholder='VD: Thiết kế bán hàng' />
+                  <Form.Control
+                    type='date'
+                    name='expired'
+                    onChange={handleCreatePost}
+                    placeholder='VD: Thiết kế bán hàng'
+                  />
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='lh'>
                   <Form.Label>Loại hình làm việc</Form.Label>
-                  <Form.Select aria-label='Default select example'>
+                  <Form.Select
+                    aria-label='Default select example'
+                    name='workingMethod'
+                    onChange={handleCreatePost}
+                  >
                     {hts.map((item, index) => {
-                      if (item.value === ht) {
+                      if (item.type === ht) {
                         return (
-                          <option key={index} selected value='pasttime'>
+                          <option key={index} selected value='1'>
                             {item.context}
                           </option>
                         );
                       }
                       return (
-                        <option key={index} value='pasttime'>
+                        <option key={index} value='1'>
                           {item.context}
                         </option>
                       );
                     })}
                   </Form.Select>
                 </Form.Group>
-                <Form.Group className='mb-3' controlId='ht'>
+                {/* <Form.Group className='mb-3' controlId='ht'>
                   <Form.Label>Hình thức làm việc</Form.Label>
                   <Form.Select aria-label='Default select example'>
                     <option value='online'>Làm online</option>
                     <option value='offline'>Làm tại văn phòng</option>
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
               </div>
             </div>
           </div>
@@ -138,9 +217,15 @@ const PostProject = () => {
               <div style={{ width: "60%" }}>
                 <Form.Group className='mb-3' controlId='nct'>
                   <Form.Label>Cần tuyển freelancer làm việc tại</Form.Label>
-                  <Form.Select aria-label='Default select example'>
+                  <Form.Control
+                    type='text'
+                    name='address'
+                    onChange={handleCreatePost}
+                    placeholder='Hà Nội'
+                  />
+                  {/* <Form.Select aria-label='Default select example'>
                     <option value=''>- Nơi cần tuyển -</option>
-                  </Form.Select>
+                  </Form.Select> */}
                 </Form.Group>
               </div>
             </div>
@@ -154,10 +239,14 @@ const PostProject = () => {
               <div>
                 <Form.Group className='mb-3' controlId='httl' style={{ width: "60%" }}>
                   <Form.Label>Hình thức trả lương</Form.Label>
-                  <Form.Select aria-label='Default select example'>
-                    <option value='project'>Trả theo dự án</option>
-                    <option value='hour'>Trả theo giờ</option>
-                    <option value='month'>Trả theo tháng</option>
+                  <Form.Select
+                    aria-label='Default select example'
+                    name='paymentMethod'
+                    onChange={handleCreatePost}
+                  >
+                    <option value='1'>Trả theo dự án</option>
+                    <option value='2'>Trả theo giờ</option>
+                    <option value='3'>Trả theo tháng</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className='mb-3'>
@@ -168,6 +257,8 @@ const PostProject = () => {
                       aria-label='Default select example'
                       style={{ width: "60%" }}
                       placeholder='Khoảng'
+                      name='budget'
+                      onChange={handleCreatePost}
                     ></Form.Control>
                     {/* <Form.Control
                       type='number'

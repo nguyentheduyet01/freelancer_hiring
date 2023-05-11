@@ -16,7 +16,7 @@ const categorySlice = createSlice({
     [getCategoryAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.Category = action.payload;
+      state.category = action.payload;
     },
     [getCategoryAction.rejected]: (state, action) => {
       state.isLoad = false;
@@ -29,7 +29,7 @@ const categorySlice = createSlice({
     [getCategoriesAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.Categories = action.payload;
+      state.categories = action.payload;
     },
     [getCategoriesAction.rejected]: (state, action) => {
       state.isLoad = false;

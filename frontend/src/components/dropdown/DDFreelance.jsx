@@ -9,7 +9,7 @@ const DDFreelance = () => {
   const items = [
     {
       id: "1",
-      title: "Tìm Việc làm",
+      title: "Đăng tin và Tìm kiếm",
       subtitle: "Hàng ngàn công việc mới được đăng mỗi này",
       chevronRight: "ChevronRight",
       enter: () => setIsShow(() => true),

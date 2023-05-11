@@ -9,11 +9,11 @@ const Posts = () => {
   const { posts } = useSelector((state) => state.post);
   const { data } = posts;
   const handleClick = () => {
-    dispatch(getAllPostAction({}));
+    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
   };
 
   useEffect(() => {
-    dispatch(getAllPostAction({}));
+    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
   }, [dispatch]);
   return (
     <>
