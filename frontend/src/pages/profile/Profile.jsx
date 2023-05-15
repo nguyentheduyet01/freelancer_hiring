@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../images/avatar.png";
 import pen from "../../images/pen.png";
 import placeholder from "../../images/placeholder.png";
@@ -8,11 +8,16 @@ import email from "../../images/email.png";
 import phone from "../../images/phone-call.png";
 import "./Profile.css";
 import { Link } from "react-router-dom";
+import { getAllSkillUserAction } from "../../reducer/actions/userAction";
 
 const Profile = () => {
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { user, skills } = useSelector((state) => state.user);
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
+  useEffect(() => {
+    dispatch(getAllSkillUserAction(user?.id));
+  }, [dispatch, user?.id]);
   return (
     <>
       <Container>
@@ -40,6 +45,16 @@ const Profile = () => {
                 <span style={{ color: "gray" }}>
                   {user?.address} - {date.toLocaleString()}
                 </span>
+              </div>
+              <div className='mt-3'>
+                <div className='d-flex'>
+                  {skills?.length !== 0 &&
+                    skills?.map((skill, index) => (
+                      <button className='skillButton'>
+                        <Link className='linkSkill'>{skill?.skill?.name}</Link>
+                      </button>
+                    ))}
+                </div>
               </div>
             </div>
           </Col>

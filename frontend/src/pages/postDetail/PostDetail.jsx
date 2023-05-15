@@ -9,11 +9,12 @@ import placeholder from "../../images/placeholder.png";
 import user from "../../images/user.png";
 import wage from "../../images/wage.png";
 import working from "../../images/working.png";
-import formatVi from "../../utils/vi";
-import "./PostDetail.css";
 import { getPostAction } from "../../reducer/actions/postAction";
-import formatVND from "./../../utils/formatVND";
 import paragraphFormat from "../../utils/paragraphFormat";
+import { showToastMessageSuccess } from "../../utils/toastify";
+import formatVi from "../../utils/vi";
+import formatVND from "./../../utils/formatVND";
+import "./PostDetail.css";
 
 const PostDetail = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const PostDetail = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Ứng tuyển thành công");
+    showToastMessageSuccess("thành công");
   };
 
   useEffect(() => {

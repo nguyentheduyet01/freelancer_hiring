@@ -35,6 +35,7 @@ const accountSlice = createSlice({
     [logoutAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
+      state.message = action.payload;
     },
   },
 });

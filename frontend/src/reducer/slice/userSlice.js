@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUserAction, getUserAction } from "../actions/userAction";
+import { getAllSkillUserAction, getAllUserAction, getUserAction } from "../actions/userAction";
 
 const userSlice = createSlice({
   name: "user",
@@ -35,8 +35,25 @@ const userSlice = createSlice({
       state.isLoad = false;
       state.error = true;
     },
+    [getAllSkillUserAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getAllSkillUserAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.skills = action.payload.data;
+    },
+    [getAllSkillUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
   },
 });
+
+// const userSkills = (state,payload) =>{
+
+// }
 
 const userReducer = userSlice.reducer;
 // export const {  } = userSlice.actions;

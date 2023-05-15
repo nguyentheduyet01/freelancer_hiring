@@ -3,11 +3,12 @@ import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginAction } from "../../reducer/actions/accountAction";
+import { showToastMessageError, showToastMessageSuccess } from "../../utils/toastify";
 import "./Login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { account: accountUser } = useSelector((state) => state.account);
+  const { account: accountUser, error } = useSelector((state) => state.account);
   const [account, setAccount] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,12 +25,16 @@ const Login = () => {
 
   useEffect(() => {
     if (accountUser?.isSuccess) {
+      showToastMessageSuccess("Đăng nhập thành công");
       if (location.state?.from) {
         navigate(location.state?.from);
       }
       navigate("/");
     }
-  }, [accountUser, navigate, location]);
+    if (error === true) {
+      showToastMessageError("Tài khoản hoặc mật khẩu sai");
+    }
+  }, [accountUser, navigate, location, error]);
 
   return (
     <>

@@ -25,3 +25,8 @@ export const deleteUserAction = createAsyncThunk("user/deleteUser", async (id) =
   const { data } = await axios.delete(`users/${id}`);
   return data;
 });
+
+export const getAllSkillUserAction = createAsyncThunk("user/skill", async (id) => {
+  const { data } = await axios.get(`users/${id}/skill`);
+  return data;
+});
