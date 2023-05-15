@@ -1,19 +1,25 @@
 import { State } from "country-state-city";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Pagination, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight, XCircle } from "react-bootstrap-icons";
 import { Typeahead } from "react-bootstrap-typeahead";
-import Post from "../../components/post/Post";
-import "./Search.css";
+import { useDispatch } from "react-redux";
 import Freelancer from "../../components/freelancer/Freelancer";
+import { getAllUserAction } from "../../reducer/actions/userAction";
+import "./Search.css";
 
 const FreelanceSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
   const ref = useRef(null);
   const options = State.getStatesOfCountry("VN");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isClose, setIsClose] = useState(false);
   let newSelected = [];
+
+  useEffect(() => {
+    dispatch(getAllUserAction());
+  }, [dispatch]);
 
   const handleSelected = (selected) => {
     setSelectedOptions(selected);
@@ -41,65 +47,65 @@ const FreelanceSearch = () => {
                   Kỹ năng
                 </span>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     Node.js
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     JavaScript
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     React
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     MongoDB
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     PHP
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     TypeScript
                   </div>
                 </div>
                 <div className='d-flex'>
-                  <label class='label d-flex align-items-center'>
+                  <label className='label d-flex align-items-center'>
                     <input type='checkbox' />
-                    <span class='checkmark'></span>
+                    <span className='checkmark'></span>
                   </label>
-                  <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+                  <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
                     Vue.js
                   </div>
                 </div>
@@ -164,8 +170,8 @@ const FreelanceSearch = () => {
             <div></div>
           </div>
           <div>
-            <Freelancer style={{}}/>
-          </div>  
+            <Freelancer style={{}} />
+          </div>
           <div className='mb-3'></div>
           <div className='paginationBox'>
             <Pagination
@@ -175,10 +181,10 @@ const FreelanceSearch = () => {
               onChange={setCurrentPageNo}
               nextPageText={<ChevronRight />}
               prevPageText={<ChevronLeft />}
-              itemClass='page-item'
-              linkClass='page-link'
-              activeClass='pageItemActive'
-              activeLinkClass='pageLinkActive'
+              itemclassName='page-item'
+              linkclassName='page-link'
+              activeclassName='pageItemActive'
+              activeLinkclassName='pageLinkActive'
               // firstPageText='1st'
               // lastPageText='Last'
               // onClick={scrollChange}

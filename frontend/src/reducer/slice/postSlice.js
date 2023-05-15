@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPostAction, getPostAction } from "../actions/postAction";
+import { createPostAction, getAllPostAction, getPostAction } from "../actions/postAction";
 
 const postSlice = createSlice({
   name: "post",
@@ -7,7 +7,12 @@ const postSlice = createSlice({
     post: {},
     posts: [],
   },
-  reducers: {},
+  reducers: {
+    clearMessage: (state, action) => {
+      state.error = false;
+      state.success = false;
+    },
+  },
   extraReducers: {
     [getPostAction.pending]: (state, action) => {
       state.isLoad = true;
@@ -35,10 +40,24 @@ const postSlice = createSlice({
       state.isLoad = false;
       state.error = true;
     },
+    [createPostAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [createPostAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.success = true;
+      state.newPost = action.payload;
+    },
+    [createPostAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
   },
 });
 
 const postReducer = postSlice.reducer;
-// export const {  } = postSlice.actions;
+export const { clearMessage } = postSlice.actions;
 
 export default postReducer;

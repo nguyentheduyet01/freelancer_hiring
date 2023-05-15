@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
+import FreelanceSearch from "./pages/Search/FreelanceSearch";
 import Search from "./pages/Search/Search";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import PostDetail from "./pages/postDetail/PostDetail";
 import PostProject from "./pages/postProject/PostProject";
-import { getUserAction } from "./reducer/actions/userAction";
 import Profile from "./pages/profile/Profile";
-import FreelanceSearch from "./pages/Search/FreelanceSearch";
 import UpdateProfile from "./pages/profile/UpdateProfile";
+import { getUserAction } from "./reducer/actions/userAction";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ function App() {
           <Route path='posts/:id' element={<PostDetail />} />
         </Route>
       </Routes>
+      <ToastContainer />
       <Footer />
     </div>
   );
