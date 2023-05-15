@@ -1,19 +1,26 @@
 import { State } from "country-state-city";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Pagination, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight, XCircle } from "react-bootstrap-icons";
 import { Typeahead } from "react-bootstrap-typeahead";
-import Post from "../../components/post/Post";
-import "./Search.css";
+import { useDispatch } from "react-redux";
 import Freelancer from "../../components/freelancer/Freelancer";
+import { getAllUserAction } from "../../reducer/actions/userAction";
+import "./Search.css";
 
 const FreelanceSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
   const ref = useRef(null);
   const options = State.getStatesOfCountry("VN");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isClose, setIsClose] = useState(false);
   let newSelected = [];
+
+  useEffect(() => {
+    dispatch(getAllUserAction());
+    
+  }, [dispatch]);
 
   const handleSelected = (selected) => {
     setSelectedOptions(selected);
@@ -164,8 +171,8 @@ const FreelanceSearch = () => {
             <div></div>
           </div>
           <div>
-            <Freelancer style={{}}/>
-          </div>  
+            <Freelancer style={{}} />
+          </div>
           <div className='mb-3'></div>
           <div className='paginationBox'>
             <Pagination
