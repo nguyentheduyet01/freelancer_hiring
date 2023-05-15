@@ -1,4 +1,6 @@
-﻿namespace Molas.DTO
+﻿using Molas.Models;
+
+namespace Molas.DTO
 {
     public class UserDTO
     {
@@ -19,5 +21,11 @@
         public int? AccountId { get; set; }
 
         public string Address { get; set; }
+        public int? Status { get; set; }
+        
+    }
+    public class UserOutput : UserDTO
+    {
+        public List<Skill>? skills { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Molas.Repositories.Interfaces
         Task<ResultDTO> GetSkillForUser(int id, int? pagesize, int? pageindex);
         Task<ResultDTO> GetCvForUser(int id, int? pagesize, int? pageindex);
         Task<ResultDTO> GetPostApplied(int idUser, int? pagesize, int? pageindex);
+        Task<ResultDTO> GetListUser(int? pagesize, int pageindex);
 
     }
 }

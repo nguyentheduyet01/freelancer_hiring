@@ -30,5 +30,10 @@ namespace Molas.Services
         {
             return await _userRepository.GetCvForUser(id,pagesize, pageindex);
         }
+
+        public async Task<ResultDTO> GetListUser(int? pagesize, int pageindex)
+        {
+            return await _userRepository.GetListUser(pagesize, pageindex);
+        }
     }
 }

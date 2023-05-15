@@ -2,11 +2,13 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Molas.Models;
 
 public partial class UserPost
 {
+    [Key]
     public decimal? Salary { get; set; }
 
     public DateTime? CreatedAt { get; set; }
@@ -16,7 +18,7 @@ public partial class UserPost
     public int? PostId { get; set; }
     public int? CvId { get; set; }
     public string? Suggestion { get; set; }
-    public DateTime IntendTime { get; set; }
+    public DateTime? IntendTime { get; set; }
     public virtual Posts Post { get; set; }
 
     public virtual Users User { get; set; }

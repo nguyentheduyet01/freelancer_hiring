@@ -12,6 +12,10 @@ namespace Molas
             CreateMap<UserDTO, Users>();
             CreateMap<PostDTO, Posts>();
             CreateMap<Posts, PostDTO>();
+            CreateMap<UserPost, UserPostDTO>();
+            CreateMap<UserPostDTO, UserPost>();
+            CreateMap<UserOutput, Users>();
+            CreateMap<Users, UserOutput>();
         }
     }
 }

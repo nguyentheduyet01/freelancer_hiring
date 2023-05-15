@@ -61,6 +61,41 @@ namespace Molas.Repositories
 
         }
 
+        public async Task<ResultDTO> GetListUser(int? pagesize, int pageindex)
+        {
+            List<UserOutput> listuser = new List<UserOutput>();
+            ResultDTO result = new ResultDTO();
+            var res = new List<Users>();
+            try
+            {
+                var pots = _dataContext.Users.Where(n => n.Status == 1);
+                result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
+                res = await pots.Skip((int)(pageindex - 1))
+                .Distinct()
+                .Take((int)pagesize)
+                .Where(s => s.Status == 1)
+                .ToListAsync();
+                result.pageSize = pagesize;
+                result.pageIndex = pageindex;
+                listuser = _mapper.Map< List<UserOutput>>(res);
+                foreach(var item in listuser)
+                {
+                    var skills = from skill in _dataContext.Skill
+                                               join us in _dataContext.UserSkill on skill.Id equals us.IdSkill
+                                               where us.IdUser == item.Id
+                                               select skill;
+                    item.skills = skills.ToList();
+                }
+                result.data = listuser;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "can not get list post!");
+                throw;
+            }
+        }
+
         public async Task<ResultDTO> GetPostApplied(int idUser, int? pagesize, int? pageindex)
         {
             if (pagesize == null || pagesize == 0)

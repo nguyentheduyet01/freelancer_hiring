@@ -12,6 +12,10 @@ namespace Molas.Services
         {
             _postRepository = postRepository;
         }
+        public async Task<bool> ApplyPost(UserPostDTO userPost)
+        {
+            return await _postRepository.ApplyPost(userPost);
+        }
         public async Task<ResultDTO> GetListPostAsync(PostInput input)
         {
             return await _postRepository.GetListPostsAsync(input);

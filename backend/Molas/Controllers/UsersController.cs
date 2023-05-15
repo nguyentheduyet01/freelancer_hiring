@@ -9,6 +9,7 @@ using Molas.DTO;
 using Molas.Models;
 using Molas.Molas;
 using Molas.Services.Interfaces;
+using static Molas.DTO.CommonDTO;
 
 namespace Molas.Controllers
 {
@@ -27,13 +28,10 @@ namespace Molas.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<ResultDTO>> GetUsers(int? pagesize, int pageindex)
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
-            return await _context.Users.ToListAsync();
+
+            return await _usersService.GetListUser(pagesize, pageindex);
         }
 
         // GET: api/Users/5
@@ -123,12 +121,19 @@ namespace Molas.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsers(int id, Users users)
         {
-            if (id != users.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(users).State = EntityState.Modified;
+            var u = new Users();
+            u =  _context.Users.FirstOrDefault(u => u.Id == id);
+            u.Decription = !string.IsNullOrEmpty(users.Decription) ? users.Decription : u.Decription; 
+            u.Name = !string.IsNullOrEmpty(users.Name) ? users.Name : u.Name; 
+            u.Gentle = users.Gentle.HasValue ? users.Gentle : u.Gentle; 
+            u.Age = users.Age.HasValue ? users.Age : u.Age; 
+            u.Phone = !string.IsNullOrEmpty(users.Phone) ? users.Phone : u.Phone; 
+            u.Email = !string.IsNullOrEmpty(users.Email) ? users.Email : u.Email; 
+            u.Experince = !string.IsNullOrEmpty(users.Experince) ? users.Experince : u.Experince; 
+            u.Address = !string.IsNullOrEmpty(users.Address) ? users.Address : u.Address; 
+            u.AccountId = users.AccountId.HasValue ? users.AccountId : u.AccountId; 
+            u.Status = users.Status.HasValue ? users.Status : u.Status; 
+            _context.Entry(u).State = EntityState.Modified;
 
             try
             {

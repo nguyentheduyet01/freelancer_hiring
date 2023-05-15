@@ -181,7 +181,6 @@ public partial class MolasDbContext : DbContext
         modelBuilder.Entity<UserPost>(entity =>
         {
             entity
-                .HasNoKey()
                 .ToTable("user_post");
 
             entity.Property(e => e.CreatedAt)
@@ -230,6 +229,7 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AccountId).HasColumnName("account_id");
             entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Age).HasColumnName("age");
             entity.Property(e => e.Decription).HasColumnName("decription");
             entity.Property(e => e.Email)

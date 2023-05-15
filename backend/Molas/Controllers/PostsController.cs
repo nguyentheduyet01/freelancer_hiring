@@ -53,6 +53,24 @@ namespace Molas.Controllers
                 return NotFound();
             }
         }
+        [HttpPost("apply")]
+        public async Task<ActionResult<OutputDTO>> ApplyPost(UserPostDTO input)
+        {
+            try
+            {
+                var res = await _postService.ApplyPost(input);
+                if (res)
+                {
+                return Ok(res);
+                }
+                return BadRequest("Apply faile");
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
 
         // GET: api/Posts/5
         [HttpGet("{id}")]

@@ -19,6 +19,23 @@ namespace Molas.Repositories
             _logger = logger;
             _mapper = mapper;
         }
+
+        public async Task<bool> ApplyPost(UserPostDTO userPost)
+        {
+            try
+            {
+                UserPost apply = _mapper.Map<UserPost>(userPost);
+                 _dbContext.UserPost.Add(apply);
+                 await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "can not apply post!");
+                throw;
+            }
+        }
+
         public async Task<ResultDTO> GetListPostsAsync(PostInput input)
         {
             try

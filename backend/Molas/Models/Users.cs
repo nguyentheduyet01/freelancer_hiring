@@ -24,6 +24,7 @@ public partial class Users
     public int? AccountId { get; set; }
 
     public string Address { get; set; }
+    public int? Status { get; set; }
 
     public string Decription { get; set; }
 

@@ -8,5 +8,6 @@ namespace Molas.Repositories.Interfaces
         Task<ResultDTO> GetListPostsAsync(PostInput input);
         Task<PostDTO> GetPostByIdAsync(int id);
         Task<bool> PostPostAsync(PostDTO post);
+        Task<bool> ApplyPost(UserPostDTO userPost);
     }
 }
