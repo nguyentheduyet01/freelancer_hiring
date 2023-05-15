@@ -50,7 +50,7 @@ const Profile = () => {
                 <div className='d-flex'>
                   {skills?.length !== 0 &&
                     skills?.map((skill, index) => (
-                      <button className='skillButton'>
+                      <button className='skillButton' key={index}>
                         <Link className='linkSkill'>{skill?.skill?.name}</Link>
                       </button>
                     ))}

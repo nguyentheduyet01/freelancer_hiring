@@ -7,17 +7,14 @@ import ProfileEdit from "./../../components/profile/ProfileEdit";
 
 const UpdateProfile = () => {
   const location = useLocation();
-  const [site, setSite] = useState({
-    context: <ProfileEdit />,
-  });
+  const [site, setSite] = useState({});
 
   let ht = location.pathname.split("/")[3] || "info";
 
   useEffect(() => {
     if (ht === "work_profile") {
       setSite({ context: <WorkProfile /> });
-    }
-    if (ht === "capacity_profile") {
+    } else if (ht === "capacity_profile") {
       setSite({ context: <CapacityProfile /> });
     } else {
       setSite({ context: <ProfileEdit /> });
@@ -62,7 +59,9 @@ const UpdateProfile = () => {
             })}
         </div>
         <hr />
-        <div className='mt-4'>{site.context}</div>
+        <div className='mt-4' style={{ padding: "10px 43px" }}>
+          {site.context}
+        </div>
       </Container>
     </div>
   );

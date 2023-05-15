@@ -94,10 +94,10 @@ const Search = () => {
               onChange={setCurrentPageNo}
               nextPageText={<ChevronRight />}
               prevPageText={<ChevronLeft />}
-              itemClass='page-item'
-              linkClass='page-link'
-              activeClass='pageItemActive'
-              activeLinkClass='pageLinkActive'
+              itemClassName='page-item'
+              linkClassName='page-link'
+              activeClassName='pageItemActive'
+              activeLinkClassName='pageLinkActive'
               // firstPageText='1st'
               // lastPageText='Last'
               // onClick={scrollChange}
