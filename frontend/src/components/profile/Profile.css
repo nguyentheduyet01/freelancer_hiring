@@ -1,0 +1,88 @@
+.label {
+  display: block;
+  width: 12%;
+  /* justify-content: space-between; */
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.label input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark,.checkmarkRadio {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #cacec9;
+  border-radius: 6px;
+}
+.checkmarkRadio{
+  border-radius: 50%;
+}
+
+/* When the checkbox is checked, add a blue background */
+.label input:checked ~ .checkmark,.label input:checked ~ .checkmarkRadio {
+  background-color: #074d07;
+  border: none;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after, .checkmarkRadio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.label input:checked ~ .checkmark:after,.label input:checked ~ .checkmarkRadio:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.label .checkmark:after {
+  left: 8px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.label .checkmarkRadio:after {
+  top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.btnSearch{
+  width: 100px;
+  background-color: #106e03;
+  color: white;
+  border: none;
+  border-radius: 0 10px 10px 0;
+}
+
+.btnSearch:hover{
+  background-color: #17a804;
+}
+
+.freelancerBox:hover{
+  background-color: #f2f7f2;
+}

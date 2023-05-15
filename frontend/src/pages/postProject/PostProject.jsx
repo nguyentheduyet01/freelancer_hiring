@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
-import icon1 from "../../images/headhunting.png";
-import icon2 from "../../images/file.png";
-import icon3 from "../../images/requirements.png";
-import icon4 from "../../images/financial.png";
-import "./postProject.css";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import icon2 from "../../images/file.png";
+import icon4 from "../../images/financial.png";
+import icon1 from "../../images/headhunting.png";
+import icon3 from "../../images/requirements.png";
 import { getCategoriesAction } from "../../reducer/actions/categoryAction";
 import { createPostAction } from "../../reducer/actions/postAction";
+import { clearMessage } from "../../reducer/slice/postSlice";
+import { showToastMessageSuccess } from "../../utils/toastify";
+import "./postProject.css";
 
 // #044B04
 const PostProject = () => {
@@ -16,11 +18,16 @@ const PostProject = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [post, setPost] = useState({
+    categoryId: 1,
     linkApply: "null",
     status: 1,
+    workingMethod: 1,
+    paymentMethod: 1,
   });
+  const [validated, setValidated] = useState(false);
   const { categories } = useSelector((state) => state.category);
   const { account } = useSelector((state) => state.account);
+  const { success } = useSelector((state) => state.post);
   let ht = location.search.split("=")[1];
   // if (ht == "") {
   //   ht = "fulltime";
@@ -55,33 +62,30 @@ const PostProject = () => {
     if (account === "") {
       navigate("/login?post");
     }
+    const form = e.currentTarget;
     e.preventDefault();
-    // const myForm = new FormData();
-    // myForm.set("createdBy", account.data.id);
-    // myForm.set("linkApply", "null");
-    // myForm.set("descriptions", post.descriptions);
-    // myForm.set("title", post.title);
-    // myForm.set("requirement", post.requirement);
-    // myForm.set("budget", Number(post.budget));
-    // myForm.set("paymentMethod", Number(post.paymentMethod));
-    // myForm.set("expired", post.expired);
-    // myForm.set("workingMethod", Number(post.workingMethod));
-    // myForm.set("address", post.address);
-    // myForm.set("status", 1);
 
-    const newPost = {
-      ...post,
-      createdBy: account.data.id,
-    };
+    if (form.checkValidity() !== false) {
+      const newPost = {
+        ...post,
+        createdBy: account.data.id,
+      };
 
-    dispatch(createPostAction(newPost));
-    alert("Đăng bài thành công");
-    // navi
+      dispatch(createPostAction(newPost));
+    }
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+    setValidated(true);
   };
 
   useEffect(() => {
+    if (success === true) {
+      showToastMessageSuccess("Đăng Bài thành công");
+    }
+    dispatch(clearMessage());
     dispatch(getCategoriesAction());
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return (
     <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
@@ -90,7 +94,7 @@ const PostProject = () => {
       </h4>
 
       <Row style={{ width: "80%", margin: "0 auto" }}>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}>
           <div className='d-flex flex-row' style={{ width: "100%" }}>
             <div className='iconPost'>
               <img src={icon1} alt='icon1' />
@@ -127,11 +131,15 @@ const PostProject = () => {
               <Form.Group className='mb-3' controlId='name'>
                 <Form.Label>Đặt tên cụ thể cho công việc cần tuyển</Form.Label>
                 <Form.Control
+                  required
                   type='text'
                   name='title'
                   placeholder='VD: Thiết kế bán hàng'
                   onChange={handleCreatePost}
                 />
+                <Form.Control.Feedback type='invalid'>
+                  Vui lòng nhập trường này
+                </Form.Control.Feedback>
               </Form.Group>
             </div>
           </div>
@@ -147,16 +155,21 @@ const PostProject = () => {
                   freelancer càng có đầy đủ thông tin để gửi báo giá chính xác hơn).
                 </Form.Label>
                 <Form.Control
+                  required
                   as='textarea'
                   rows={4}
                   name='descriptions'
                   onChange={handleCreatePost}
                   placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
                 />
+                <Form.Control.Feedback type='invalid'>
+                  Vui lòng nhập trường này
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className='mb-3' controlId='skill'>
                 <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
                 <Form.Control
+                  required
                   as='textarea'
                   type='text'
                   row={2}
@@ -164,16 +177,23 @@ const PostProject = () => {
                   onChange={handleCreatePost}
                   placeholder='VD: Thiết kế bán hàng'
                 />
+                <Form.Control.Feedback type='invalid'>
+                  Vui lòng nhập trường này
+                </Form.Control.Feedback>
               </Form.Group>
               <div style={{ width: "80%" }}>
                 <Form.Group className='mb-3' controlId='date'>
                   <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>
                   <Form.Control
+                    required
                     type='date'
                     name='expired'
                     onChange={handleCreatePost}
                     placeholder='VD: Thiết kế bán hàng'
                   />
+                  <Form.Control.Feedback type='invalid'>
+                    Vui lòng nhập trường này
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='lh'>
@@ -219,6 +239,7 @@ const PostProject = () => {
                 <Form.Group className='mb-3' controlId='nct'>
                   <Form.Label>Cần tuyển freelancer làm việc tại</Form.Label>
                   <Form.Control
+                    required
                     type='text'
                     name='address'
                     onChange={handleCreatePost}
@@ -227,6 +248,9 @@ const PostProject = () => {
                   {/* <Form.Select aria-label='Default select example'>
                     <option value=''>- Nơi cần tuyển -</option>
                   </Form.Select> */}
+                  <Form.Control.Feedback type='invalid'>
+                    Vui lòng nhập trường này
+                  </Form.Control.Feedback>
                 </Form.Group>
               </div>
             </div>
@@ -252,21 +276,20 @@ const PostProject = () => {
                 </Form.Group>
                 <Form.Group className='mb-3'>
                   <Form.Label>Số tiền tối đa có thể trả</Form.Label>
-                  <div className='d-flex justify-content-between'>
+                  <div className='d-flex flex-column justify-content-between'>
                     <Form.Control
+                      required
                       type='number'
                       aria-label='Default select example'
                       style={{ width: "60%" }}
                       placeholder='Khoảng'
                       name='budget'
                       onChange={handleCreatePost}
-                    ></Form.Control>
-                    {/* <Form.Control
-                      type='number'
-                      aria-label='Default select example'
-                      style={{ width: "49%" }}
-                      placeholder='Đến'
-                    ></Form.Control> */}
+                    />
+
+                    <Form.Control.Feedback type='invalid'>
+                      Vui lòng nhập trường này
+                    </Form.Control.Feedback>
                   </div>
                 </Form.Group>
               </div>

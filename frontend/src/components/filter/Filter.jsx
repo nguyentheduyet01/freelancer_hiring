@@ -61,38 +61,38 @@ const Filter = () => {
         <div>
           <span style={{ fontWeight: "500", fontSize: "95%", color: "#677967" }}>Khoảng giá</span>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='checkbox' />
-              <span class='checkmark'></span>
+              <span className='checkmark'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               nhỏ hơn 1 triệu
             </div>
           </div>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='checkbox' />
-              <span class='checkmark'></span>
+              <span className='checkmark'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               nhỏ hơn 1 triệu
             </div>
           </div>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='checkbox' />
-              <span class='checkmark'></span>
+              <span className='checkmark'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               nhỏ hơn 1 triệu
             </div>
           </div>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='checkbox' />
-              <span class='checkmark'></span>
+              <span className='checkmark'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               nhỏ hơn 1 triệu
             </div>
           </div>
@@ -103,29 +103,29 @@ const Filter = () => {
             Hình thức làm việc
           </span>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='radio' name='radio' />
-              <span class='checkmarkRadio'></span>
+              <span className='checkmarkRadio'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               Tất cả
             </div>
           </div>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='radio' name='radio' />
-              <span class='checkmarkRadio'></span>
+              <span className='checkmarkRadio'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               Làm online
             </div>
           </div>
           <div className='d-flex'>
-            <label class='label d-flex align-items-center'>
+            <label className='label d-flex align-items-center'>
               <input type='radio' name='radio' />
-              <span class='checkmarkRadio'></span>
+              <span className='checkmarkRadio'></span>
             </label>
-            <div class='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
               Làm tại văn phòng
             </div>
           </div>
