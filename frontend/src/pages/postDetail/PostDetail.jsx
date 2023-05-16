@@ -9,20 +9,26 @@ import placeholder from "../../images/placeholder.png";
 import user from "../../images/user.png";
 import wage from "../../images/wage.png";
 import working from "../../images/working.png";
-import { getPostAction } from "../../reducer/actions/postAction";
+import { applyAction, getPostAction } from "../../reducer/actions/postAction";
 import paragraphFormat from "../../utils/paragraphFormat";
 import { showToastMessageSuccess } from "../../utils/toastify";
 import formatVi from "../../utils/vi";
 import formatVND from "./../../utils/formatVND";
 import "./PostDetail.css";
+import { clearMessage } from "../../reducer/slice/postSlice";
 
 const PostDetail = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [apply, setApply] = useState({});
+  const { user } = useSelector((state) => state.user);
+  const { post, applySuccess } = useSelector((state) => state.post);
+
+  const [apply, setApply] = useState({
+    userId: user?.id,
+    postId: post?.id,
+  });
 
   const id = location.pathname.split("/")[2];
-  const { post } = useSelector((state) => state.post);
   let day = null;
 
   if (post?.expired) {
@@ -41,12 +47,19 @@ const PostDetail = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    showToastMessageSuccess("thành công");
+    console.log(apply);
+    dispatch(applyAction(apply));
+    // showToastMessageSuccess("thành công");
   };
 
   useEffect(() => {
+    if (applySuccess === true) {
+      showToastMessageSuccess("Ứng tuyển thành công");
+    }
+
+    dispatch(clearMessage());
     dispatch(getPostAction(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, applySuccess]);
 
   return (
     <Container className='mt-3'>
@@ -161,7 +174,7 @@ const PostDetail = () => {
                   <Form.Control
                     type='number'
                     placeholder='2.000.000VNĐ'
-                    name=''
+                    name='salary'
                     onChange={handleApply}
                   />
                 </Form.Group>
@@ -169,7 +182,11 @@ const PostDetail = () => {
                   <Form.Label>
                     <h6 className=''>Dự kiến hoàn thành trong bao lâu</h6>
                   </Form.Label>
-                  <Form.Select aria-label='Default select example' name='' onChange={handleApply}>
+                  <Form.Select
+                    aria-label='Default select example'
+                    name='intendTime'
+                    // onChange={handleApply}
+                  >
                     <option value='1d'>1 Ngày</option>
                     <option value='2d'>2 Ngày</option>
                     <option value='3d'>3 Ngày</option>
@@ -194,7 +211,7 @@ const PostDetail = () => {
                     rows={5}
                     placeholder='- Tôi đã có XX năm kinh nghiệm trong lĩnh vực'
                     onChange={handleApply}
-                    name=''
+                    name='suggestion'
                   />
                 </Form.Group>
                 <Form.Group className='mb-3'>

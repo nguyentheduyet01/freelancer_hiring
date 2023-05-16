@@ -18,7 +18,7 @@ const FreelanceSearch = () => {
   let newSelected = [];
 
   useEffect(() => {
-    dispatch(getAllUserAction());
+    dispatch(getAllUserAction({}));
   }, [dispatch]);
 
   const handleSelected = (selected) => {

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../utils/instance";
 
-export const getAllSkillAction = createAsyncThunk("skill/getSkill", async (id) => {
-  const { data } = await axios.get(`skills/${id}`);
+export const getAllSkillAction = createAsyncThunk("skill/getAllSkill", async () => {
+  const { data } = await axios.get(`skills`);
   return data;
 });
 

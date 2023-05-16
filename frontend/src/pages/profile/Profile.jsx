@@ -15,6 +15,20 @@ const Profile = () => {
   const { user, skills } = useSelector((state) => state.user);
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
+  const exp = [
+    {
+      value: "1",
+      context: "Mới đi làm",
+    },
+    {
+      value: "2",
+      context: "Đã có kinh nghiệm",
+    },
+    {
+      value: "3",
+      context: "Đi làm lâu năm",
+    },
+  ];
   useEffect(() => {
     dispatch(getAllSkillUserAction(user?.id));
   }, [dispatch, user?.id]);
@@ -78,9 +92,24 @@ const Profile = () => {
           <div>
             <div>
               <h5>Giới thiệu</h5>
+              <p>{user?.decription}</p>
             </div>
             <div>
-              <h5>Tóm lược</h5>
+              <h5>Làm việc</h5>
+              {exp.map((e, index) => {
+                if (e.value === user?.experince) {
+                  return <p>{e.context}</p>;
+                }
+              })}
+            </div>
+          </div>
+          <div></div>
+        </Row>
+        <Row className='border p-3 rounded-4 mt-5'>
+          <div>
+            <div>
+              <h5>Hồ sơ năng lực</h5>
+              <p>{user?.decription}</p>
             </div>
           </div>
           <div></div>

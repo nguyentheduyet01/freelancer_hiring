@@ -6,11 +6,10 @@ import SkillFreelancer from "./SkillFreelancer";
 
 const Freelancer = () => {
   const { users } = useSelector((state) => state.user);
-
   return (
     <div>
-      {users?.length !== 0 &&
-        users?.map((user, index) => (
+      {users?.data?.length !== 0 &&
+        users?.data?.map((user, index) => (
           <Row className='px-5 py-4 m-0 freelancerBox border' key={index}>
             <div className='d-flex justify-content-between align-items-center'>
               <div className='d-flex'>
@@ -52,7 +51,7 @@ const Freelancer = () => {
               >
                 {user?.decription}.
               </Card.Text>
-              <SkillFreelancer userId={user?.id} />
+              <SkillFreelancer skills={user?.skills} />
             </div>
           </Row>
         ))}
