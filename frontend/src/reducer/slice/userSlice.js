@@ -12,7 +12,11 @@ const userSlice = createSlice({
     user: {},
     users: [],
   },
-  reducers: {},
+  reducers: {
+    clearMessage: (state, action) => {
+      state.updateSuccess = false;
+    },
+  },
   extraReducers: {
     [getUserAction.pending]: (state, action) => {
       state.isLoad = true;
@@ -60,7 +64,7 @@ const userSlice = createSlice({
     [updateUserAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.success = true;
+      state.updateSuccess = true;
     },
     [updateUserAction.rejected]: (state, action) => {
       state.isLoad = false;
@@ -74,6 +78,6 @@ const userSlice = createSlice({
 // }
 
 const userReducer = userSlice.reducer;
-// export const {  } = userSlice.actions;
+export const { clearMessage } = userSlice.actions;
 
 export default userReducer;

@@ -30,3 +30,8 @@ export const deletePostAction = createAsyncThunk("post/deletePost", async (id) =
   const { data } = await axios.delete(`posts/${id}`);
   return data;
 });
+
+export const applyAction = createAsyncThunk("post/apply", async (apply) => {
+  const { data } = await axios.post(`posts/apply`, apply);
+  return data;
+});

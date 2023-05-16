@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../images/avatar.png";
 import { updateUserAction } from "../../reducer/actions/userAction";
 import "./Profile.css";
+import { showToastMessageSuccess } from "../../utils/toastify";
+import { clearMessage } from "../../reducer/slice/userSlice";
 
 const ProfileEdit = () => {
   const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
-  const { user } = useSelector((state) => state.user);
+  const { user, updateSuccess } = useSelector((state) => state.user);
 
   const [newUser, setNewUser] = useState({
     name: user?.name,
@@ -42,6 +44,11 @@ const ProfileEdit = () => {
   };
 
   useEffect(() => {
+    if (updateSuccess === true) {
+      showToastMessageSuccess("Cập nhật thành công");
+    }
+
+    dispatch(clearMessage());
     setNewUser({
       name: user?.name,
       gentle: user?.gentle,
@@ -50,7 +57,7 @@ const ProfileEdit = () => {
       email: user?.email,
       address: user?.address,
     });
-  }, [user]);
+  }, [user, updateSuccess, dispatch]);
 
   return (
     <Form style={{ width: "50%" }} onSubmit={handleSubmit} noValidate validated={validated}>
