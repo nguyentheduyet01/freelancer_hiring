@@ -34,3 +34,21 @@
 .header-item:not(:first-child){
   margin-left: 20px;
 }
+
+.sideUpdateHeader{
+  padding: 0 15px 0 15px;
+  border: 1px solid #ebecee;
+}
+.sideUpdateHeader.active{
+  background-color: #3399cc;
+}
+.sideUpdateHeader.active .sideUpdate{
+  color: white;
+}
+
+.sideUpdateHeader .sideUpdate{
+  color: black;
+  text-decoration: none;
+  line-height: 30px;
+  min-height: 37px !important;
+}

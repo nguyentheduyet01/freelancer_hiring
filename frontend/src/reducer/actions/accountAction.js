@@ -16,3 +16,8 @@ export const loginAction = createAsyncThunk("account/login", async (account) => 
 export const logoutAction = createAsyncThunk("account/action", async () => {
   localStorage.setItem("account", JSON.stringify(""));
 });
+
+export const changPassAction = createAsyncThunk("account/password", async (id, pass) => {
+  const { data } = await axios.put(`authentication/changepassword/${id}`, pass);
+  return data;
+});

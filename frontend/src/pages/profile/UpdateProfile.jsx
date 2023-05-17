@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import MetaData from "../../components/metadata/MetaData";
 import CapacityProfile from "./../../components/profile/CapacityProfile";
-import WorkProfile from "./../../components/profile/WorkProfile";
 import ProfileEdit from "./../../components/profile/ProfileEdit";
+import WorkProfile from "./../../components/profile/WorkProfile";
 
 const UpdateProfile = () => {
   const location = useLocation();
@@ -41,27 +42,32 @@ const UpdateProfile = () => {
 
   return (
     <div>
+      <MetaData title='Update Profile' />
       <Container className='border rounded-4 mt-5'>
-        <div className='header-profile mt-3'>
-          {items &&
-            items.map((item, index) => {
-              let active = "";
-              if (ht === item.value) {
-                active = "active";
-              }
-              return (
-                <div className={`header-item ${active}`} key={index}>
-                  <Link to={item.link} style={{ textDecoration: "none", color: "#3399cc" }}>
-                    {item.context}
-                  </Link>
-                </div>
-              );
-            })}
-        </div>
-        <hr />
-        <div className='mt-4' style={{ padding: "10px 43px" }}>
-          {site.context}
-        </div>
+        <Row>
+          <Col>
+            <div className='header-profile mt-3'>
+              {items &&
+                items.map((item, index) => {
+                  let active = "";
+                  if (ht === item.value) {
+                    active = "active";
+                  }
+                  return (
+                    <div className={`header-item ${active}`} key={index}>
+                      <Link to={item.link} style={{ textDecoration: "none", color: "#3399cc" }}>
+                        {item.context}
+                      </Link>
+                    </div>
+                  );
+                })}
+            </div>
+            <hr />
+            <div className='mt-4' style={{ padding: "10px 43px" }}>
+              {site.context}
+            </div>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
