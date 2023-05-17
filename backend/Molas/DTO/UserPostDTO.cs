@@ -11,6 +11,6 @@
         public int? PostId { get; set; }
         public int? CvId { get; set; }
         public string? Suggestion { get; set; }
-        public DateTime? IntendTime { get; set; }
+        public string? IntendTime { get; set; }
     }
 }

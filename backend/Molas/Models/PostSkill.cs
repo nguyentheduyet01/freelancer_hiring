@@ -7,11 +7,9 @@ namespace Molas.Models;
 
 public partial class PostSkill
 {
-    public int? SkillId { get; set; }
+    public int Id { get; set; }
 
     public int? PostId { get; set; }
 
-    public virtual Posts Post { get; set; }
-
-    public virtual Skill Skill { get; set; }
+    public int? SkillId { get; set; }
 }

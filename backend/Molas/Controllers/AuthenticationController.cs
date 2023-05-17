@@ -56,11 +56,20 @@ namespace Molas.Controllers
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("changepassword")]
-        public async Task<IActionResult> PutCategory(int id, string password)
+        public async Task<IActionResult> PutCategory(int id,[FromBody] PasswordDTO pass)
         {
           
             Account account = await _context.Account.FindAsync(id);
-            account.Password = password;
+            if(account.Password != pass.OldPassword)
+            {
+                return BadRequest("Old password not corect!");
+            }
+            if(pass.Password == pass.OldPassword)
+            {
+                return BadRequest("Old password equal new password!");
+            }
+            
+            account.Password = pass.Password;
             _context.Entry(account).State = EntityState.Modified;
 
             try
@@ -79,7 +88,7 @@ namespace Molas.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
         private bool CategoryExists(int id)
         {

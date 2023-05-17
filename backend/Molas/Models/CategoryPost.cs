@@ -7,11 +7,9 @@ namespace Molas.Models;
 
 public partial class CategoryPost
 {
-    public int? PostsId { get; set; }
+    public int Id { get; set; }
 
     public int? CategoryId { get; set; }
 
-    public virtual Category Category { get; set; }
-
-    public virtual Posts Posts { get; set; }
+    public int? PostId { get; set; }
 }

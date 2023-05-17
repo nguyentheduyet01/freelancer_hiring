@@ -35,8 +35,8 @@ namespace Molas.Repositories
             try
             {
                 var pots = from p in _dataContext.Users
-                           join up in _dataContext.UserSkill on p.Id equals up.IdUser
-                           where up.IdSkill == id
+                           join up in _dataContext.UserSkill on p.Id equals up.UserId
+                           where up.SkillId == id
                            select p;
                 result.totalCount = await pots.Distinct().CountAsync();
                 res = await pots.Skip((int)(pageindex - 1))

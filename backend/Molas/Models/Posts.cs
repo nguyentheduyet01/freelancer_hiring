@@ -21,13 +21,21 @@ public partial class Posts
 
     public int? CreatedBy { get; set; }
 
+    /// <summary>
+    /// 1:bán thời gian, 2: toàn thời gian, 3: theo dự án
+    /// </summary>
     public int? WorkingMethod { get; set; }
-    public int? PaymentMethod { get; set; }
-    public string? Address { get; set; }
 
     public DateTime? Expired { get; set; }
 
     public int? Status { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+
+    /// <summary>
+    /// 1: theo dự án, 2: theo giờ, 3: theo tháng
+    /// </summary>
+    public int? PaymentMethod { get; set; }
+
+    public string Address { get; set; }
 }

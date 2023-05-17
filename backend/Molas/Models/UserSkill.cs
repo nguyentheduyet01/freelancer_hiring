@@ -7,11 +7,9 @@ namespace Molas.Models;
 
 public partial class UserSkill
 {
-    public int? IdUser { get; set; }
+    public int Id { get; set; }
 
-    public int? IdSkill { get; set; }
+    public int? SkillId { get; set; }
 
-    public virtual Skill IdSkillNavigation { get; set; }
-
-    public virtual Users IdUserNavigation { get; set; }
+    public int? UserId { get; set; }
 }

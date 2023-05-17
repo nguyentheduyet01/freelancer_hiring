@@ -35,5 +35,20 @@ namespace Molas.Services
         {
             return await _userRepository.GetListUser(pagesize, pageindex);
         }
+
+        public async Task<bool> AddListSkill(ListSkillDTO listSkill)
+        {
+            return await _userRepository.AddListSkill(listSkill);
+        }
+
+        public async Task<bool> DeleteSkill(int skillId, int userId)
+        {
+            return await _userRepository.DeleteSkill(skillId,userId);
+        }
+
+        public async Task<bool> ChangeStatus(int idUser, int status)
+        {
+            return await _userRepository.ChangeStatus(idUser, status);
+        }
     }
 }

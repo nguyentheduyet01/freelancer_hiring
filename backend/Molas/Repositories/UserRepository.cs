@@ -23,6 +23,74 @@ namespace Molas.Repositories
             _logger = logger;
         }
 
+        public async Task<bool> AddListSkill(ListSkillDTO listSkill)
+        {
+            try
+            {
+                foreach(var item in listSkill.ListIdSkill)
+                {
+                UserSkill userSkill = new UserSkill();
+                    userSkill.SkillId = item;
+                    userSkill.UserId = listSkill.idUser;
+                    var re = _dataContext.UserSkill.Where(n => n.SkillId == userSkill.SkillId && n.UserId == userSkill.UserId).ToList();
+                    if(re.Count > 0)
+                    {
+                        continue;
+                    }
+                         _dataContext.UserSkill.Add(userSkill);
+                }
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex,"Exeption insert list skill");
+                throw;
+            }
+        }
+
+        public async Task<bool> ChangeStatus(int idUser, int status)
+        {
+            try
+            {
+                var user = _dataContext.Users.Where(x => x.Id == idUser).ToList();
+                if (user.Count > 0)
+                {
+                    var user1 = user.FirstOrDefault();
+                    user1.Status = status;
+                    _dataContext.Users.Update(user1);
+                    await _dataContext.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> DeleteSkill(int skillId, int userId)
+        {
+            try
+            {
+                var userSkill = await _dataContext.UserSkill.Where(n => n.SkillId ==  skillId && n.UserId == userId).FirstOrDefaultAsync();
+                if(userSkill != null)
+                {
+                 _dataContext.UserSkill.Remove(userSkill);
+
+                }
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Exeption delete skill");
+                throw;
+            }
+        }
+
         public async Task<ResultDTO> GetCvForUser(int id, int? pagesize, int? pageindex)
         {
             if (pagesize == null || pagesize == 0)
@@ -81,8 +149,8 @@ namespace Molas.Repositories
                 foreach(var item in listuser)
                 {
                     var skills = from skill in _dataContext.Skill
-                                               join us in _dataContext.UserSkill on skill.Id equals us.IdSkill
-                                               where us.IdUser == item.Id
+                                               join us in _dataContext.UserSkill on skill.Id equals us.SkillId
+                                               where us.UserId == item.Id
                                                select skill;
                     item.skills = skills.ToList();
                 }
@@ -180,8 +248,8 @@ namespace Molas.Repositories
             try
             {
                 var skills = from skill in _dataContext.Skill
-                             join us in _dataContext.UserSkill on skill.Id equals us.IdSkill
-                             where us.IdUser == id
+                             join us in _dataContext.UserSkill on skill.Id equals us.SkillId
+                             where us.UserId == id
                              select new { skill, id };
                 //var skills = _dataContext.Skill.Join(_dataContext.UserSkill, sk => sk.Id, us => us.Id_Skill,
                 //    (sk, us) => new

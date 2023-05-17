@@ -45,7 +45,7 @@ namespace Molas.Repositories
                 if (input.category_id != null && input.category_id != 0)
                 {
                     var pots = from a in _dbContext.Posts
-                               join cp in _dbContext.CategoryPost on a.Id equals cp.PostsId
+                               join cp in _dbContext.CategoryPost on a.Id equals cp.PostId
                                where cp.CategoryId == input.category_id
                                select a;
                     result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();

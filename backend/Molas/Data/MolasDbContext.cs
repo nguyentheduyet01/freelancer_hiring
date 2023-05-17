@@ -68,20 +68,11 @@ public partial class MolasDbContext : DbContext
 
         modelBuilder.Entity<CategoryPost>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("category_post");
+            entity.ToTable("category_post");
 
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
-            entity.Property(e => e.PostsId).HasColumnName("posts_id");
-
-            entity.HasOne(d => d.Category).WithMany()
-                .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK_category_post_Category");
-
-            entity.HasOne(d => d.Posts).WithMany()
-                .HasForeignKey(d => d.PostsId)
-                .HasConstraintName("FK_category_post_Posts");
+            entity.Property(e => e.PostId).HasColumnName("post_id");
         });
 
         modelBuilder.Entity<FileData>(entity =>
@@ -110,20 +101,11 @@ public partial class MolasDbContext : DbContext
 
         modelBuilder.Entity<PostSkill>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("post_skill");
+            entity.ToTable("post_skill");
 
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.PostId).HasColumnName("post_id");
             entity.Property(e => e.SkillId).HasColumnName("skill_id");
-
-            entity.HasOne(d => d.Post).WithMany()
-                .HasForeignKey(d => d.PostId)
-                .HasConstraintName("FK_post_skill_Posts");
-
-            entity.HasOne(d => d.Skill).WithMany()
-                .HasForeignKey(d => d.SkillId)
-                .HasConstraintName("FK_post_skill_Skill");
         });
 
         modelBuilder.Entity<Posts>(entity =>
@@ -131,6 +113,7 @@ public partial class MolasDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Posts__3213E83F818983E9");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Address).HasColumnName("address");
             entity.Property(e => e.Budget)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("budget");
@@ -146,12 +129,15 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("link_apply");
+            entity.Property(e => e.PaymentMethod)
+                .HasComment("1: theo dự án, 2: theo giờ, 3: theo tháng")
+                .HasColumnName("payment_method");
             entity.Property(e => e.Requirement).HasColumnName("requirement");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Title).HasColumnName("title");
-            entity.Property(e => e.WorkingMethod).HasColumnName("working_method");
-            entity.Property(e => e.PaymentMethod).HasColumnName("payment_method");
-            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.WorkingMethod)
+                .HasComment("1:bán thời gian, 2: toàn thời gian, 3: theo dự án")
+                .HasColumnName("working_method");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -181,18 +167,21 @@ public partial class MolasDbContext : DbContext
         modelBuilder.Entity<UserPost>(entity =>
         {
             entity
+                .HasNoKey()
                 .ToTable("user_post");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.PostId).HasColumnName("post_id");
             entity.Property(e => e.CvId).HasColumnName("cv_id");
-            entity.Property(e => e.Suggestion).HasColumnName("suggestion");
-            entity.Property(e => e.IntendTime).HasColumnName("intend_time");
+            entity.Property(e => e.IntendTime)
+                .HasMaxLength(100)
+                .HasColumnName("intend_time");
+            entity.Property(e => e.PostId).HasColumnName("post_id");
             entity.Property(e => e.Salary)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("salary");
+            entity.Property(e => e.Suggestion).HasColumnName("suggestion");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.Post).WithMany()
@@ -206,20 +195,11 @@ public partial class MolasDbContext : DbContext
 
         modelBuilder.Entity<UserSkill>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("user_skill");
+            entity.ToTable("user_skill");
 
-            entity.Property(e => e.IdSkill).HasColumnName("id_skill");
-            entity.Property(e => e.IdUser).HasColumnName("id_user");
-
-            entity.HasOne(d => d.IdSkillNavigation).WithMany()
-                .HasForeignKey(d => d.IdSkill)
-                .HasConstraintName("FK_user_skill_Skill");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany()
-                .HasForeignKey(d => d.IdUser)
-                .HasConstraintName("FK_user_skill_Users");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.SkillId).HasColumnName("skill_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<Users>(entity =>
@@ -229,7 +209,6 @@ public partial class MolasDbContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AccountId).HasColumnName("account_id");
             entity.Property(e => e.Address).HasColumnName("address");
-            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Age).HasColumnName("age");
             entity.Property(e => e.Decription).HasColumnName("decription");
             entity.Property(e => e.Email)
@@ -240,6 +219,9 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("experince");
             entity.Property(e => e.Gentle).HasColumnName("gentle");
+            entity.Property(e => e.Introdue)
+                .HasMaxLength(100)
+                .HasColumnName("introdue");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
@@ -247,6 +229,7 @@ public partial class MolasDbContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("phone");
+            entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Account).WithMany(p => p.Users)
                 .HasForeignKey(d => d.AccountId)

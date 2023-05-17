@@ -133,6 +133,7 @@ namespace Molas.Controllers
             u.Address = !string.IsNullOrEmpty(users.Address) ? users.Address : u.Address; 
             u.AccountId = users.AccountId.HasValue ? users.AccountId : u.AccountId; 
             u.Status = users.Status.HasValue ? users.Status : u.Status; 
+            u.Introdue = !string.IsNullOrEmpty(users.Introdue) ? users.Introdue : u.Introdue; 
             _context.Entry(u).State = EntityState.Modified;
 
             try
@@ -187,6 +188,36 @@ namespace Molas.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+        [HttpDelete("skill")]
+        public async Task<IActionResult> DeleteSkill(int skillId,int userId)
+        {
+            var res = await _usersService.DeleteSkill(skillId, userId);
+            if (res)
+            {
+                return Ok("success");
+            }
+            return BadRequest("Delete faile!");
+        }
+        [HttpPost("listskill")]
+        public async Task<IActionResult> AddListSkill(ListSkillDTO userSkill)
+        {
+            var res = await _usersService.AddListSkill(userSkill);
+            if (res)
+            {
+                return Ok("success");
+            }
+            return BadRequest("Add faile!");
+        }
+         [HttpGet("changestatus")]
+        public async Task<IActionResult> ChangeStatus(int idUser, int status)
+        {
+            var res = await _usersService.ChangeStatus(idUser,status);
+            if (res)
+            {
+                return Ok("success");
+            }
+            return BadRequest("change faile!");
         }
 
         private bool UsersExists(int id)
