@@ -6,10 +6,13 @@ export const getUserAction = createAsyncThunk("user/getUser", async (id) => {
   return data;
 });
 
-export const getAllUserAction = createAsyncThunk("user/getAllUser", async () => {
-  const { data } = await axios.get("users");
-  return data;
-});
+export const getAllUserAction = createAsyncThunk(
+  "user/getAllUser",
+  async ({ pagesize = 5, pageindex = 1 }) => {
+    const { data } = await axios.get(`users?pagesize=${pagesize}&pageindex=${pageindex}`);
+    return data;
+  },
+);
 
 export const createUserAction = createAsyncThunk("user/createUser", async (user) => {
   const { data } = await axios.post("users", user);

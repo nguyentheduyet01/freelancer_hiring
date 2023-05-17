@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
+import MetaData from "./components/metadata/MetaData";
+import NotFound from "./pages/NotFound/NotFound";
 import FreelanceSearch from "./pages/Search/FreelanceSearch";
 import Search from "./pages/Search/Search";
 import Home from "./pages/home/Home";
@@ -12,9 +15,9 @@ import Login from "./pages/login/Login";
 import PostDetail from "./pages/postDetail/PostDetail";
 import PostProject from "./pages/postProject/PostProject";
 import Profile from "./pages/profile/Profile";
+import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import { getUserAction } from "./reducer/actions/userAction";
-import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +29,10 @@ function App() {
 
   return (
     <div style={{ overflowX: "hidden" }}>
+      {/* {
+        pathName =
+      } */}
+      <MetaData title='Home' />
       <Header success={account?.isSuccess} />
       <Routes>
         <Route path='/' element={<Outlet />}>
@@ -37,12 +44,16 @@ function App() {
           </Route>
           <Route path='freelancer' element={<FreelanceSearch />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='profile/setting' element={<Setting />}>
+            <Route path='password' />
+          </Route>
           <Route path='profile/update' element={<UpdateProfile />}>
             <Route path='work_profile' />
             <Route path='capacity_profile' />
           </Route>
           <Route path='posts' element={<PostProject />} />
           <Route path='posts/:id' element={<PostDetail />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
       <ToastContainer />

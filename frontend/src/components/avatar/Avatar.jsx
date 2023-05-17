@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import { Bell } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.png";
 import { logoutAction } from "../../reducer/actions/accountAction";
 
@@ -48,11 +48,22 @@ const Avatar = () => {
                 Hồ sơ cá nhân
               </Link>
             </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to='profile/update' style={{ textDecoration: "none", color: "black" }}>
+                Chỉnh sửa hồ sơ
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to='profile/setting' style={{ textDecoration: "none", color: "black" }}>
+                Cài đặt chung
+              </Link>
+            </Dropdown.Item>
             <Dropdown.Item onClick={handleLogout}>Đăng xuất</Dropdown.Item>
             {/* <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item> */}
           </Dropdown>
         </DropdownButton>
       </Col>
+      <Outlet />
     </Row>
   );
 };

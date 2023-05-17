@@ -1,16 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPostAction, getAllPostAction, getPostAction } from "../actions/postAction";
+import {
+  applyAction,
+  createPostAction,
+  getAllPostAction,
+  getPostAction,
+} from "../actions/postAction";
 
 const postSlice = createSlice({
   name: "post",
   initialState: {
     post: {},
     posts: [],
+    applied: [],
   },
   reducers: {
     clearMessage: (state, action) => {
       state.error = false;
       state.success = false;
+      state.applySuccess = false;
     },
   },
   extraReducers: {
@@ -51,6 +58,20 @@ const postSlice = createSlice({
       state.newPost = action.payload;
     },
     [createPostAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [applyAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [applyAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.applySuccess = true;
+      state.applied = action.payload;
+    },
+    [applyAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },
