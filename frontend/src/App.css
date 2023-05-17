@@ -44,3 +44,8 @@
 .skillButton:hover .linkSkill{
   color: #314644;
 }
+
+.dropdown-item:active {
+  background-color: #3399cc !important;
+  color: white !important;
+}

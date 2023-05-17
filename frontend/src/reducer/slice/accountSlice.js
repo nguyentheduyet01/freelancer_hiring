@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginAction, logoutAction } from "../actions/accountAction";
+import { changPassAction, loginAction, logoutAction } from "../actions/accountAction";
 
 const initialState = {
   account: localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : {},
@@ -33,6 +33,20 @@ const accountSlice = createSlice({
       state.account = {};
     },
     [logoutAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+      state.message = action.payload;
+    },
+    [changPassAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [changPassAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.changeSuccess = true;
+    },
+    [changPassAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
       state.message = action.payload;

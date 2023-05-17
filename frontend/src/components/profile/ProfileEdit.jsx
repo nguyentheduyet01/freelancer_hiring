@@ -6,11 +6,12 @@ import { updateUserAction } from "../../reducer/actions/userAction";
 import "./Profile.css";
 import { showToastMessageSuccess } from "../../utils/toastify";
 import { clearMessage } from "../../reducer/slice/userSlice";
+import Loader from "../Loader/Loader";
 
 const ProfileEdit = () => {
   const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
-  const { user, updateSuccess } = useSelector((state) => state.user);
+  const { user, updateSuccess, isLoad } = useSelector((state) => state.user);
 
   const [newUser, setNewUser] = useState({
     name: user?.name,
@@ -60,75 +61,79 @@ const ProfileEdit = () => {
   }, [user, updateSuccess, dispatch]);
 
   return (
-    <Form style={{ width: "50%" }} onSubmit={handleSubmit} noValidate validated={validated}>
-      <div>
-        <img src={avatar} alt='avatar' style={{ width: "120px", height: "120px" }} />
-      </div>
-      <Form.Group controlId='formFile' className='mt-3'>
-        <Form.Control type='file' />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className='mt-3' controlId='name'>
-        <Form.Label>Họ và tên</Form.Label>
-        <Form.Control
-          required
-          type='text'
-          name='name'
-          value={name}
-          placeholder='Nhập Họ và tên'
-          onChange={handleUser}
-        />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className='mt-3' controlId='age'>
-        <Form.Label>Tuổi</Form.Label>
-        <Form.Control
-          required
-          type='number'
-          name='age'
-          value={age}
-          placeholder='Nhập Tuổi'
-          onChange={handleUser}
-        />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className='mt-3' controlId='phone'>
-        <Form.Label>Số điện thoại</Form.Label>
-        <Form.Control
-          required
-          type='text'
-          name='phone'
-          value={phone}
-          placeholder='Nhập Số điện thoại'
-          onChange={handleUser}
-        />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className='mt-3' controlId='email'>
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          required
-          type='text'
-          name='email'
-          value={email}
-          placeholder='Nhập Email'
-          onChange={handleUser}
-        />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className='mt-3' controlId='address'>
-        <Form.Label>Địa chỉ</Form.Label>
-        <Form.Control
-          required
-          type='text'
-          name='address'
-          value={address}
-          placeholder='Nhập Địa chỉ'
-          onChange={handleUser}
-        />
-        <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
-      </Form.Group>
-      {/* <div className='d-flex mt-3'>
+    <>
+      {isLoad ? (
+        <Loader />
+      ) : (
+        <Form style={{ width: "50%" }} onSubmit={handleSubmit} noValidate validated={validated}>
+          <div>
+            <img src={avatar} alt='avatar' style={{ width: "120px", height: "120px" }} />
+          </div>
+          <Form.Group controlId='formFile' className='mt-3'>
+            <Form.Control type='file' />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className='mt-3' controlId='name'>
+            <Form.Label>Họ và tên</Form.Label>
+            <Form.Control
+              required
+              type='text'
+              name='name'
+              value={name}
+              placeholder='Nhập Họ và tên'
+              onChange={handleUser}
+            />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className='mt-3' controlId='age'>
+            <Form.Label>Tuổi</Form.Label>
+            <Form.Control
+              required
+              type='number'
+              name='age'
+              value={age}
+              placeholder='Nhập Tuổi'
+              onChange={handleUser}
+            />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className='mt-3' controlId='phone'>
+            <Form.Label>Số điện thoại</Form.Label>
+            <Form.Control
+              required
+              type='text'
+              name='phone'
+              value={phone}
+              placeholder='Nhập Số điện thoại'
+              onChange={handleUser}
+            />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className='mt-3' controlId='email'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              required
+              type='text'
+              name='email'
+              value={email}
+              placeholder='Nhập Email'
+              onChange={handleUser}
+            />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className='mt-3' controlId='address'>
+            <Form.Label>Địa chỉ</Form.Label>
+            <Form.Control
+              required
+              type='text'
+              name='address'
+              value={address}
+              placeholder='Nhập Địa chỉ'
+              onChange={handleUser}
+            />
+            <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
+          </Form.Group>
+          {/* <div className='d-flex mt-3'>
         <div className='d-flex' style={{ width: "120px" }}>
           <label className='label d-flex align-items-center'>
             <input
@@ -160,10 +165,12 @@ const ProfileEdit = () => {
           </div>
         </div>
       </div> */}
-      <Button variant='primary' type='submit' className='mt-3'>
-        Cập nhật
-      </Button>
-    </Form>
+          <Button variant='primary' type='submit' className='mt-3'>
+            Cập nhật
+          </Button>
+        </Form>
+      )}
+    </>
   );
 };
 
