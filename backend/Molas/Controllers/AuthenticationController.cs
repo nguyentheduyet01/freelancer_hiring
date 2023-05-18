@@ -4,6 +4,7 @@ using Molas.DTO;
 using Molas.Models;
 using Molas.Molas;
 using Molas.Services.Interfaces;
+using static Molas.DTO.CommonDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -59,14 +60,17 @@ namespace Molas.Controllers
         public async Task<IActionResult> PutCategory(int id,[FromBody] PasswordDTO pass)
         {
           
+                OutputDTO res = new OutputDTO();
             Account account = await _context.Account.FindAsync(id);
             if(account.Password != pass.OldPassword)
             {
-                return BadRequest("Old password not corect!");
+                res.message = "Old password not corect!";
+                return BadRequest(res);
             }
             if(pass.Password == pass.OldPassword)
             {
-                return BadRequest("Old password equal new password!");
+                res.message = "Old password equal new password!";
+                return BadRequest(res);
             }
             
             account.Password = pass.Password;

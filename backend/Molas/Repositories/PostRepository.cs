@@ -64,6 +64,7 @@ namespace Molas.Repositories
                 }
                 result.pageSize = input.pagesize;
                 result.pageIndex = input.pageindex;
+                result.totalPage = ( result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
                 result.data = res;
                 return result;
             }
