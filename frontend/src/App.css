@@ -49,3 +49,12 @@
   background-color: #3399cc !important;
   color: white !important;
 }
+
+.pagination>li{
+  /* color: white !important; */
+  width: 20px;
+  text-align: center  ;
+}
+/* .linkSkill{
+  color: rgb(233, 229, 229);
+} */
