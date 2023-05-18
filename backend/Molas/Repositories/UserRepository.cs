@@ -113,6 +113,7 @@ namespace Molas.Repositories
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
+                result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
                 result.data = res;
                 return result;
             }
@@ -145,6 +146,7 @@ namespace Molas.Repositories
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
+                result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
                 listuser = _mapper.Map< List<UserOutput>>(res);
                 foreach(var item in listuser)
                 {
@@ -175,22 +177,21 @@ namespace Molas.Repositories
                 pageindex = 1;
             }
             ResultDTO result = new ResultDTO();
-            var res = new List<Posts>();
             try
             {
-                var pots = from p in _dataContext.Posts
-                           join up in _dataContext.UserPost on p.Id equals up.PostId
-                           where up.UserId == idUser
-                           select p;
-                result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
-                res = await pots.Skip((int)(pageindex - 1))
+                var pots = from post in _dataContext.Posts
+                           join userpost in _dataContext.UserPost on post.Id equals userpost.PostId
+                           where userpost.UserId == idUser
+                           select new { post, userpost };
+                result.totalCount = await pots.Where(s => s.post.Status == 1).Distinct().CountAsync();
+                result.data = await pots.Skip((int)(pageindex - 1))
                 .Distinct()
                 .Take((int)pagesize)
-                .Where(s => s.Status == 1)
+                .Where(s => s.post.Status == 1)
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
-                result.data = res;
+                result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
                 return result;
             }
             catch (Exception ex)
@@ -223,6 +224,8 @@ namespace Molas.Repositories
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
+                result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
+
                 result.data = res;
                 return result;
             }
@@ -264,6 +267,7 @@ namespace Molas.Repositories
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
+                result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
                 result.data = res;
                 return result;
             }

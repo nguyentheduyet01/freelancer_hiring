@@ -45,6 +45,7 @@ namespace Molas.Repositories
                 .ToListAsync();
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
+                result.totalPage = result.totalCount / result.pageSize + result.totalCount % result.pageSize > 0 ? 1 : 0;
                 result.data = res;
                 return result;
             }
