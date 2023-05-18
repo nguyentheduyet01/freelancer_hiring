@@ -25,6 +25,7 @@ function App() {
   const { account } = useSelector((state) => state.account);
 
   useEffect(() => {
+    // if(account?.í)
     dispatch(getUserAction(account?.data?.id));
   }, [dispatch, account]);
 

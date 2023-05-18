@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import MetaData from "../metadata/MetaData";
-import { showToastMessageError } from "./../../utils/toastify";
+import { showToastMessageError, showToastMessageSuccess } from "./../../utils/toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { changPassAction } from "../../reducer/actions/accountAction";
+import { changPassAction, logoutAction } from "../../reducer/actions/accountAction";
+import { clearMessage } from "../../reducer/slice/accountSlice";
 
 const ChangePass = () => {
   const [validated, setValidated] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
-  const { account } = useSelector((state) => state.account);
+  const { account, changeSuccess, message } = useSelector((state) => state.account);
   const handlePass = (e) => {
     setUser({
       ...user,
@@ -30,7 +31,7 @@ const ChangePass = () => {
           oldPassword: user.oldPassword,
           password: user.password,
         };
-        dispatch(changPassAction({ id: account.data.id, pass: news }));
+        dispatch(changPassAction({ id: account.data.accountId, pass: news }));
       }
       if (form.checkValidity() === false) {
         e.stopPropagation();
@@ -38,6 +39,16 @@ const ChangePass = () => {
       setValidated(true);
     }
   };
+  useEffect(() => {
+    if (changeSuccess && message === "") {
+      showToastMessageSuccess("Đổi mật khẩu thành công");
+      dispatch(clearMessage());
+      dispatch(logoutAction());
+    }
+    if (message !== "") {
+      showToastMessageError(message);
+    }
+  }, [changeSuccess, dispatch, message]);
   return (
     <div>
       <MetaData title='Change Password' />
