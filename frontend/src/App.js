@@ -53,7 +53,9 @@ function App() {
             <Route path='capacity_profile' />
           </Route>
           <Route path='posts' element={<PostProject />} />
-          <Route path='myposts' element={<ListPost />} />
+          <Route path='myposts' element={<ListPost />}>
+            <Route path='apply' element={<ListPost />} />
+          </Route>
           <Route path='posts/:id' element={<PostDetail />} />
           <Route path='*' element={<NotFound />} />
         </Route>
