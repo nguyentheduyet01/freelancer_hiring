@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSkillAction } from "./../../reducer/actions/skillAction";
+import { useNavigate } from "react-router-dom";
 import { updateUserAction } from "../../reducer/actions/userAction";
-import { showToastMessageSuccess } from "../../utils/toastify";
 import { clearMessage } from "../../reducer/slice/userSlice";
+import { showToastMessageSuccess } from "../../utils/toastify";
 import Loader from "../Loader/Loader";
+import { getAllSkillAction } from "./../../reducer/actions/skillAction";
 
 const WorkProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [selections, setSelections] = useState([]);
 
@@ -26,11 +28,11 @@ const WorkProfile = () => {
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
-    console.log(newUser);
     e.preventDefault();
 
     if (form.checkValidity() !== false) {
       dispatch(updateUserAction({ id: user.id, user: newUser }));
+      navigate("/profile");
     }
     if (form.checkValidity() === false) {
       e.stopPropagation();

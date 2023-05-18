@@ -11,7 +11,12 @@ export const getAllPostAction = createAsyncThunk(
 
 export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
   const { data } = await axios.get(`posts/${id}`);
-  return data;
+  const { data: dataUser } = await axios.get(`users/${data.createdBy}`);
+  const newData = {
+    ...data,
+    name: dataUser?.name,
+  };
+  return newData;
 });
 
 export const createPostAction = createAsyncThunk("post/createPost", async (post) => {

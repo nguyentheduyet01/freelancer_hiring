@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.png";
 import { updateUserAction } from "../../reducer/actions/userAction";
-import "./Profile.css";
-import { showToastMessageSuccess } from "../../utils/toastify";
 import { clearMessage } from "../../reducer/slice/userSlice";
+import { showToastMessageSuccess } from "../../utils/toastify";
 import Loader from "../Loader/Loader";
+import "./Profile.css";
 
 const ProfileEdit = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const { user, updateSuccess, isLoad } = useSelector((state) => state.user);
 
@@ -30,10 +32,12 @@ const ProfileEdit = () => {
 
     if (form.checkValidity() !== false) {
       dispatch(updateUserAction({ id: user.id, user: newUser }));
+      navigate("/profile");
     }
     if (form.checkValidity() === false) {
       e.stopPropagation();
     }
+    // dispatch(getUserAction(account?.data?.id));
     setValidated(true);
   };
 

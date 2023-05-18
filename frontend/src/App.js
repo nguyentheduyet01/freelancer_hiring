@@ -18,6 +18,7 @@ import Profile from "./pages/profile/Profile";
 import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import { getUserAction } from "./reducer/actions/userAction";
+import ListPost from "./pages/profile/ListPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
             <Route path='capacity_profile' />
           </Route>
           <Route path='posts' element={<PostProject />} />
+          <Route path='myposts' element={<ListPost />} />
           <Route path='posts/:id' element={<PostDetail />} />
           <Route path='*' element={<NotFound />} />
         </Route>
