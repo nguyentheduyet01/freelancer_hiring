@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import avatar from "../../images/avatar.png";
-import pen from "../../images/pen.png";
-import placeholder from "../../images/placeholder.png";
-import email from "../../images/email.png";
-import phone from "../../images/phone-call.png";
-import "./Profile.css";
 import { Link } from "react-router-dom";
-import { getAllSkillUserAction } from "../../reducer/actions/userAction";
-import MetaData from "../../components/metadata/MetaData";
 import Loader from "../../components/Loader/Loader";
-import ChangePass from "../../components/setting/ChangePass";
+import MetaData from "../../components/metadata/MetaData";
 import Notification from "../../components/setting/Notification";
+import avatar from "../../images/avatar.png";
+import email from "../../images/email.png";
+import pen from "../../images/pen.png";
+import phone from "../../images/phone-call.png";
+import placeholder from "../../images/placeholder.png";
+import { getAllSkillUserAction } from "../../reducer/actions/userAction";
+import "./Profile.css";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const Profile = () => {
   ];
   useEffect(() => {
     dispatch(getAllSkillUserAction(user?.id));
-  }, [dispatch, user?.id]);
+  }, [dispatch, user]);
   return (
     <>
       <MetaData title='Profile' />

@@ -33,3 +33,13 @@ export const getAllSkillUserAction = createAsyncThunk("user/skill", async (id) =
   const { data } = await axios.get(`users/${id}/skill`);
   return data;
 });
+
+export const getAllPostUserAction = createAsyncThunk(
+  "user/posts",
+  async (id, { pagesize = 5, pageindex = 1 }) => {
+    const { data } = await axios.get(
+      `users/${id}/posts?pagesize=${pagesize}&pageindex=${pageindex}`,
+    );
+    return data;
+  },
+);

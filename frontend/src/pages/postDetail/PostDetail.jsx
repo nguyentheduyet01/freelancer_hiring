@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import MetaData from "../../components/metadata/MetaData";
+import avatar from "../../images/avatar.png";
 import budgeting from "../../images/budgeting.png";
 import calendar from "../../images/calendar.png";
 import hourglass from "../../images/hourglass.png";
 import placeholder from "../../images/placeholder.png";
-import user from "../../images/user.png";
 import wage from "../../images/wage.png";
 import working from "../../images/working.png";
 import { applyAction, getPostAction } from "../../reducer/actions/postAction";
+import { clearMessage } from "../../reducer/slice/postSlice";
 import paragraphFormat from "../../utils/paragraphFormat";
 import { showToastMessageSuccess } from "../../utils/toastify";
 import formatVi from "../../utils/vi";
 import formatVND from "./../../utils/formatVND";
 import "./PostDetail.css";
-import { clearMessage } from "../../reducer/slice/postSlice";
-import Loader from "../../components/Loader/Loader";
-import MetaData from "../../components/metadata/MetaData";
 
 const PostDetail = () => {
   const dispatch = useDispatch();
@@ -44,15 +44,15 @@ const PostDetail = () => {
   const handleApply = (e) => {
     setApply({
       ...apply,
+      userId: user?.id,
+      postId: post?.id,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(apply);
     dispatch(applyAction(apply));
-    // showToastMessageSuccess("thành công");
   };
 
   useEffect(() => {
@@ -76,11 +76,15 @@ const PostDetail = () => {
               <h4>{post?.title}</h4>
               <div className='' style={{ fontSize: "90%", fontWeight: "700" }}>
                 <div className='d-flex mt-3' style={{ width: "20%" }}>
-                  <img style={{ width: "32px", height: "32px" }} src={user} alt='user' />
+                  <img
+                    style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                    src={avatar}
+                    alt='user'
+                  />
                   <div style={{ marginLeft: "20px" }}>
                     Người đăng
                     <div className='infoProject'>
-                      <Link>the duyet</Link>
+                      <Link>{post?.name}</Link>
                     </div>
                   </div>
                 </div>

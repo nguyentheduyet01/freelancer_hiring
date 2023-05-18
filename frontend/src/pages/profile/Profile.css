@@ -52,3 +52,11 @@
   line-height: 30px;
   min-height: 37px !important;
 }
+
+.header{
+  /* background-color: #3399cc; */
+  line-height: 40px;
+  width: 360px !important;
+  justify-content: space-between;
+  padding: 5px;
+}

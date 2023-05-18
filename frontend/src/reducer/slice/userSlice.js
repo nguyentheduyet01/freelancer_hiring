@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getAllPostUserAction,
   getAllSkillUserAction,
   getAllUserAction,
   getUserAction,
@@ -67,6 +68,19 @@ const userSlice = createSlice({
       state.updateSuccess = true;
     },
     [updateUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [getAllPostUserAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getAllPostUserAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.posts = action.payload;
+    },
+    [getAllPostUserAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },
