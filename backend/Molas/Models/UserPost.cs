@@ -2,11 +2,13 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Molas.Models;
 
 public partial class UserPost
 {
+    [Key]
     public decimal? Salary { get; set; }
 
     public DateTime? CreatedAt { get; set; }

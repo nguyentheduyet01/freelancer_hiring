@@ -167,7 +167,6 @@ public partial class MolasDbContext : DbContext
         modelBuilder.Entity<UserPost>(entity =>
         {
             entity
-                .HasNoKey()
                 .ToTable("user_post");
 
             entity.Property(e => e.CreatedAt)
