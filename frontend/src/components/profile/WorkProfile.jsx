@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateUserAction } from "../../reducer/actions/userAction";
 import { clearMessage } from "../../reducer/slice/userSlice";
-import { showToastMessageSuccess } from "../../utils/toastify";
 import Loader from "../Loader/Loader";
 import { getAllSkillAction } from "./../../reducer/actions/skillAction";
 
@@ -21,7 +20,7 @@ const WorkProfile = () => {
   });
 
   const { skills } = useSelector((state) => state.skill);
-  const { user, updateSuccess, isLoad } = useSelector((state) => state.user);
+  const { user, isLoad } = useSelector((state) => state.user);
   const { decription, experince } = newUser;
 
   const options = skills.map((skill) => skill.name);
@@ -66,17 +65,13 @@ const WorkProfile = () => {
   ];
 
   useEffect(() => {
-    if (updateSuccess === true) {
-      showToastMessageSuccess("Cập nhật thành công");
-    }
-
     dispatch(clearMessage());
     setNewUser({
       decription: user?.decription,
       experince: user?.experince,
     });
     dispatch(getAllSkillAction());
-  }, [dispatch, user, updateSuccess]);
+  }, [dispatch, user]);
 
   return (
     <>

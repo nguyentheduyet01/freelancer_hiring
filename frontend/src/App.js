@@ -19,6 +19,7 @@ import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import { getUserAction } from "./reducer/actions/userAction";
 import ListPost from "./pages/profile/ListPost";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,17 +46,17 @@ function App() {
             <Route path='fulltime' />
           </Route>
           <Route path='freelancer' element={<FreelanceSearch />} />
-          <Route path='profile' element={<Profile />} />
-          <Route path='profile/setting' element={<Setting />}>
+          <Route path='profile' element={<PrivateRoute component={<Profile />} />} />
+          <Route path='profile/setting' element={<PrivateRoute component={<Setting />} />}>
             <Route path='password' />
           </Route>
-          <Route path='profile/update' element={<UpdateProfile />}>
+          <Route path='profile/update' element={<PrivateRoute component={<UpdateProfile />} />}>
             <Route path='work_profile' />
             <Route path='capacity_profile' />
           </Route>
           <Route path='posts' element={<PostProject />} />
-          <Route path='myposts' element={<ListPost />}>
-            <Route path='apply' element={<ListPost />} />
+          <Route path='myposts' element={<PrivateRoute component={<ListPost />} />}>
+            <Route path='apply' />
           </Route>
           <Route path='posts/:id' element={<PostDetail />} />
           <Route path='*' element={<NotFound />} />

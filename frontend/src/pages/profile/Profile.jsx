@@ -10,12 +10,14 @@ import email from "../../images/email.png";
 import pen from "../../images/pen.png";
 import phone from "../../images/phone-call.png";
 import placeholder from "../../images/placeholder.png";
-import { getAllSkillUserAction } from "../../reducer/actions/userAction";
+import { getAllSkillUserAction, getUserAction } from "../../reducer/actions/userAction";
 import "./Profile.css";
+import { showToastMessageSuccess } from "../../utils/toastify";
+import { clearMessage } from "../../reducer/slice/userSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { user, skills, isLoad } = useSelector((state) => state.user);
+  const { user, skills, isLoad, updateSuccess } = useSelector((state) => state.user);
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
   const exp = [
@@ -33,8 +35,13 @@ const Profile = () => {
     },
   ];
   useEffect(() => {
+    if (updateSuccess === true) {
+      showToastMessageSuccess("Cập nhật thành công");
+      dispatch(clearMessage());
+      dispatch(getUserAction(user?.id));
+    }
     dispatch(getAllSkillUserAction(user?.id));
-  }, [dispatch, user]);
+  }, [dispatch, user, updateSuccess]);
   return (
     <>
       <MetaData title='Profile' />
