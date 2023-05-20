@@ -6,6 +6,7 @@ import {
   getAllUserAction,
   getUserAction,
   updateUserAction,
+  userLogoutAction,
 } from "../actions/userAction";
 
 const userSlice = createSlice({
@@ -95,6 +96,19 @@ const userSlice = createSlice({
       state.received = action.payload;
     },
     [getAllReceivedPostAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [userLogoutAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [userLogoutAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.user = {};
+    },
+    [userLogoutAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.png";
 import { logoutAction } from "../../reducer/actions/accountAction";
+import { userLogoutAction } from "../../reducer/actions/userAction";
 
 const Avatar = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Avatar = () => {
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const handleLogout = () => {
     dispatch(logoutAction());
+    dispatch(userLogoutAction());
     navigate("/");
   };
 

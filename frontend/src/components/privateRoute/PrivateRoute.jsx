@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component }) => {
   const isLoggedIn = account?.isSuccess;
 
   if (isLoggedIn !== true) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/login' replace />;
   } else {
     return Component;
   }

@@ -35,7 +35,7 @@ const accountSlice = createSlice({
     [logoutAction.fulfilled]: (state, action) => {
       state.isLoad = false;
       state.error = false;
-      state.account = {};
+      state.account = "";
     },
     [logoutAction.rejected]: (state, action) => {
       state.isLoad = false;
