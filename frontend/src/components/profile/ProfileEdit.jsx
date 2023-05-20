@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.png";
 import { updateUserAction } from "../../reducer/actions/userAction";
 import { clearMessage } from "../../reducer/slice/userSlice";
-import { showToastMessageSuccess } from "../../utils/toastify";
 import Loader from "../Loader/Loader";
 import "./Profile.css";
 
@@ -49,10 +48,6 @@ const ProfileEdit = () => {
   };
 
   useEffect(() => {
-    if (updateSuccess === true) {
-      showToastMessageSuccess("Cập nhật thành công");
-    }
-
     dispatch(clearMessage());
     setNewUser({
       name: user?.name,
