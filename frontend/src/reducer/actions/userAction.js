@@ -43,3 +43,13 @@ export const getAllPostUserAction = createAsyncThunk(
     return data;
   },
 );
+
+export const getAllReceivedPostAction = createAsyncThunk(
+  "user/posts",
+  async (id, { pagesize = 5, pageindex = 1 }) => {
+    const { data } = await axios.get(
+      `users/${id}/received?pagesize=${pagesize}&pageindex=${pageindex}`,
+    );
+    return data;
+  },
+);

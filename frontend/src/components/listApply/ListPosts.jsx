@@ -31,7 +31,7 @@ const ListPosts = () => {
 
   return (
     <div>
-      <Tables posts={posts?.data} headers={headers} />
+      <Tables posts='post' headers={headers} />
     </div>
   );
 };

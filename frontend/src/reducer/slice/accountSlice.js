@@ -8,7 +8,12 @@ const initialState = {
 const accountSlice = createSlice({
   name: "account",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearMessage: (state, action) => {
+      state.changeSuccess = false;
+      state.message = "";
+    },
+  },
   extraReducers: {
     [loginAction.pending]: (state, action) => {
       state.isLoad = true;
@@ -45,6 +50,7 @@ const accountSlice = createSlice({
       state.isLoad = false;
       state.error = false;
       state.changeSuccess = true;
+      state.message = action.payload;
     },
     [changPassAction.rejected]: (state, action) => {
       state.isLoad = false;
@@ -55,6 +61,6 @@ const accountSlice = createSlice({
 });
 
 const accountReducer = accountSlice.reducer;
-export const { login, logout } = accountSlice.actions;
+export const { clearMessage } = accountSlice.actions;
 
 export default accountReducer;

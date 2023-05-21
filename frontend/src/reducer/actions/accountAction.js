@@ -13,11 +13,16 @@ export const loginAction = createAsyncThunk("account/login", async (account) => 
   return data;
 });
 
-export const logoutAction = createAsyncThunk("account/action", async () => {
+export const logoutAction = createAsyncThunk("account/logout", async () => {
   localStorage.setItem("account", JSON.stringify(""));
 });
 
-export const changPassAction = createAsyncThunk("account/password", async (id, pass) => {
-  const { data } = await axios.put(`authentication/changepassword/${id}`, pass);
-  return data;
+export const changPassAction = createAsyncThunk("account/password", async ({ id, pass }) => {
+  console.log(pass);
+  try {
+    const { data } = await axios.put(`authentication/changepassword?id=${id}`, pass);
+    return data;
+  } catch (e) {
+    return e.response.data.message;
+  }
 });
