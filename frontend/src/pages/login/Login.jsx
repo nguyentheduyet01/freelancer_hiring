@@ -12,6 +12,8 @@ const Login = () => {
   const [account, setAccount] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
+  const search = location.search.split("=")[1];
+
   const loginHandle = (e) => {
     setAccount({
       ...account,
@@ -26,15 +28,16 @@ const Login = () => {
   useEffect(() => {
     if (accountUser?.isSuccess) {
       showToastMessageSuccess("Đăng nhập thành công");
-      if (location.state?.from) {
-        navigate(location.state?.from);
+      if (search) {
+        navigate(`/${search}`);
+      } else {
+        navigate("/");
       }
-      navigate("/");
     }
     if (error === true) {
       showToastMessageError("Tài khoản hoặc mật khẩu sai");
     }
-  }, [accountUser, navigate, location, error]);
+  }, [accountUser, navigate, location, error, search]);
 
   return (
     <>

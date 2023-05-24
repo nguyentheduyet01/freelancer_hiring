@@ -61,24 +61,25 @@ const PostProject = () => {
   };
 
   const handleSubmit = (e) => {
-    if (account === "") {
-      navigate("/login?post");
-    }
-    const form = e.currentTarget;
     e.preventDefault();
+    if (account === "") {
+      navigate("/login?r=posts");
+    } else {
+      const form = e.currentTarget;
 
-    if (form.checkValidity() !== false) {
-      const newPost = {
-        ...post,
-        createdBy: account.data.id,
-      };
+      if (form.checkValidity() !== false) {
+        const newPost = {
+          ...post,
+          createdBy: account?.data?.id,
+        };
 
-      dispatch(createPostAction(newPost));
+        dispatch(createPostAction(newPost));
+      }
+      if (form.checkValidity() === false) {
+        e.stopPropagation();
+      }
+      setValidated(true);
     }
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    }
-    setValidated(true);
   };
 
   useEffect(() => {
@@ -213,13 +214,13 @@ const PostProject = () => {
                         {hts.map((item, index) => {
                           if (item.type === ht) {
                             return (
-                              <option key={index} selected value='1'>
+                              <option key={index} selected value={item.value}>
                                 {item.context}
                               </option>
                             );
                           }
                           return (
-                            <option key={index} value='1'>
+                            <option key={index} value={item.value}>
                               {item.context}
                             </option>
                           );

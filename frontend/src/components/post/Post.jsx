@@ -6,17 +6,16 @@ import "./Post.css";
 import formatVND from "../../utils/formatVND";
 
 const Post = ({ item, active }) => {
-  // 'cartPost'
   return (
     <div>
       <Card
         style={{ padding: "30px" }}
         className={`${active === "active" ? "cartPost active" : "cartPost"}`}
       >
-        <Link to={`posts/${item?.id}`} className='postLink'>
+        <Link to={`/posts/${item?.id}`} className='postLink'>
           <Card.Body>
             <Card.Title style={{ fontSize: "120%", lineHeight: "50px" }}>
-              <Link to='' className='linkPost'>
+              <Link to={`/posts/${item?.id}`} className='linkPost'>
                 {item?.title}
               </Link>
             </Card.Title>
@@ -25,7 +24,7 @@ const Post = ({ item, active }) => {
               style={{ fontSize: "100%" }}
             >
               <span>Ngân sách: {formatVND(item?.budget)}</span>
-              <span>Đã đăng {formatVi(item?.createdBy)}</span>
+              <span>Đã đăng: {formatVi(item?.createdAt)}</span>
             </Card.Subtitle>
             <Card.Text
               style={{

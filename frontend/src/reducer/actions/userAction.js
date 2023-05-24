@@ -53,3 +53,7 @@ export const getAllReceivedPostAction = createAsyncThunk(
     return data;
   },
 );
+
+export const userLogoutAction = createAsyncThunk("user/logout", async () => {
+  localStorage.setItem("account", JSON.stringify(""));
+});
