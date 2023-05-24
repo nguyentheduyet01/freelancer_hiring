@@ -60,6 +60,48 @@ namespace Molas.Services
             }
 
         }
+        public async Task<LoginOutput> AdminLogin(string username, string password)
+        {
+            try
+            {
+                LoginOutput res = new LoginOutput();
+                var account = await _repository.FindByUsernameAsync(username);
+                if (account == null)
+                {
+                    res.isSuccess = false;
+                    res.message = "Tài khoản không tồn tại! ";
+                    return res;
+                }
+                else
+                {
+                    if (account.Password == password)
+                    {
+                        if(account.RoleId != 2)
+                        {
+                            res.isSuccess = false;
+                            res.message = "Tài khoản không có quyền truy cập!";
+                            return res;
+                        }
+                        var tokenStr = GenerateJWT(account);
+                        res.isSuccess = true;
+                        res.token = tokenStr;
+                        res.data = await _users.GetUserByIdAccount(account.Id);
+                        return res;
+                    }
+
+                    res.isSuccess = false;
+                    res.message = "Mật khẩu không chính xác!";
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex?.ToString());
+                throw new Exception();
+            }
+
+        }
+
         private string GenerateJWT(Account account)
         {
             var issuer = _config["Jwt:Issuer"];

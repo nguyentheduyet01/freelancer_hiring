@@ -21,8 +21,13 @@ namespace Molas.DTO
         public int? AccountId { get; set; }
 
         public string Address { get; set; }
+
+        public string Decription { get; set; }
+
         public int? Status { get; set; }
-        
+
+        public string Introdue { get; set; }
+
     }
     public class UserOutput : UserDTO
     {
