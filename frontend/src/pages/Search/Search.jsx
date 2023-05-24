@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Filter from "../../components/filter/Filter";
 import Post from "../../components/post/Post";
 import wireless from "../../images/wireless.png";
+import { getAllPostAction } from "../../reducer/actions/postAction";
 import "./Search.css";
 
 const Search = () => {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.post);
+  const { data } = posts;
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
   let ht = location.pathname.split("/")[2] || "all";
@@ -37,6 +42,10 @@ const Search = () => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
+  }, [dispatch]);
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
@@ -82,9 +91,13 @@ const Search = () => {
             <div></div>
           </div>
           <div className='mb-3'>
-            <Post active='active' />
-            <Post />
-            <Post />
+            {data?.length !== 0 &&
+              data?.map((item, index) => {
+                if (index === 0) {
+                  return <Post key={index} item={item} active='active' />;
+                }
+                return <Post key={index} item={item} />;
+              })}
           </div>
           <div className='paginationBox'>
             <Pagination
