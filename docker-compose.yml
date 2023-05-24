@@ -21,9 +21,9 @@ services:
       - my-network
 
   backend:
-    image: backend:latest
+    image: sizzan/backend
     ports:
-      - "80:80"
+      - "8080:80"
     environment:
       DB_HOST: mssql
 
@@ -35,9 +35,9 @@ services:
       - my-network
 
   frontend:
-    image: frontend:latest
+    image: sizzan/frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - mssql
       - backend
