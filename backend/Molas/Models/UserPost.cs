@@ -9,11 +9,12 @@ namespace Molas.Models;
 public partial class UserPost
 {
     [Key]
+    public int? UserId { get; set; }
+
     public decimal? Salary { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
-    public int? UserId { get; set; }
 
     public int? PostId { get; set; }
 

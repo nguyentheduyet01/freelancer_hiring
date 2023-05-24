@@ -7,6 +7,7 @@ namespace Molas.Services.Interfaces
     public interface IAuthenticationService
     {
         Task<LoginOutput> Login(string username, string password);
+        Task<LoginOutput> AdminLogin(string username, string password);
         Task<OutputDTO>  CreateAccount(string username, string password, int role);
     }
 }

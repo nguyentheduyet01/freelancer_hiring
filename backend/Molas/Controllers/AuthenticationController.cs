@@ -37,6 +37,23 @@ namespace Molas.Controllers
             }
             return Ok(acc);
         }
+        [Route("adminlogin")]
+        [HttpPost]
+        public async Task<ActionResult<LoginOutput>> AdminLogin([FromBody] LoginInput account)
+        {
+            var acc = await _authenticationService.AdminLogin(account.username, account.password);
+
+            if (acc == null)
+            {
+                return NotFound();
+            }
+            else if(acc.isSuccess == false)
+            {
+                return BadRequest(acc.message);
+            }
+            return Ok(acc);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetCategory(int id)
         {
