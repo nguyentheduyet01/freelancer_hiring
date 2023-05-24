@@ -8,6 +8,7 @@ import SkillFreelancer from "./SkillFreelancer";
 
 const Freelancer = () => {
   const { users, isLoad } = useSelector((state) => state.user);
+  console.log(users);
   return (
     <>
       <MetaData title='FreelancerSearch' />
@@ -65,7 +66,7 @@ const Freelancer = () => {
                       WebkitBoxOrient: "vertical",
                     }}
                   >
-                    {user?.decription}.
+                    {user?.decription}
                   </Card.Text>
                   <SkillFreelancer skills={user?.skills} />
                 </div>

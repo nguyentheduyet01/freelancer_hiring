@@ -66,7 +66,7 @@ const Filter = () => {
               <span className='checkmark'></span>
             </label>
             <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
-              nhỏ hơn 1 triệu
+              Nhỏ hơn 1 triệu
             </div>
           </div>
           <div className='d-flex'>
@@ -75,7 +75,7 @@ const Filter = () => {
               <span className='checkmark'></span>
             </label>
             <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
-              nhỏ hơn 1 triệu
+              Lớn hơn 1 triệu - Nhỏ hơn 2 triệu
             </div>
           </div>
           <div className='d-flex'>
@@ -84,7 +84,7 @@ const Filter = () => {
               <span className='checkmark'></span>
             </label>
             <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
-              nhỏ hơn 1 triệu
+              Lớn hơn 2 triệu - Nhỏ hơn 3 triệu
             </div>
           </div>
           <div className='d-flex'>
@@ -93,7 +93,16 @@ const Filter = () => {
               <span className='checkmark'></span>
             </label>
             <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
-              nhỏ hơn 1 triệu
+              Lớn hơn 3 triệu - Nhỏ hơn 4 triệu
+            </div>
+          </div>
+          <div className='d-flex'>
+            <label className='label d-flex align-items-center'>
+              <input type='checkbox' />
+              <span className='checkmark'></span>
+            </label>
+            <div className='d-flex align-items-start' style={{ lineHeight: "33px" }}>
+              Lớn hơn 4 triệu
             </div>
           </div>
           <hr />
