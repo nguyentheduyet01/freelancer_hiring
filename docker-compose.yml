@@ -46,6 +46,18 @@ services:
     networks:
       - my-network
 
+  admin:
+    image: admin
+    ports:
+      - "4000:80"
+    depends_on:
+      - mssql
+      - backend
+    restart: always
+
+    networks:
+      - my-network
+
 volumes:
   db:
     driver: local
