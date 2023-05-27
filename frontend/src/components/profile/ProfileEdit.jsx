@@ -117,6 +117,7 @@ const ProfileEdit = () => {
               value={email}
               placeholder='Nhập Email'
               onChange={handleUser}
+              disabled
             />
             <Form.Control.Feedback type='invalid'>Vui lòng nhập trường này</Form.Control.Feedback>
           </Form.Group>
