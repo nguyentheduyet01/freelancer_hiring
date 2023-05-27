@@ -60,6 +60,11 @@ const Avatar = () => {
                 Cài đặt chung
               </Link>
             </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to='myposts' style={{ textDecoration: "none", color: "black" }}>
+                Quản lý bài đăng
+              </Link>
+            </Dropdown.Item>
             <Dropdown.Item onClick={handleLogout}>Đăng xuất</Dropdown.Item>
             {/* <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item> */}
           </Dropdown>

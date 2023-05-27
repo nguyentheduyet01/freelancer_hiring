@@ -37,6 +37,7 @@ const Search = () => {
   ];
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
+    // dispatch(getAllPostAction({ pagesize: 5, pageindex: posts?.pageIndex || 1 }));
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -44,8 +45,8 @@ const Search = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
-  }, [dispatch]);
+    dispatch(getAllPostAction({ pagesize: 5, pageindex: currentPage }));
+  }, [dispatch, currentPage]);
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
@@ -102,8 +103,8 @@ const Search = () => {
           <div className='paginationBox'>
             <Pagination
               activePage={currentPage}
-              itemsCountPerPage={2}
-              totalItemsCount={10}
+              itemsCountPerPage={1}
+              totalItemsCount={posts?.totalPage || 5}
               onChange={setCurrentPageNo}
               nextPageText={<ChevronRight />}
               prevPageText={<ChevronLeft />}
