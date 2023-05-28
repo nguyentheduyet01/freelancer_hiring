@@ -65,7 +65,7 @@ const Login = () => {
                     onChange={loginHandle}
                   />
                   <label className='form-label' htmlFor='form1Example13'>
-                    Email address
+                    Email
                   </label>
                 </div>
 
@@ -78,7 +78,7 @@ const Login = () => {
                     onChange={loginHandle}
                   />
                   <label className='form-label' htmlFor='form1Example23'>
-                    Password
+                    Mật khẩu
                   </label>
                 </div>
 
@@ -92,10 +92,10 @@ const Login = () => {
                     />
                     <label className='form-check-label' htmlFor='form1Example3'>
                       {" "}
-                      Remember me{" "}
+                      Nhớ{" "}
                     </label>
                   </div>
-                  <span>Forgot password?</span>
+                  <span>Quên mật khẩu?</span>
                 </div>
 
                 <button

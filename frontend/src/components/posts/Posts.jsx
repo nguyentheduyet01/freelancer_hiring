@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../post/Post";
 import { getAllPostAction } from "./../../reducer/actions/postAction";
@@ -7,14 +7,16 @@ import "./Posts.css";
 const Posts = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
+  const [currentPage, setCurrentPage] = useState(5);
   const { data } = posts;
+
   const handleClick = () => {
-    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
+    setCurrentPage(currentPage + 5);
   };
 
   useEffect(() => {
-    dispatch(getAllPostAction({ pagesize: 5, pageindex: 1 }));
-  }, [dispatch]);
+    dispatch(getAllPostAction({ pagesize: currentPage, pageindex: 1 }));
+  }, [dispatch, currentPage]);
   return (
     <>
       {data?.length !== 0 &&
