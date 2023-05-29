@@ -54,6 +54,11 @@ export const getAllReceivedPostAction = createAsyncThunk(
   },
 );
 
+export const statusUserAction = createAsyncThunk("user/statusUser", async ({ idUser, status }) => {
+  const { data } = await axios.get(`users/changestatus?idUser=${idUser}&status=${status}`);
+  return data;
+});
+
 export const userLogoutAction = createAsyncThunk("user/logout", async () => {
   localStorage.setItem("account", JSON.stringify(""));
 });

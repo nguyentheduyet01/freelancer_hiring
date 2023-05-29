@@ -5,6 +5,7 @@ import {
   getAllSkillUserAction,
   getAllUserAction,
   getUserAction,
+  statusUserAction,
   updateUserAction,
   userLogoutAction,
 } from "../actions/userAction";
@@ -18,6 +19,7 @@ const userSlice = createSlice({
   reducers: {
     clearMessage: (state, action) => {
       state.updateSuccess = false;
+      state.statusChange = false;
     },
   },
   extraReducers: {
@@ -98,6 +100,20 @@ const userSlice = createSlice({
     [getAllReceivedPostAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
+    },
+    [statusUserAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [statusUserAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.statusChange = true;
+    },
+    [statusUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+      state.statusChange = false;
     },
     [userLogoutAction.pending]: (state, action) => {
       state.isLoad = true;

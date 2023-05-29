@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +17,8 @@ import { clearMessage } from "../../reducer/slice/userSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { user, skills, isLoad, updateSuccess } = useSelector((state) => state.user);
+  const [status, setStatus] = useState({ status: "" });
+  const { user, skills, isLoad, updateSuccess, statusChange } = useSelector((state) => state.user);
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
   const exp = [
@@ -35,13 +36,13 @@ const Profile = () => {
     },
   ];
   useEffect(() => {
-    if (updateSuccess === true) {
+    if (updateSuccess === true || statusChange === true) {
       showToastMessageSuccess("Cập nhật thành công");
       dispatch(clearMessage());
       dispatch(getUserAction(user?.id));
     }
     dispatch(getAllSkillUserAction(user?.id));
-  }, [dispatch, user, updateSuccess]);
+  }, [dispatch, user, updateSuccess, statusChange]);
   return (
     <>
       <MetaData title='Profile' />
@@ -104,7 +105,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <Notification />
+                <Notification status={status} setStatus={setStatus} />
               </div>
             </Col>
           </Row>

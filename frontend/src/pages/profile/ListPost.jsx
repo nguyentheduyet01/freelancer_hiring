@@ -18,9 +18,9 @@ const ListPost = () => {
       link: "",
     },
     {
-      value: "apply",
+      value: "applied",
       context: "Danh sách ứng tuyển",
-      link: "/myposts/apply",
+      link: "/myposts/applied",
     },
   ];
 

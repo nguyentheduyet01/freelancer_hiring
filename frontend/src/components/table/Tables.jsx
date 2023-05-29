@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Offcanvas, Table } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import formatVND from "../../utils/formatVND";
 import Loader from "../Loader/Loader";
 import "./Table.css";
 
 const Tables = ({ post, headers }) => {
+  const dispatch = useDispatch();
   const { posts, isLoad, received } = useSelector((state) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isShow, setIsShow] = useState(false);
+
+  const handleClose = () => setIsShow(false);
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -20,7 +24,9 @@ const Tables = ({ post, headers }) => {
       behavior: "smooth",
     });
   };
-
+  const handleClick = (id) => {
+    setIsShow(true);
+  };
   return (
     <>
       {isLoad ? (
@@ -52,7 +58,6 @@ const Tables = ({ post, headers }) => {
                       <td>{formatVND(item?.budget)}</td>
                       <td>{item?.status === 0 ? "Đang duyệt" : "Đã duyệt"}</td>
                     </tr>
-                    // <div>{item?.title}</div>
                   ))}
               </tbody>
             </Table>
@@ -66,8 +71,8 @@ const Tables = ({ post, headers }) => {
               <tbody>
                 {received &&
                   received?.data?.map((item, index) => (
-                    <tr key={item?.id}>
-                      <td>{index}</td>
+                    <tr key={item?.id} onClick={() => handleClick(item?.id)}>
+                      <td>{index + 1}</td>
                       <td>
                         <Link to={`/posts/${item?.id}`}>{item?.title}</Link>
                       </td>
@@ -81,7 +86,6 @@ const Tables = ({ post, headers }) => {
                       <td>{formatVND(item?.budget)}</td>
                       <td>{item?.status === 0 ? "Đang duyệt" : "Đã duyệt"}</td>
                     </tr>
-                    // <div>{item?.title}</div>
                   ))}
               </tbody>
             </Table>
@@ -106,6 +110,14 @@ const Tables = ({ post, headers }) => {
           </div>
         </>
       )}
+      <>
+        <Offcanvas show={isShow} onHide={handleClose} placement='end' style={{ width: "55%" }}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body></Offcanvas.Body>
+        </Offcanvas>
+      </>
     </>
   );
 };
