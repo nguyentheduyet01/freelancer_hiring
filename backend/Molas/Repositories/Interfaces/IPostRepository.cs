@@ -9,5 +9,6 @@ namespace Molas.Repositories.Interfaces
         Task<PostDTO> GetPostByIdAsync(int id);
         Task<bool> PostPostAsync(PostDTO post);
         Task<bool> ApplyPost(UserPostDTO userPost);
+        Task<ResultDTO> GetListUserApplied(int id);
     }
 }

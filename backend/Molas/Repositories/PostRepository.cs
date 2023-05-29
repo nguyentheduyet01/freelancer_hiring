@@ -4,6 +4,7 @@ using Molas.DTO;
 using Molas.Models;
 using Molas.Molas;
 using Molas.Repositories.Interfaces;
+using System.Drawing.Printing;
 using static Molas.DTO.CommonDTO;
 
 namespace Molas.Repositories
@@ -49,17 +50,19 @@ namespace Molas.Repositories
                                where cp.CategoryId == input.category_id
                                select a;
                     result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();
-                    res = await pots.Skip(input.pageindex-1)
-                    .Take(input.pagesize)
+                    res = await pots.Skip((int)((input.pageindex - 1) * input.pagesize))
+                    .Distinct()
                     .Where(s => s.Status == 1)
+                    .Take(input.pagesize)
                     .ToListAsync();
                 }
                 else
                 {
                     result.totalCount = await _dbContext.Posts.Where(s => s.Status == 1).CountAsync();
-                     res = await _dbContext.Posts.Skip(input.pageindex -1)
-                    .Take(input.pagesize)
+                     res = await _dbContext.Posts.Skip((int)((input.pageindex - 1) * input.pagesize))
+                    .Distinct()
                     .Where(s => s.Status == 1)
+                    .Take(input.pagesize)
                     .ToListAsync();
                 }
                 result.pageSize = input.pagesize;
@@ -73,6 +76,17 @@ namespace Molas.Repositories
                 _logger.LogError(ex,"can not get list post!");
                 throw;
             }
+        }
+
+        public async Task<ResultDTO> GetListUserApplied(int id)
+        {
+            var pots = from a in _dbContext.Users
+                       join cp in _dbContext.UserPost on a.Id equals cp.UserId
+                       where cp.PostId == id
+                       select a;
+            var result = new ResultDTO();
+            result.data = pots.Distinct();
+            return result;
         }
 
         public async Task<PostDTO> GetPostByIdAsync(int id)

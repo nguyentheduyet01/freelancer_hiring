@@ -102,12 +102,13 @@ namespace Molas.Repositories
                 pageindex = 1;
             }
             ResultDTO result = new ResultDTO();
-            var res = new List<FileData>();
             try
             {
-                var cv = _dataContext.FileData.Where(n => n.UserId == id && n.Type == 2);
+                var cv = from c in _dataContext.FileData
+                         where c.UserId == id
+                         select new {c.FileName,c.Id,c.Title};
                 result.totalCount = await cv.Distinct().CountAsync();
-                res = await cv.Skip((int)(pageindex - 1))
+                var res = await cv.Skip((int)((pageindex - 1) * pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .ToListAsync();
@@ -139,7 +140,7 @@ namespace Molas.Repositories
             {
                 var pots = _dataContext.Users.Where(n => n.Status == 1);
                 result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
-                res = await pots.Skip((int)(pageindex - 1))
+                res = await pots.Skip((int)((pageindex - 1) * pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .Where(s => s.Status == 1)
@@ -184,7 +185,7 @@ namespace Molas.Repositories
                            where userpost.UserId == idUser
                            select new { post, userpost };
                 result.totalCount = await pots.Where(s => s.post.Status == 1).Distinct().CountAsync();
-                result.data = await pots.Skip((int)(pageindex - 1))
+                result.data = await pots.Skip((int)((pageindex - 1) * pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .Where(s => s.post.Status == 1)
@@ -217,7 +218,7 @@ namespace Molas.Repositories
             {
                 var pots = _dataContext.Posts.Where(n => n.CreatedBy == id);
                 result.totalCount = await pots.Where(s => s.Status == 1).Distinct().CountAsync();
-                res = await pots.Skip((int)(pageindex - 1))
+                res = await pots.Skip((int)(int)((pageindex - 1) * pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .Where(s => s.Status == 1)
@@ -261,7 +262,7 @@ namespace Molas.Repositories
                 //        us.Id_User
                 //    }).Where(n => n.Id_User == id);
                 result.totalCount = await skills.Distinct().CountAsync();
-                var res = await skills.Skip((int)(pageindex -1))
+                var res = await skills.Skip((int)((pageindex -1)*pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .ToListAsync();
