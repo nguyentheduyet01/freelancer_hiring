@@ -168,6 +168,7 @@ public partial class MolasDbContext : DbContext
         {
             entity
                 .ToTable("user_post");
+            entity.Property(e => e.Id).HasColumnName("id");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
