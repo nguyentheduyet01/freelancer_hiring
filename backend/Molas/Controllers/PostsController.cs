@@ -71,6 +71,24 @@ namespace Molas.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("checkapply")]
+        public async Task<ActionResult> CheckApply(int PostId, int UserId)
+        {
+            try
+            {
+                var res = await _context.UserPost.Where(n => n.UserId == UserId && n.PostId == PostId).FirstOrDefaultAsync();
+                if (res != null)
+                {
+                return Ok(true);
+                }
+                return Ok(false);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
@@ -79,6 +97,19 @@ namespace Molas.Controllers
             try
             {
                 var res = await _postService.GetPostByIdAsync(id);
+                return res;
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+        [HttpGet("{id}/users")]
+        public async Task<ActionResult<ResultDTO>> GetListUserApplied(int id)
+        {
+            try
+            {
+                var res = await _postService.GetListUserApplied(id);
                 return res;
             }
             catch 

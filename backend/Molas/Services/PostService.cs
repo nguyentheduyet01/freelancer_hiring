@@ -22,6 +22,11 @@ namespace Molas.Services
            
         }
 
+        public async Task<ResultDTO> GetListUserApplied(int id)
+        {
+            return await _postRepository.GetListUserApplied(id);
+        }
+
         public Task<PostDTO> GetPostByIdAsync(int id)
         {
            return _postRepository.GetPostByIdAsync(id);
