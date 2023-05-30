@@ -184,12 +184,29 @@ namespace Molas.Repositories
                            join userpost in _dataContext.UserPost on post.Id equals userpost.PostId
                            where userpost.UserId == idUser
                            select new { post, userpost };
-                result.totalCount = await pots.Where(s => s.post.Status == 1).Distinct().CountAsync();
-                result.data = await pots.Skip((int)((pageindex - 1) * pagesize))
+                 var data = await pots.Skip((int)((pageindex - 1) * pagesize))
                 .Distinct()
                 .Take((int)pagesize)
                 .Where(s => s.post.Status == 1)
+                .OrderBy(s => s.post.Id)
                 .ToListAsync();
+                var sortedList = data.ToList();
+                var resultList = new List<object>();
+                for (int i = 0; i < data.Count - 1; i++)
+                {
+                    
+                    if (sortedList[i].post != sortedList[i + 1].post)
+                    {
+                        resultList.Add(sortedList[i]);
+                    }
+                    if ( i == data.Count-2)
+                    {
+                        resultList.Add(sortedList[i+1]);
+                    }
+                    
+                }
+                result.totalCount = resultList.Count;
+                result.data  = resultList;
                 result.pageSize = pagesize;
                 result.pageIndex = pageindex;
                 result.totalPage = (result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);
