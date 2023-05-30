@@ -6,6 +6,7 @@ using Molas.Molas;
 using Molas.Repositories.Interfaces;
 using System.Drawing.Printing;
 using static Molas.DTO.CommonDTO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Molas.Repositories
 {
@@ -80,12 +81,26 @@ namespace Molas.Repositories
 
         public async Task<ResultDTO> GetListUserApplied(int id)
         {
-            var pots = from a in _dbContext.Users
-                       join cp in _dbContext.UserPost on a.Id equals cp.UserId
-                       where cp.PostId == id
-                       select a;
+            var pots = from user in _dbContext.Users
+                       join userpost in _dbContext.UserPost on user.Id equals userpost.UserId
+                       where userpost.PostId == id
+                       select new {user, userpost};
+            var data = pots.ToList();
+            var resultList = new List<object>();
+            for (int i = 0; i < data.Count - 1; i++)
+            {
+                if (data[i].user != data[i + 1].user)
+                {
+                    resultList.Add(data[i]);
+                }
+                if (i == data.Count - 2)
+                {
+                    resultList.Add(data[i + 1]);
+                }
+
+            }
             var result = new ResultDTO();
-            result.data = pots.Distinct();
+            result.data = resultList;
             return result;
         }
 
