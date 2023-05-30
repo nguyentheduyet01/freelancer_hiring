@@ -4,6 +4,7 @@ import {
   createPostAction,
   getAllPostAction,
   getPostAction,
+  getUserApplyPostAction,
 } from "../actions/postAction";
 
 const postSlice = createSlice({
@@ -72,6 +73,19 @@ const postSlice = createSlice({
       state.applied = action.payload;
     },
     [applyAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [getUserApplyPostAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getUserApplyPostAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.user = action.payload;
+    },
+    [getUserApplyPostAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

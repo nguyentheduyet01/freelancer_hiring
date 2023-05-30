@@ -84,7 +84,7 @@ const PostDetail = () => {
                   <div style={{ marginLeft: "20px" }}>
                     Người đăng
                     <div className='infoProject'>
-                      <Link>{post?.name}</Link>
+                      <Link to={`/freelancer/${user?.id}`}>{post?.name}</Link>
                     </div>
                   </div>
                 </div>
@@ -252,7 +252,12 @@ const PostDetail = () => {
                         <Form.Control type='file' onChange={handleApply} name='' />
                       </div>
                     </Form.Group>
-                    <Button variant='warning' type='submit' style={{ width: "100%" }}>
+                    <Button
+                      variant='warning'
+                      type='submit'
+                      style={{ width: "100%" }}
+                      disabled={day > 0 ? false : true}
+                    >
                       Gửi chào giá
                     </Button>
                   </Col>

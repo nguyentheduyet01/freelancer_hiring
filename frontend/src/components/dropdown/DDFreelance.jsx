@@ -39,7 +39,7 @@ const DDFreelance = () => {
         },
         {
           subtitle: "Tìm theo freelancer",
-          link: "freelancer",
+          link: "freelancer/search",
         },
         {
           subtitle: "Tìm theo dự án đã làm",

@@ -52,8 +52,11 @@
 
 .pagination>li{
   /* color: white !important; */
-  width: 20px;
+  width: 22px;
   text-align: center  ;
+}
+.pagination>li>a{
+  text-decoration: none;
 }
 /* .linkSkill{
   color: rgb(233, 229, 229);

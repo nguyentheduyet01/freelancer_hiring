@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import MetaData from "../../components/metadata/MetaData";
-import Notification from "../../components/setting/Notification";
 import avatar from "../../images/avatar.png";
 import email from "../../images/email.png";
 import pen from "../../images/pen.png";
 import phone from "../../images/phone-call.png";
 import placeholder from "../../images/placeholder.png";
-import { getAllSkillUserAction, getUserAction } from "../../reducer/actions/userAction";
-import "./Profile.css";
-import { showToastMessageSuccess } from "../../utils/toastify";
-import { clearMessage } from "../../reducer/slice/userSlice";
+import {
+  getAllSkillUserAction,
+  getFreelancerAction,
+  getUserAction,
+} from "../../reducer/actions/userAction";
+import "./Freelancer.css";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [status, setStatus] = useState({ status: "" });
-  const { user, skills, isLoad, updateSuccess, statusChange } = useSelector((state) => state.user);
+  const location = useLocation();
+  const { freelancer: user, skills, isLoad } = useSelector((state) => state.user);
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
+  const id = location.pathname.split("/")[2];
   const exp = [
     {
       value: "1",
@@ -36,13 +38,9 @@ const Profile = () => {
     },
   ];
   useEffect(() => {
-    if (updateSuccess === true || statusChange === true) {
-      showToastMessageSuccess("Cập nhật thành công");
-      dispatch(clearMessage());
-      dispatch(getUserAction(user?.id));
-    }
-    dispatch(getAllSkillUserAction(user?.id));
-  }, [dispatch, user, updateSuccess, statusChange]);
+    dispatch(getFreelancerAction(id));
+    dispatch(getAllSkillUserAction(id));
+  }, [dispatch, id]);
   return (
     <>
       <MetaData title='Profile' />
@@ -105,7 +103,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <Notification status={status} setStatus={setStatus} />
+                {/* <Notification status={status} setStatus={setStatus} /> */}
               </div>
             </Col>
           </Row>

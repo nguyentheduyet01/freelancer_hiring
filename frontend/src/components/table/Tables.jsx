@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Offcanvas, Table } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import formatVND from "../../utils/formatVND";
 import Loader from "../Loader/Loader";
 import "./Table.css";
+import { getUserApplyPostAction } from "../../reducer/actions/postAction";
 
 const Tables = ({ post, headers }) => {
+  const dispatch = useDispatch();
   const { posts, isLoad, received } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.post);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isShow, setIsShow] = useState(false);
+  // const { data } = user;
+  const handleClose = () => setIsShow(false);
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -20,7 +26,10 @@ const Tables = ({ post, headers }) => {
       behavior: "smooth",
     });
   };
-
+  const handleClick = (id) => {
+    setIsShow(true);
+    dispatch(getUserApplyPostAction(id));
+  };
   return (
     <>
       {isLoad ? (
@@ -37,8 +46,8 @@ const Tables = ({ post, headers }) => {
               <tbody>
                 {posts &&
                   posts?.data?.map((item, index) => (
-                    <tr key={item?.id}>
-                      <td>{index}</td>
+                    <tr key={item?.id} onClick={() => handleClick(item?.id)}>
+                      <td>{index + 1}</td>
                       <td>
                         <Link to={`/posts/${item?.id}`}>{item?.title}</Link>
                       </td>
@@ -52,7 +61,6 @@ const Tables = ({ post, headers }) => {
                       <td>{formatVND(item?.budget)}</td>
                       <td>{item?.status === 0 ? "Đang duyệt" : "Đã duyệt"}</td>
                     </tr>
-                    // <div>{item?.title}</div>
                   ))}
               </tbody>
             </Table>
@@ -67,9 +75,9 @@ const Tables = ({ post, headers }) => {
                 {received &&
                   received?.data?.map((item, index) => (
                     <tr key={item?.id}>
-                      <td>{index}</td>
+                      <td>{index + 1}</td>
                       <td>
-                        <Link to={`/posts/${item?.id}`}>{item?.title}</Link>
+                        <Link to={`/posts/${item?.post?.id}`}>{item?.post?.title}</Link>
                       </td>
                       <td>
                         {item?.workingMethod === 1
@@ -78,10 +86,10 @@ const Tables = ({ post, headers }) => {
                           ? "Việc làm toàn thời gian"
                           : "Việc làm theo dự án"}
                       </td>
-                      <td>{formatVND(item?.budget)}</td>
+                      <td>{item?.userpost?.intendTime}</td>
+                      <td>{formatVND(item?.userpost?.salary)}</td>
                       <td>{item?.status === 0 ? "Đang duyệt" : "Đã duyệt"}</td>
                     </tr>
-                    // <div>{item?.title}</div>
                   ))}
               </tbody>
             </Table>
@@ -106,6 +114,40 @@ const Tables = ({ post, headers }) => {
           </div>
         </>
       )}
+      <>
+        <Offcanvas show={isShow} onHide={handleClose} placement='end' style={{ width: "55%" }}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Table responsive className='mt-3'>
+              <thead>
+                <tr>
+                  <th>stt</th>
+                  <th>Người ứng tuyển</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Giá thương lượng</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user?.data &&
+                  user?.data?.map((item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <Link to={`/freelancer/${item?.user?.id}`}>{item?.user?.name}</Link>
+                      </td>
+                      <td>{item?.user?.phone}</td>
+                      <td>{item?.user?.email}</td>
+                      <td>{formatVND(item?.userpost?.salary)}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </Offcanvas.Body>
+        </Offcanvas>
+      </>
     </>
   );
 };
