@@ -4,6 +4,7 @@ import {
   getAllReceivedPostAction,
   getAllSkillUserAction,
   getAllUserAction,
+  getFreelancerAction,
   getUserAction,
   statusUserAction,
   updateUserAction,
@@ -33,6 +34,19 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     [getUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [getFreelancerAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getFreelancerAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.freelancer = action.payload;
+    },
+    [getFreelancerAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

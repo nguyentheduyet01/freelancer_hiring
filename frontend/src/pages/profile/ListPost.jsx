@@ -32,12 +32,8 @@ const ListPost = () => {
           {items.map((item, index) => {
             if (ht === item.value) {
               return (
-                <div className='active'>
-                  <Link
-                    style={{ color: "black", textDecoration: "none" }}
-                    to={item.link}
-                    key={index}
-                  >
+                <div className='active' key={index}>
+                  <Link style={{ color: "black", textDecoration: "none" }} to={item.link}>
                     {item.context}
                   </Link>
                 </div>
