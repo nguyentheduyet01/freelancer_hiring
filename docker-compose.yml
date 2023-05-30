@@ -47,7 +47,7 @@ services:
       - my-network
 
   admin:
-    image: admin
+    image: sizzan/admin
     ports:
       - "4000:80"
     depends_on:

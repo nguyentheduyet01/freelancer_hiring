@@ -5,10 +5,10 @@ import avatar from "../../images/avatar.png";
 import Loader from "../Loader/Loader";
 import MetaData from "../metadata/MetaData";
 import SkillFreelancer from "./SkillFreelancer";
+import { Link } from "react-router-dom";
 
 const Freelancer = () => {
   const { users, isLoad } = useSelector((state) => state.user);
-  console.log(users);
   return (
     <>
       <MetaData title='FreelancerSearch' />
@@ -21,11 +21,13 @@ const Freelancer = () => {
               <Row className='px-5 py-4 m-0 freelancerBox border' key={index}>
                 <div className='d-flex justify-content-between align-items-center'>
                   <div className='d-flex'>
-                    <img
-                      src={avatar}
-                      alt='avatar.png'
-                      style={{ width: "70px", height: "70px", borderRadius: "50%" }}
-                    />
+                    <Link to={`/freelancer/${user?.id}`}>
+                      <img
+                        src={avatar}
+                        alt='avatar.png'
+                        style={{ width: "70px", height: "70px", borderRadius: "50%" }}
+                      />
+                    </Link>
                     <div
                       className='d-flex flex-column justify-content-center'
                       style={{ marginLeft: "10px", fontSize: "92%", fontWeight: "500" }}
@@ -47,12 +49,14 @@ const Freelancer = () => {
                     </div>
                   </div>
                   <div>
-                    <button
-                      className='btnSearch'
-                      style={{ width: "auto", height: "40px", borderRadius: "0" }}
-                    >
-                      Liên hệ trực tiếp
-                    </button>
+                    <Link to={`/freelancer/${user?.id}`}>
+                      <button
+                        className='btnSearch'
+                        style={{ width: "auto", height: "40px", borderRadius: "0" }}
+                      >
+                        Liên hệ trực tiếp
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className='mt-3'>

@@ -7,6 +7,7 @@ import "./App.css";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import MetaData from "./components/metadata/MetaData";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import NotFound from "./pages/NotFound/NotFound";
 import FreelanceSearch from "./pages/Search/FreelanceSearch";
 import Search from "./pages/Search/Search";
@@ -14,12 +15,12 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import PostDetail from "./pages/postDetail/PostDetail";
 import PostProject from "./pages/postProject/PostProject";
+import ListPost from "./pages/profile/ListPost";
 import Profile from "./pages/profile/Profile";
 import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import { getUserAction } from "./reducer/actions/userAction";
-import ListPost from "./pages/profile/ListPost";
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import Freelancer from "./pages/freelancer/Freelancer";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function App() {
             <Route path='passtime' />
             <Route path='fulltime' />
           </Route>
-          <Route path='freelancer' element={<FreelanceSearch />} />
+          <Route path='freelancer/search' element={<FreelanceSearch />} />
           <Route path='profile' element={<PrivateRoute component={<Profile />} />} />
           <Route path='profile/setting' element={<PrivateRoute component={<Setting />} />}>
             <Route path='password' />
@@ -56,8 +57,9 @@ function App() {
           </Route>
           <Route path='posts' element={<PostProject />} />
           <Route path='myposts' element={<PrivateRoute component={<ListPost />} />}>
-            <Route path='apply' />
+            <Route path='applied' />
           </Route>
+          <Route path='freelancer/:id' element={<Freelancer />} />
           <Route path='posts/:id' element={<PostDetail />} />
           <Route path='*' element={<NotFound />} />
         </Route>

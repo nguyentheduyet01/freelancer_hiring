@@ -6,6 +6,11 @@ export const getUserAction = createAsyncThunk("user/getUser", async (id) => {
   return data;
 });
 
+export const getFreelancerAction = createAsyncThunk("user/Freelancer", async (id) => {
+  const { data } = await axios.get(`users/${id}`);
+  return data;
+});
+
 export const getAllUserAction = createAsyncThunk(
   "user/getAllUser",
   async ({ pagesize = 5, pageindex = 1 }) => {
@@ -45,7 +50,7 @@ export const getAllPostUserAction = createAsyncThunk(
 );
 
 export const getAllReceivedPostAction = createAsyncThunk(
-  "user/posts",
+  "user/receive",
   async (id, { pagesize = 5, pageindex = 1 }) => {
     const { data } = await axios.get(
       `users/${id}/received?pagesize=${pagesize}&pageindex=${pageindex}`,
@@ -53,6 +58,11 @@ export const getAllReceivedPostAction = createAsyncThunk(
     return data;
   },
 );
+
+export const statusUserAction = createAsyncThunk("user/statusUser", async ({ idUser, status }) => {
+  const { data } = await axios.get(`users/changestatus?idUser=${idUser}&status=${status}`);
+  return data;
+});
 
 export const userLogoutAction = createAsyncThunk("user/logout", async () => {
   localStorage.setItem("account", JSON.stringify(""));

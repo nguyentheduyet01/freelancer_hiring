@@ -18,10 +18,10 @@ const ListApply = () => {
       name: "Loại việc",
     },
     {
-      name: "Thời gian",
+      name: "Dự kiến hoàng thành",
     },
     {
-      name: "Ngân sách",
+      name: "Giá thương lượng",
     },
     {
       name: "Trạng Thái",
@@ -32,7 +32,7 @@ const ListApply = () => {
   }, [dispatch, user]);
   return (
     <div>
-      <Tables posts='post' headers={headers} />
+      <Tables post='apply' headers={headers} />
     </div>
   );
 };
