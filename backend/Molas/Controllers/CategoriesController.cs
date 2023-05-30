@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Molas.DTO;
 using Molas.Models;
 using Molas.Molas;
 
@@ -31,6 +32,39 @@ namespace Molas.Controllers
           }
             return await _context.Category.ToListAsync();
         }
+        [HttpGet("{id}/skills")]
+        public async Task<ActionResult<IEnumerable<Skill>>> GetCategoryandSkill(int id)
+        {
+          if (_context.Skill == null)
+          {
+              return NotFound();
+          }
+            
+            return await _context.Skill.Where(n=> n.IdCategory == id).ToListAsync();
+        }
+        //[HttpGet("skills")]
+        //public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategoryandSkill()
+        //{
+
+        //  if (_context.Category == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var res = new List<CategoryDTO>();
+        //    var ca = await _context.Category.ToListAsync();
+        //    foreach(var item in ca)
+        //    {
+        //        var n = new CategoryDTO();
+        //        n.Id = item.Id;
+        //        n.Name = item.Name;
+        //        res.Add(n);
+        //    }
+        //    foreach(var item in res)
+        //    {
+        //        item.skills = await _context.Skill.Where(n => n.IdCategory == item.Id).ToListAsync();
+        //    }
+        //    return res;
+        //}
 
         // GET: api/Categories/5
         [HttpGet("{id}")]

@@ -117,6 +117,44 @@ namespace Molas.Controllers
                 throw;
             }
         }
+        [HttpGet("notapprove")]
+        public async Task<ActionResult<ResultDTO>> GetListPostNotActive()
+        {
+            try
+            {
+                var result = new ResultDTO();
+                result.data = await _context.Posts.Where(n => n.Status == 0).ToListAsync();
+                return result;
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+        [HttpGet("approve")]
+        public async Task<ActionResult<OutputDTO>> ApprovePost(int id)
+        {
+            try
+            {
+                var result = new OutputDTO();
+                var post = await _context.Posts.FirstOrDefaultAsync(n => n.Id == id);
+                if(post == null)
+                {
+                    result.isSuccess = false;
+                    result.message = "Không tìm thấy thông tin bài viết!";
+                    return result;
+                }
+                post.Status = 1;
+                _context.Posts.Update(post);
+                await _context.SaveChangesAsync();
+                result.isSuccess = true;
+                return result;
+            }
+            catch 
+            {
+                throw;
+            }
+        }
 
         // PUT: api/Posts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
