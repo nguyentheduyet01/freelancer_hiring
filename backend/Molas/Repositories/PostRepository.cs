@@ -55,15 +55,20 @@ namespace Molas.Repositories
                 }
                 if (input.skill.HasValue && input.skill > 0) 
                 {
-                    query = from a in _dbContext.Posts
+                    query = from a in query
                             join cp in _dbContext.PostSkill on a.Id equals cp.PostId
                             where cp.SkillId == input.skill
                             select a;
                 }
-                if (string.IsNullOrEmpty(input.address))
+                if (!string.IsNullOrEmpty(input.address))
                 {
                     query = query.Where(n => n.Address.ToLower().Contains(input.address.ToLower()));
                 }
+                if (!string.IsNullOrEmpty(input.search))
+                {
+                    query = query.Where(n => n.Title.ToLower().Contains(input.search.ToLower()));
+                }
+                
                 result.totalCount = query.Where(s => s.Status == 1).Distinct().Count();
                 res = query.Skip((int)((input.pageindex - 1) * input.pagesize))
                    .Distinct()
