@@ -44,28 +44,32 @@ namespace Molas.Repositories
             {
                 ResultDTO result = new ResultDTO();
                 var res = new List<Posts>();
-                if (input.category_id != null && input.category_id != 0)
+                IQueryable<Posts> query = _dbContext.Posts;
+                var posts = await _dbContext.Posts.Where(n => n.Status == 1).ToListAsync();
+                if (input.category.HasValue && input.category > 0)
                 {
-                    var pots = from a in _dbContext.Posts
+                    query = from a in _dbContext.Posts
                                join cp in _dbContext.CategoryPost on a.Id equals cp.PostId
-                               where cp.CategoryId == input.category_id
+                               where cp.CategoryId == input.category
                                select a;
-                    result.totalCount = await pots.Where(s => s.Status == 1).CountAsync();
-                    res = await pots.Skip((int)((input.pageindex - 1) * input.pagesize))
-                    .Distinct()
-                    .Where(s => s.Status == 1)
-                    .Take(input.pagesize)
-                    .ToListAsync();
                 }
-                else
+                if (input.skill.HasValue && input.skill > 0) 
                 {
-                    result.totalCount = await _dbContext.Posts.Where(s => s.Status == 1).CountAsync();
-                     res = await _dbContext.Posts.Skip((int)((input.pageindex - 1) * input.pagesize))
-                    .Distinct()
-                    .Where(s => s.Status == 1)
-                    .Take(input.pagesize)
-                    .ToListAsync();
+                    query = from a in _dbContext.Posts
+                            join cp in _dbContext.PostSkill on a.Id equals cp.PostId
+                            where cp.SkillId == input.skill
+                            select a;
                 }
+                if (string.IsNullOrEmpty(input.address))
+                {
+                    query = query.Where(n => n.Address.ToLower().Contains(input.address.ToLower()));
+                }
+                result.totalCount = query.Where(s => s.Status == 1).Distinct().Count();
+                res = query.Skip((int)((input.pageindex - 1) * input.pagesize))
+                   .Distinct()
+                   .Where(s => s.Status == 1)
+                   .Take(input.pagesize)
+                   .ToList();
                 result.pageSize = input.pagesize;
                 result.pageIndex = input.pageindex;
                 result.totalPage = ( result.totalCount / result.pageSize) + (result.totalCount % result.pageSize > 0 ? 1 : 0);

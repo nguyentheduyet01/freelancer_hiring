@@ -50,7 +50,7 @@ namespace Molas.Controllers
             catch (Exception ex)
             {
 
-                return NotFound();
+                return BadRequest(ex.Message);
             }
         }
         [HttpPost("apply")]
