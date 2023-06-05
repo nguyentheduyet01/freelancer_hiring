@@ -4,8 +4,28 @@ import axios from "../../utils/instance";
 export const getAllPostAction = createAsyncThunk(
   "post/getAllPost",
   async (input = { pagesize: 5, pageindex: 1, search: "", address: "" }) => {
-    const { data } = await axios.post(`posts/search`, input);
-    return data;
+    let newInput;
+    if (input.address !== "" && input.search === "") {
+      newInput = {
+        pagesize: input.pagesize,
+        pageindex: input.pageindex,
+        address: input.address,
+      };
+      const { data } = await axios.post(`posts/search`, newInput);
+      newInput = data;
+    } else if (input.search !== "" && input.address === "") {
+      newInput = {
+        pagesize: input.pagesize,
+        pageindex: input.pageindex,
+        search: input.search,
+      };
+      const { data } = await axios.post(`posts/search`, newInput);
+      newInput = data;
+    } else {
+      const { data } = await axios.post(`posts/search`, input);
+      newInput = data;
+    }
+    return newInput;
   },
 );
 

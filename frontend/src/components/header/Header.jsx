@@ -17,6 +17,7 @@ const Header = ({ success }) => {
 
   const handleChange = (e) => {
     localStorage.setItem("search", JSON.stringify(e.target.value));
+    localStorage.setItem("address", JSON.stringify("e.target.value"));
     setSearch(e.target.value);
   };
   const handleSearch = (e) => {
@@ -84,7 +85,6 @@ const Header = ({ success }) => {
                 >
                   <Form.Group className='' controlId='' style={{ width: "240px" }}>
                     <Form.Control
-                      required
                       type='text'
                       placeholder='search'
                       style={{
