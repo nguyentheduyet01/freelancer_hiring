@@ -11,11 +11,12 @@ const Filter = () => {
   const options = State.getStatesOfCountry("VN");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isClose, setIsClose] = useState(false);
-  let newSelected = [];
 
   const handleSelected = (selected) => {
     setSelectedOptions(selected);
-    newSelected = selectedOptions.map((item) => item.name);
+    // newSelected = selectedOptions.map((item) => item.name);
+    // console.log(selected);
+    localStorage.setItem("address", JSON.stringify(selected[0].name));
     setIsClose(true);
   };
 
@@ -30,7 +31,7 @@ const Filter = () => {
             // defaultSelected={options.slice(0, 4)}
             id='public-methods-example'
             labelKey='name'
-            multiple
+            // multiple
             options={options}
             placeholder='Chọn thành phố...'
             ref={ref}
@@ -40,20 +41,22 @@ const Filter = () => {
           />
           {isClose && (
             <Button
-              onClick={() => {
-                ref.current?.clear();
-                setIsClose(false);
-              }}
               style={{
                 backgroundColor: "transparent",
                 border: "none",
                 color: "black",
                 position: "absolute",
-                top: "50px",
+                top: "59px",
                 right: "-6px",
               }}
             >
-              <XCircle />
+              <XCircle
+                onClick={() => {
+                  ref.current.clear();
+                  setIsClose(false);
+                }}
+                style={{ cursor: "pointer" }}
+              />
             </Button>
           )}
           <hr />

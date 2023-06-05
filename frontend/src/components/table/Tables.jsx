@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Offcanvas, Table } from "react-bootstrap";
+import { Button, Offcanvas, Table } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import formatVND from "../../utils/formatVND";
 import Loader from "../Loader/Loader";
 import "./Table.css";
 import { getUserApplyPostAction } from "../../reducer/actions/postAction";
+import axios from "../../utils/instance";
 
 const Tables = ({ post, headers }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,20 @@ const Tables = ({ post, headers }) => {
     setIsShow(true);
     dispatch(getUserApplyPostAction(id));
   };
+
+  const downloadCv = async (id) => {
+    const link = document.createElement("a");
+    link.href = `https://localhost:7001/api/filedatas/${id}`;
+
+    const clickEvent = new MouseEvent("click", {
+      view: window,
+      bubbles: false,
+      cancelable: true,
+    });
+
+    link.dispatchEvent(clickEvent);
+  };
+
   return (
     <>
       {isLoad ? (
@@ -88,7 +103,15 @@ const Tables = ({ post, headers }) => {
                       </td>
                       <td>{item?.userpost?.intendTime}</td>
                       <td>{formatVND(item?.userpost?.salary)}</td>
-                      <td>{item?.status === 0 ? "Đang duyệt" : "Đã duyệt"}</td>
+                      <td>
+                        <Button
+                          onClick={() => {
+                            downloadCv(item?.userpost?.cvId);
+                          }}
+                        >
+                          Tải xuống
+                        </Button>
+                      </td>
                     </tr>
                   ))}
               </tbody>

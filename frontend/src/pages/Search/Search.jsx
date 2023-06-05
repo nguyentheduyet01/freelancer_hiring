@@ -44,9 +44,15 @@ const Search = () => {
     });
   };
 
+  const search = localStorage.getItem("search") ? JSON.parse(localStorage.getItem("search")) : "";
+  const address = localStorage.getItem("address")
+    ? JSON.parse(localStorage.getItem("address"))
+    : "";
   useEffect(() => {
-    dispatch(getAllPostAction({ pagesize: 5, pageindex: currentPage }));
-  }, [dispatch, currentPage]);
+    dispatch(
+      getAllPostAction({ pagesize: 5, pageindex: currentPage, search: search, address: address }),
+    );
+  }, [dispatch, currentPage, search, address]);
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
@@ -92,6 +98,11 @@ const Search = () => {
             <div></div>
           </div>
           <div className='mb-3'>
+            {data?.length === 0 && (
+              <div style={{ textAlign: "center", height: "60vh" }} className='mt-5'>
+                <h5>Không tìm thấy bài đăng</h5>
+              </div>
+            )}
             {data?.length !== 0 &&
               data?.map((item, index) => {
                 if (index === 0) {
@@ -101,21 +112,23 @@ const Search = () => {
               })}
           </div>
           <div className='paginationBox'>
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={1}
-              totalItemsCount={posts?.totalPage || 5}
-              onChange={setCurrentPageNo}
-              nextPageText={<ChevronRight />}
-              prevPageText={<ChevronLeft />}
-              itemClassName='page-item'
-              linkClassName='page-link'
-              activeClassName='pageItemActive'
-              activeLinkClassName='pageLinkActive'
-              // firstPageText='1st'
-              // lastPageText='Last'
-              // onClick={scrollChange}
-            />
+            {data?.length !== 0 && (
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={1}
+                totalItemsCount={posts?.totalPage || 5}
+                onChange={setCurrentPageNo}
+                nextPageText={<ChevronRight />}
+                prevPageText={<ChevronLeft />}
+                itemClassName='page-item'
+                linkClassName='page-link'
+                activeClassName='pageItemActive'
+                activeLinkClassName='pageLinkActive'
+                // firstPageText='1st'
+                // lastPageText='Last'
+                // onClick={scrollChange}
+              />
+            )}
           </div>
         </Col>
       </Row>

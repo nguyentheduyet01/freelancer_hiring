@@ -3,7 +3,7 @@ import axios from "../../utils/instance";
 
 export const getAllPostAction = createAsyncThunk(
   "post/getAllPost",
-  async (input = { pagesize: 5, pageindex: 1 }) => {
+  async (input = { pagesize: 5, pageindex: 1, search: "", address: "" }) => {
     const { data } = await axios.post(`posts/search`, input);
     return data;
   },
@@ -38,7 +38,12 @@ export const getUserApplyPostAction = createAsyncThunk("post/userPost", async (i
   return data;
 });
 
-export const applyAction = createAsyncThunk("post/apply", async (apply) => {
-  const { data } = await axios.post(`posts/apply`, apply);
+export const applyAction = createAsyncThunk("post/apply", async ({ apply, cvId }) => {
+  const newApply = {
+    ...apply,
+    cvId: cvId,
+  };
+  console.log(newApply);
+  const { data } = await axios.post(`posts/apply`, newApply);
   return data;
 });
