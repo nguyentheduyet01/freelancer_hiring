@@ -32,6 +32,9 @@
     {
         public int pagesize { get; set; }
         public int pageindex { get; set; }
-        public int? category_id { get; set; }
+        public int? category { get; set; }
+        public int? skill { get; set; }
+        public string? address { get; set; }
+        public string? search { get; set; }
     }
 }
