@@ -21,6 +21,7 @@ import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import { getUserAction } from "./reducer/actions/userAction";
 import Freelancer from "./pages/freelancer/Freelancer";
+import Register from "./pages/register/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
         <Route path='/' element={<Outlet />}>
           <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
           <Route path='search' element={<Search />}>
             <Route path='passtime' />
             <Route path='fulltime' />

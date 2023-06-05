@@ -18,6 +18,8 @@ import { showToastMessageSuccess } from "../../utils/toastify";
 import formatVi from "../../utils/vi";
 import formatVND from "./../../utils/formatVND";
 import "./PostDetail.css";
+import { uploadACtion } from "../../reducer/actions/userAction";
+import axios from "../../utils/instance";
 
 const PostDetail = () => {
   const dispatch = useDispatch();
@@ -25,10 +27,13 @@ const PostDetail = () => {
   const { user } = useSelector((state) => state.user);
   const { post, applySuccess } = useSelector((state) => state.post);
   const { isLoad } = useSelector((state) => state.post);
+  const [file, setFile] = useState();
+  const [validated, setValidated] = useState(false);
 
   const [apply, setApply] = useState({
     userId: user?.id,
     postId: post?.id,
+    intendTime: "1 Ngày",
   });
 
   const id = location.pathname.split("/")[2];
@@ -50,9 +55,38 @@ const PostDetail = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(applyAction(apply));
+    const form = e.currentTarget;
+    if (form.checkValidity() !== false) {
+      let cvId;
+      if (file) {
+        const myForm = new FormData();
+
+        myForm.set("UserId", user?.id);
+        myForm.set("title", "title");
+        myForm.set("type", 2);
+        myForm.set("files", file);
+        const { data } = await axios.post("filedatas/upload", myForm, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        cvId = data?.split("_")[0];
+      }
+      dispatch(applyAction({ apply, cvId }));
+    }
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+    setValidated(true);
+  };
+
+  const handleUpload = (e) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(e.target.files[0]);
+    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -176,10 +210,10 @@ const PostDetail = () => {
                   <Link className='linkSkill'>javascript</Link>
                 </button>
                 <button className='skillButton'>
-                  <Link className='linkSkill'>Nodejs</Link>
+                  <Link className='linkSkill'>Express</Link>
                 </button>
                 <button className='skillButton'>
-                  <Link className='linkSkill'>Nodejs</Link>
+                  <Link className='linkSkill'>ReactJs</Link>
                 </button>
               </div>
             </div>
@@ -190,7 +224,7 @@ const PostDetail = () => {
             <div className='border rounded-4 p-3 mt-3'>
               <h5>Thông tin chào giá</h5>
               <hr />
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} noValidate validated={validated}>
                 <Row>
                   <Col xm='4' lg='4'>
                     <Form.Group className='mb-3' controlId='cp'>
@@ -198,11 +232,15 @@ const PostDetail = () => {
                         <h6 className=''>Đề xuất chi phí</h6>
                       </Form.Label>
                       <Form.Control
+                        required
                         type='number'
                         placeholder='2.000.000VNĐ'
                         name='salary'
                         onChange={handleApply}
                       />
+                      <Form.Control.Feedback type='invalid'>
+                        Vui lòng nhập trường này
+                      </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='dk'>
                       <Form.Label>
@@ -211,19 +249,23 @@ const PostDetail = () => {
                       <Form.Select
                         aria-label='Default select example'
                         name='intendTime'
-                        // onChange={handleApply}
+                        required
+                        onChange={handleApply}
                       >
-                        <option value='1d'>1 Ngày</option>
-                        <option value='2d'>2 Ngày</option>
-                        <option value='3d'>3 Ngày</option>
-                        <option value='5d'>5 Ngày</option>
-                        <option value='7d'>7 Ngày</option>
-                        <option value='10d'>10 Ngày</option>
-                        <option value='2w'>2 Tuần</option>
-                        <option value='3w'>3 Tuần</option>
-                        <option value='4w'>4 Tuần</option>
-                        <option value='6w'>6 Tuần</option>
+                        <option value='1 Ngày'>1 Ngày</option>
+                        <option value='2 Ngày'>2 Ngày</option>
+                        <option value='3 Ngày'>3 Ngày</option>
+                        <option value='5 Ngày'>5 Ngày</option>
+                        <option value='7 Ngày'>7 Ngày</option>
+                        <option value='10 Ngày'>10 Ngày</option>
+                        <option value='2 Tuần'>2 Tuần</option>
+                        <option value='3 Tuần'>3 Tuần</option>
+                        <option value='4 Tuần'>4 Tuần</option>
+                        <option value='6 Tuần'>6 Tuần</option>
                       </Form.Select>
+                      <Form.Control.Feedback type='invalid'>
+                        Vui lòng nhập trường này
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col xm='1' lg='1' className='p-0'></Col>
@@ -233,12 +275,16 @@ const PostDetail = () => {
                         <h6>Đề xuất thuyết phục khách hàng</h6>
                       </Form.Label>
                       <Form.Control
+                        required
                         as='textarea'
                         rows={5}
                         placeholder='- Tôi đã có XX năm kinh nghiệm trong lĩnh vực'
                         onChange={handleApply}
                         name='suggestion'
                       />
+                      <Form.Control.Feedback type='invalid'>
+                        Vui lòng nhập trường này
+                      </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className='mb-3'>
                       <Form.Label style={{ color: "#0093be", fontSize: "90%", cursor: "pointer" }}>
@@ -249,8 +295,11 @@ const PostDetail = () => {
                         pptx, ods, odt, zip, rar <br />
                         Dung lượng tối đa: 10MB <br />
                         Kích thước tối đa: 3000x3000 px <br />
-                        <Form.Control type='file' onChange={handleApply} name='' />
+                        <Form.Control type='file' onChange={handleUpload} name='' />
                       </div>
+                      <Form.Control.Feedback type='invalid'>
+                        Vui lòng nhập trường này
+                      </Form.Control.Feedback>
                     </Form.Group>
                     <Button
                       variant='warning'

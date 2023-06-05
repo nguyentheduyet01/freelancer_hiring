@@ -8,6 +8,7 @@ import {
   getUserAction,
   statusUserAction,
   updateUserAction,
+  uploadACtion,
   userLogoutAction,
 } from "../actions/userAction";
 
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     clearMessage: (state, action) => {
       state.updateSuccess = false;
       state.statusChange = false;
+      state.uploadStatus = "";
     },
   },
   extraReducers: {
@@ -128,6 +130,21 @@ const userSlice = createSlice({
       state.isLoad = false;
       state.error = true;
       state.statusChange = false;
+    },
+    [uploadACtion.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [uploadACtion.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.uploadStatus = true;
+      state.upload = action.payload;
+    },
+    [uploadACtion.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+      state.uploadStatus = false;
     },
     [userLogoutAction.pending]: (state, action) => {
       state.isLoad = true;

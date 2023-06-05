@@ -24,7 +24,7 @@ const ListApply = () => {
       name: "Giá thương lượng",
     },
     {
-      name: "Trạng Thái",
+      name: "cv",
     },
   ];
   useEffect(() => {

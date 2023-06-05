@@ -67,3 +67,12 @@ export const statusUserAction = createAsyncThunk("user/statusUser", async ({ idU
 export const userLogoutAction = createAsyncThunk("user/logout", async () => {
   localStorage.setItem("account", JSON.stringify(""));
 });
+
+export const uploadACtion = createAsyncThunk("user/upload", async (upload) => {
+  const { data } = await axios.post("filedatas/upload", upload, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+});

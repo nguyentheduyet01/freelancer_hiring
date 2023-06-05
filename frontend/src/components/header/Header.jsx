@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { ChevronDown, ChevronUp, Search } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../images/icon_page.png";
 import Avatar from "../avatar/Avatar";
 import DDFreelance from "../dropdown/DDFreelance";
@@ -9,9 +9,21 @@ import DDFindJob from "./../dropdown/DDFindJob";
 import "./Header.css";
 
 const Header = ({ success }) => {
+  const navigate = useNavigate();
   const [isShow, setIsShow] = useState(false);
   const [isShowJob, setIsShowJob] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [search, setSearch] = useState();
+
+  const handleChange = (e) => {
+    localStorage.setItem("search", JSON.stringify(e.target.value));
+    setSearch(e.target.value);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch("");
+    navigate(`/search`);
+  };
 
   useEffect(() => {
     if (success === true) {
@@ -60,6 +72,7 @@ const Header = ({ success }) => {
             <Row className='mt-3'>
               <Col style={{ padding: "15  px 0 0 0" }}>
                 <Form
+                  onSubmit={handleSearch}
                   style={{
                     position: "relative",
                     borderRadius: "100px",
@@ -71,6 +84,7 @@ const Header = ({ success }) => {
                 >
                   <Form.Group className='' controlId='' style={{ width: "240px" }}>
                     <Form.Control
+                      required
                       type='text'
                       placeholder='search'
                       style={{
@@ -79,6 +93,8 @@ const Header = ({ success }) => {
                         padding: "0 0 0 8px",
                       }}
                       className='input-none'
+                      onChange={handleChange}
+                      value={search}
                     />
                   </Form.Group>
                   <Button
