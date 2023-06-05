@@ -115,7 +115,7 @@ const Filter = ({ setSearchAdd, setSearchCate }) => {
               >
                 <XCircle
                   onClick={() => {
-                    ref.current.clear();
+                    // ref.current.clear();
                     setIsClose(false);
                   }}
                   style={{ cursor: "pointer" }}
