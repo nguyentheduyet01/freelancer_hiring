@@ -16,6 +16,8 @@ const Search = () => {
   const { data } = posts;
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchAdd, setSearchAdd] = useState();
+  const [searchCate, setSearchCate] = useState("");
   let ht = location.pathname.split("/")[2] || "all";
 
   const items = [
@@ -45,20 +47,30 @@ const Search = () => {
   };
 
   const search = localStorage.getItem("search") ? JSON.parse(localStorage.getItem("search")) : "";
-  const address = localStorage.getItem("address")
-    ? JSON.parse(localStorage.getItem("address"))
-    : "";
+  // const address = localStorage.getItem("address")
+  //   ? JSON.parse(localStorage.getItem("address"))
+  //   : "";
+
   useEffect(() => {
+    if (search !== "" || searchCate !== "") {
+      setSearchAdd("");
+    }
     dispatch(
-      getAllPostAction({ pagesize: 5, pageindex: currentPage, search: search, address: address }),
+      getAllPostAction({
+        pagesize: 10,
+        pageindex: currentPage,
+        search: search,
+        address: searchAdd,
+        category: searchCate,
+      }),
     );
-  }, [dispatch, currentPage, search, address]);
+  }, [dispatch, currentPage, search, searchAdd, searchCate]);
 
   return (
     <div className='mt-4' style={{ width: "1200px", margin: "0 auto" }}>
       <Row>
         <Col lg='3'>
-          <Filter />
+          <Filter setSearchAdd={setSearchAdd} setSearchCate={setSearchCate} />
         </Col>
         <Col className='border p-0 rounded-4' style={{ overflow: "hidden" }}>
           <div className='searchHeader d-flex mb-3'>
@@ -92,7 +104,7 @@ const Search = () => {
             <div className='d-flex'>
               <img src={wireless} alt='wireless' style={{ width: "18px", height: "18px" }} />
               <span style={{ marginLeft: "10px" }}>
-                <span style={{ fontWeight: "700" }}>100.000</span> công việc
+                <span style={{ fontWeight: "700" }}>{posts?.totalCount}</span> công việc
               </span>
             </div>
             <div></div>
