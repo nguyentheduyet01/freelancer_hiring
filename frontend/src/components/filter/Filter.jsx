@@ -1,24 +1,53 @@
 import { State } from "country-state-city";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { XCircle } from "react-bootstrap-icons";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "./Filter.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAction } from "../../reducer/actions/categoryAction";
 
-const Filter = () => {
+const Filter = ({ setSearchAdd, setSearchCate }) => {
   const ref = useRef(null);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
   const options = State.getStatesOfCountry("VN");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedCateOptions, setSelectedCateOptions] = useState([]);
   const [isClose, setIsClose] = useState(false);
+  const categoriesOption = categories.map((cate) => {
+    return { name: cate.name, id: cate.id };
+  });
 
   const handleSelected = (selected) => {
     setSelectedOptions(selected);
     // newSelected = selectedOptions.map((item) => item.name);
     // console.log(selected);
-    localStorage.setItem("address", JSON.stringify(selected[0].name));
+    if (selected.length !== 0) {
+      setSearchAdd(selected[0].name);
+    }
+
+    localStorage.setItem("search", JSON.stringify(""));
     setIsClose(true);
   };
+
+  const handleCateSelected = (selected) => {
+    setSelectedCateOptions(selected);
+    // newSelected = selectedOptions.map((item) => item.name);
+    // console.log(selected);
+    console.log(selected);
+    if (selected.length !== 0) {
+      setSearchCate(selected[0].id);
+    }
+
+    localStorage.setItem("search", JSON.stringify(""));
+    setIsClose(true);
+  };
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
 
   return (
     <div className='searchHeader d-flex mb-3'>
@@ -59,6 +88,41 @@ const Filter = () => {
               />
             </Button>
           )}
+          <div style={{ position: "relative" }}>
+            <span style={{ fontWeight: "500", fontSize: "95%", color: "#677967" }}>Lĩnh vực</span>
+            <Typeahead
+              // defaultSelected={options.slice(0, 4)}
+              id='public-methods-example'
+              labelKey='name'
+              // multiple
+              options={categoriesOption}
+              placeholder='Chọn lĩnh vực...'
+              ref={ref}
+              onChange={handleCateSelected}
+              selected={selectedCateOptions}
+              className='mt-2 mb-3'
+            />
+            {isClose && (
+              <Button
+                style={{
+                  backgroundColor: "transparent",
+                  border: "none",
+                  color: "black",
+                  position: "absolute",
+                  top: "59px",
+                  right: "-6px",
+                }}
+              >
+                <XCircle
+                  onClick={() => {
+                    // ref.current.clear();
+                    setIsClose(false);
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              </Button>
+            )}
+          </div>
           <hr />
         </div>
         <div>
