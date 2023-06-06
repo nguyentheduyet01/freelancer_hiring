@@ -69,10 +69,10 @@ namespace Molas.Repositories
                     query = query.Where(n => n.Title.ToLower().Contains(input.search.ToLower()));
                 }
                 
-                result.totalCount = query.Where(s => s.Status == 1).Distinct().Count();
+                result.totalCount = query.Where(s => s.Status == 1 && s.Expired > DateTime.Now).Distinct().Count();
                 res = query.Skip((int)((input.pageindex - 1) * input.pagesize))
                    .Distinct()
-                   .Where(s => s.Status == 1)
+                   .Where(s => s.Status == 1 && s.Expired > DateTime.Now)
                    .Take(input.pagesize)
                    .ToList();
                 result.pageSize = input.pagesize;
@@ -126,6 +126,12 @@ namespace Molas.Repositories
                 Posts posts = _mapper.Map<Posts>(post);
                 _dbContext.Posts.Add(posts);
                 await _dbContext.SaveChangesAsync();
+                CategoryPost categoryPost = new CategoryPost();
+                categoryPost.CategoryId = post.categoryId;
+                categoryPost.PostId = posts.Id;
+                _dbContext.CategoryPost.Add(categoryPost);
+                await _dbContext.SaveChangesAsync();
+
                 return true;
             }
             catch (Exception ex)

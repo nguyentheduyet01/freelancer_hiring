@@ -22,6 +22,7 @@
         public DateTime? Expired { get; set; }
 
         public int? Status { get; set; }
+        public int? categoryId { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public string? Address { get; set; }
