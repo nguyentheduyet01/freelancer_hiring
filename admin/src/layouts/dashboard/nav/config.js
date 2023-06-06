@@ -5,27 +5,32 @@ const navConfig = [
     icon: "",
   },
   {
-    title: "user",
+    title: "Người dùng",
     path: "/dashboard/user",
     icon: "",
   },
   {
-    title: "posts",
+    title: "Bài đăng đã duyệt",
     path: "/dashboard/posts",
     icon: "",
   },
   {
-    title: "category",
+    title: "Duyệt bài đăng",
+    path: "/dashboard/approve",
+    icon: "",
+  },
+  {
+    title: "Lĩnh vực",
     path: "/dashboard/categories",
     icon: "",
   },
   {
-    title: "skill",
+    title: "Kỹ năng",
     path: "/dashboard/skills",
     icon: "",
   },
   {
-    title: "login",
+    title: "Đăng nhập",
     path: "/login",
     icon: "",
   },

@@ -1,44 +1,44 @@
-import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 // @mui
 import {
-  Card,
-  Table,
-  Stack,
-  Paper,
-  Avatar,
   Button,
-  Popover,
-  Checkbox,
-  TableRow,
+  Card,
+  Container,
+  IconButton,
   MenuItem,
+  Paper,
+  Popover,
+  Stack,
+  Table,
   TableBody,
   TableCell,
-  Container,
-  Typography,
-  IconButton,
   TableContainer,
-  TablePagination,
+  TableRow,
+  Typography,
 } from "@mui/material";
 // components
-import Label from "../components/label";
 import Iconify from "../components/iconify";
+import Label from "../components/label";
 import Scrollbar from "../components/scrollbar";
 // sections
-import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
+import { UserListHead } from "../sections/@dashboard/user";
 // mock
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import USERLIST from "../_mock/user";
+import { approvePostAction, getAllPostAction } from "../reducer/actions/postAction";
+import { clearMessage } from "../reducer/slice/postSlice";
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false },
-  { id: "company", label: "Company", alignRight: false },
-  { id: "role", label: "Role", alignRight: false },
-  { id: "isVerified", label: "Verified", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
+  { id: "title", label: "Tiêu đề", alignRight: false },
+  { id: "descriptions", label: "Mô tả", alignRight: false },
+  { id: "requirement", label: "Yêu cầu", alignRight: false },
+  { id: "budget", label: "Ngày hết Hạn", alignRight: false },
+  { id: "status", label: "Trang thái", alignRight: false },
   { id: "" },
 ];
 
@@ -73,7 +73,9 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function UserPage() {
+export default function PostsAprevePage() {
+  const dispatch = useDispatch();
+  const { posts, approveSuccess } = useSelector((state) => state.post);
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -82,14 +84,14 @@ export default function UserPage() {
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState("name");
+  const [orderBy, setOrderBy] = useState("title");
 
   const [filterName, setFilterName] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleOpenMenu = (event) => {
-    setOpen(event.currentTarget);
+  const handleOpenMenu = (e) => {
+    dispatch(approvePostAction(e));
   };
 
   const handleCloseMenu = () => {
@@ -111,66 +113,42 @@ export default function UserPage() {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    setSelected(newSelected);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setPage(0);
-    setRowsPerPage(parseInt(event.target.value, 10));
-  };
-
-  const handleFilterByName = (event) => {
-    setPage(0);
-    setFilterName(event.target.value);
-  };
-
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
+  useEffect(() => {
+    dispatch(clearMessage());
+    if (approveSuccess === true) {
+      dispatch(getAllPostAction());
+    }
+    dispatch(getAllPostAction());
+  }, [dispatch, approveSuccess]);
+
   return (
     <>
       <Helmet>
-        <title> Dashboard - User </title>
+        <title> Dashboard - Posts </title>
       </Helmet>
 
       <Container>
         <Stack direction='row' alignItems='center' justifyContent='space-between' mb={5}>
           <Typography variant='h4' gutterBottom>
-            Quản lý người dùng
+            Quản lý bài đăng
           </Typography>
           <Button variant='contained' startIcon={<Iconify icon='eva:plus-fill' />}>
-            Thêm người dùng
+            Thêm bài đăng
           </Button>
         </Stack>
 
         <Card>
-          <UserListToolbar
+          {/* <UserListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
-          />
+          /> */}
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -185,52 +163,84 @@ export default function UserPage() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                      const selectedUser = selected.indexOf(name) !== -1;
+                  {posts?.data?.length !== 0 &&
+                    posts?.data?.map((row) => {
+                      const { id, title, descriptions, status, requirement, budget } = row;
+                      // const selectedUser = selected.indexOf(name) !== -1;
 
                       return (
                         <TableRow
                           hover
                           key={id}
                           tabIndex={-1}
-                          role='checkbox'
-                          selected={selectedUser}
+                          // selected={selectedUser}
                         >
-                          <TableCell padding='checkbox'>
-                            <Checkbox
-                              checked={selectedUser}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
-
-                          <TableCell component='th' scope='row' padding='none'>
+                          <TableCell component='th' scope='row' padding='2px'>
                             <Stack direction='row' alignItems='center' spacing={2}>
-                              <Avatar alt={name} src={avatarUrl} />
+                              {/* <Avatar alt={name} src={avatarUrl} /> */}
                               <Typography variant='subtitle2' noWrap>
-                                {name}
+                                <div
+                                  style={{
+                                    color: "black",
+                                    height: "47px",
+                                    width: "200px",
+                                    overflow: "hidden",
+                                    display: "-webkit-box",
+                                    WebkitLineClamp: 1,
+                                    WebkitBoxOrient: "vertical",
+                                  }}
+                                >
+                                  {title}
+                                </div>
                               </Typography>
                             </Stack>
                           </TableCell>
 
-                          <TableCell align='left'>{company}</TableCell>
-
-                          <TableCell align='left'>{role}</TableCell>
-
-                          <TableCell align='left'>{isVerified ? "Yes" : "No"}</TableCell>
+                          <TableCell align='left'>
+                            <div
+                              style={{
+                                color: "black",
+                                height: "47px",
+                                overflow: "hidden",
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                              }}
+                            >
+                              {descriptions}
+                            </div>
+                          </TableCell>
 
                           <TableCell align='left'>
-                            <Label color={(status === "banned" && "error") || "success"}>
-                              {sentenceCase(status)}
+                            <div
+                              style={{
+                                color: "black",
+                                height: "47px",
+                                overflow: "hidden",
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                              }}
+                            >
+                              {requirement}
+                            </div>
+                          </TableCell>
+
+                          <TableCell align='left'>vnđ{budget}</TableCell>
+
+                          <TableCell align='left'>
+                            <Label color={status === 0 ? "error" : "success"}>
+                              {status === 0 ? "Chờ duyệt" : "Đã duyệt"}
                             </Label>
+                            {/* {status} */}
                           </TableCell>
 
                           <TableCell align='right'>
-                            <IconButton size='large' color='inherit' onClick={handleOpenMenu}>
-                              <Iconify icon={"eva:more-vertical-fill"} />
-                            </IconButton>
+                            <IconButton
+                              size='small'
+                              // color='inherit'
+                              onClick={() => handleOpenMenu(id)}
+                            ></IconButton>
                           </TableCell>
                         </TableRow>
                       );
@@ -269,7 +279,7 @@ export default function UserPage() {
             </TableContainer>
           </Scrollbar>
 
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component='div'
             count={USERLIST.length}
@@ -277,7 +287,7 @@ export default function UserPage() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          /> */}
         </Card>
       </Container>
 
@@ -301,13 +311,13 @@ export default function UserPage() {
       >
         <MenuItem>
           <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
-          Edit
+          Duyệt
         </MenuItem>
 
-        <MenuItem sx={{ color: "error.main" }}>
+        {/* <MenuItem sx={{ color: "error.main" }}>
           <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
           Delete
-        </MenuItem>
+        </MenuItem> */}
       </Popover>
     </>
   );

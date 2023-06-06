@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   applyAction,
+  approvePostAction,
   createPostAction,
+  getAllNotApprovePostAction,
   getAllPostAction,
   getPostAction,
 } from "../actions/postAction";
@@ -18,6 +20,7 @@ const postSlice = createSlice({
       state.error = false;
       state.success = false;
       state.applySuccess = false;
+      state.approveSuccess = false;
     },
   },
   extraReducers: {
@@ -31,6 +34,19 @@ const postSlice = createSlice({
       state.post = action.payload;
     },
     [getPostAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [getAllNotApprovePostAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getAllNotApprovePostAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.notApprove = action.payload;
+    },
+    [getAllNotApprovePostAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },
@@ -72,6 +88,19 @@ const postSlice = createSlice({
       state.applied = action.payload;
     },
     [applyAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
+    },
+    [approvePostAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [approvePostAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.approveSuccess = true;
+    },
+    [approvePostAction.rejected]: (state, action) => {
       state.isLoad = false;
       state.error = true;
     },

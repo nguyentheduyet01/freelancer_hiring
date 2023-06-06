@@ -3,11 +3,16 @@ import axios from "../../utils/instance";
 
 export const getAllPostAction = createAsyncThunk(
   "post/getAllPost",
-  async (input = { pagesize: 5, pageindex: 1 }) => {
+  async (input = { pagesize: 20, pageindex: 1 }) => {
     const { data } = await axios.post(`posts/search`, input);
     return data;
   },
 );
+// Posts/notapprove
+export const getAllNotApprovePostAction = createAsyncThunk("post/notapprove", async () => {
+  const { data } = await axios.get(`posts/notapprove`);
+  return data;
+});
 
 export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
   const { data } = await axios.get(`posts/${id}`);
@@ -24,8 +29,13 @@ export const createPostAction = createAsyncThunk("post/createPost", async (post)
   return data;
 });
 
-export const updatePostAction = createAsyncThunk("post/updatePost", async (id, post) => {
+export const updatePostAction = createAsyncThunk("post/updatePost", async ({ id, post }) => {
   const { data } = await axios.put(`posts/${id}`, post);
+  return data;
+});
+
+export const approvePostAction = createAsyncThunk("post/updatePost", async (id) => {
+  const { data } = await axios.get(`posts/approve?id=${id}`);
   return data;
 });
 
