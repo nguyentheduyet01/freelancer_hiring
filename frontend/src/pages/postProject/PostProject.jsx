@@ -22,7 +22,7 @@ const PostProject = () => {
   const [post, setPost] = useState({
     categoryId: 1,
     linkApply: "null",
-    status: 1,
+    status: 0,
     workingMethod: 1,
     paymentMethod: 1,
   });

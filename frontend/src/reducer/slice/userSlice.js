@@ -4,6 +4,7 @@ import {
   getAllReceivedPostAction,
   getAllSkillUserAction,
   getAllUserAction,
+  getCVUserAction,
   getFreelancerAction,
   getUserAction,
   statusUserAction,
@@ -145,6 +146,19 @@ const userSlice = createSlice({
       state.isLoad = false;
       state.error = true;
       state.uploadStatus = false;
+    },
+    [getCVUserAction.pending]: (state, action) => {
+      state.isLoad = true;
+      state.error = false;
+    },
+    [getCVUserAction.fulfilled]: (state, action) => {
+      state.isLoad = false;
+      state.error = false;
+      state.cvs = action.payload;
+    },
+    [getCVUserAction.rejected]: (state, action) => {
+      state.isLoad = false;
+      state.error = true;
     },
     [userLogoutAction.pending]: (state, action) => {
       state.isLoad = true;

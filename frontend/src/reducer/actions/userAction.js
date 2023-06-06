@@ -76,3 +76,8 @@ export const uploadACtion = createAsyncThunk("user/upload", async (upload) => {
   });
   return data;
 });
+
+export const getCVUserAction = createAsyncThunk("user/cvUser", async (id) => {
+  const { data } = await axios.get(`users/${id}/cvs`);
+  return data;
+});

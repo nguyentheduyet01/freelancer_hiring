@@ -10,15 +10,23 @@ import email from "../../images/email.png";
 import pen from "../../images/pen.png";
 import phone from "../../images/phone-call.png";
 import placeholder from "../../images/placeholder.png";
-import { getAllSkillUserAction, getUserAction } from "../../reducer/actions/userAction";
-import "./Profile.css";
-import { showToastMessageSuccess } from "../../utils/toastify";
+import doc from "../../images/doc.png";
+
+import {
+  getAllSkillUserAction,
+  getCVUserAction,
+  getUserAction,
+} from "../../reducer/actions/userAction";
 import { clearMessage } from "../../reducer/slice/userSlice";
+import { showToastMessageSuccess } from "../../utils/toastify";
+import "./Profile.css";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState({ status: "" });
-  const { user, skills, isLoad, updateSuccess, statusChange } = useSelector((state) => state.user);
+  const { user, skills, isLoad, updateSuccess, statusChange, cvs } = useSelector(
+    (state) => state.user,
+  );
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
   const exp = [
@@ -35,6 +43,20 @@ const Profile = () => {
       context: "Đi làm lâu năm",
     },
   ];
+
+  const downloadCv = async (id) => {
+    const link = document.createElement("a");
+    link.href = `https://localhost:7001/api/filedatas/${id}`;
+
+    const clickEvent = new MouseEvent("click", {
+      view: window,
+      bubbles: false,
+      cancelable: true,
+    });
+
+    link.dispatchEvent(clickEvent);
+  };
+
   useEffect(() => {
     if (updateSuccess === true || statusChange === true) {
       showToastMessageSuccess("Cập nhật thành công");
@@ -42,6 +64,7 @@ const Profile = () => {
       dispatch(getUserAction(user?.id));
     }
     dispatch(getAllSkillUserAction(user?.id));
+    dispatch(getCVUserAction(user?.id));
   }, [dispatch, user, updateSuccess, statusChange]);
   return (
     <>
@@ -130,7 +153,37 @@ const Profile = () => {
             <div>
               <div>
                 <h5>Hồ sơ năng lực</h5>
-                <p>{user?.decription}</p>
+                <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+                  {cvs?.data?.length !== 0 &&
+                    cvs?.data?.map((item, index) => (
+                      <div key={index} className='cvItem mt-4'>
+                        <button
+                          className='skillButton'
+                          key={index}
+                          style={{
+                            padding: "10px 3px 0px 3px",
+                          }}
+                        >
+                          <p
+                            className='linkSkill'
+                            onClick={() => {
+                              downloadCv(item?.id);
+                            }}
+                          >
+                            {item?.title}
+                          </p>
+                        </button>
+                        {/* <img
+                          src={doc}
+                          alt='cvs'
+                          style={{ width: "100px", height: "100px" }}
+                          onClick={() => {
+                            downloadCv(item?.id);
+                          }}
+                        /> */}
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
             <div></div>

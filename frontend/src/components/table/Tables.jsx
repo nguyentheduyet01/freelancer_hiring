@@ -151,6 +151,7 @@ const Tables = ({ post, headers }) => {
                   <th>Số điện thoại</th>
                   <th>Email</th>
                   <th>Giá thương lượng</th>
+                  <th>cv</th>
                 </tr>
               </thead>
               <tbody>
@@ -164,6 +165,9 @@ const Tables = ({ post, headers }) => {
                       <td>{item?.user?.phone}</td>
                       <td>{item?.user?.email}</td>
                       <td>{formatVND(item?.userpost?.salary)}</td>
+                      <td>
+                        <Button onClick={() => downloadCv(item?.userpost?.cvId)}>Tải cv</Button>
+                      </td>
                     </tr>
                   ))}
               </tbody>
