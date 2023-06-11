@@ -21,7 +21,7 @@ services:
       - my-network
 
   backend:
-    image: sizzan/backend:v1
+    image: backend:v1
     ports:
       - "8080:80"
     environment:
@@ -35,7 +35,7 @@ services:
       - my-network
 
   frontend:
-    image: sizzan/frontend:v1
+    image: frontend:v1
     ports:
       - "3000:80"
     depends_on:
@@ -47,7 +47,7 @@ services:
       - my-network
 
   admin:
-    image: sizzan/admin:v1
+    image: admin:v1
     ports:
       - "4000:80"
     depends_on:
