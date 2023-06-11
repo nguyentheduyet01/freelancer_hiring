@@ -34,7 +34,7 @@ const Tables = ({ post, headers }) => {
 
   const downloadCv = async (id) => {
     const link = document.createElement("a");
-    link.href = `https://localhost:7001/api/filedatas/${id}`;
+    link.href = `http://localhost:8080/api/filedatas/${id}`;
 
     const clickEvent = new MouseEvent("click", {
       view: window,
