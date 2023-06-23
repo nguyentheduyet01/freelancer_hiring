@@ -60,6 +60,14 @@ namespace Molas.Repositories
                             where cp.SkillId == input.skill
                             select a;
                 }
+                if(input.PaymentMethod.HasValue && input.PaymentMethod > 0)
+                {
+                    query = query.Where(n => n.PaymentMethod == input.PaymentMethod);
+                }
+                if(input.WorkingMethod.HasValue && input.WorkingMethod > 0)
+                {
+                    query = query.Where(n => n.WorkingMethod == input.WorkingMethod);
+                }
                 if (!string.IsNullOrEmpty(input.address))
                 {
                     query = query.Where(n => n.Address.ToLower().Contains(input.address.ToLower()));
