@@ -8,9 +8,8 @@ import formatVND from "../../utils/formatVND";
 import Loader from "../Loader/Loader";
 import "./Table.css";
 import { getUserApplyPostAction } from "../../reducer/actions/postAction";
-import axios from "../../utils/instance";
 
-const Tables = ({ post, headers }) => {
+const Tables = ({ post, headers, page, setPage }) => {
   const dispatch = useDispatch();
   const { posts, isLoad, received } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.post);
@@ -21,12 +20,14 @@ const Tables = ({ post, headers }) => {
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
-    console.log(e);
+    setPage(e);
+    // console.log(e);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
   const handleClick = (id) => {
     setIsShow(true);
     dispatch(getUserApplyPostAction(id));
@@ -34,7 +35,7 @@ const Tables = ({ post, headers }) => {
 
   const downloadCv = async (id) => {
     const link = document.createElement("a");
-    link.href = `http://localhost:8080/api/filedatas/${id}`;
+    link.href = `https://localhost:7001/api/filedatas/${id}`;
 
     const clickEvent = new MouseEvent("click", {
       view: window,
@@ -52,7 +53,7 @@ const Tables = ({ post, headers }) => {
       ) : (
         <>
           {post === "post" ? (
-            <Table responsive className='mt-3'>
+            <Table responsive className="mt-3">
               <thead>
                 <tr>
                   {headers && headers?.map((item, index) => <th key={index}>{item?.name}</th>)}
@@ -80,7 +81,7 @@ const Tables = ({ post, headers }) => {
               </tbody>
             </Table>
           ) : (
-            <Table responsive className='mt-3'>
+            <Table responsive className="mt-3">
               <thead>
                 <tr>
                   {headers && headers?.map((item, index) => <th key={index}>{item?.name}</th>)}
@@ -117,19 +118,19 @@ const Tables = ({ post, headers }) => {
               </tbody>
             </Table>
           )}
-          <div className='paginationBox'>
+          <div className="paginationBox">
             <Pagination
               activePage={currentPage}
-              itemsCountPerPage={2}
-              totalItemsCount={received?.totalCount}
+              itemsCountPerPage={1}
+              totalItemsCount={received?.totalPage | posts?.totalPage}
               onChange={setCurrentPageNo}
               nextPageText={<ChevronRight />}
               prevPageText={<ChevronLeft />}
-              itemClassName='page-item'
-              linkClassName='page-link'
-              activeClassName='pageItemActive'
-              activeLinkClassName='pageLinkActive'
-              className='rbt-input-multi'
+              itemClassName="page-item"
+              linkClassName="page-link"
+              activeClassName="pageItemActive"
+              activeLinkClassName="pageLinkActive"
+              className="rbt-input-multi"
               // firstPageText='1st'
               // lastPageText='Last'
               // onClick={scrollChange}
@@ -138,12 +139,12 @@ const Tables = ({ post, headers }) => {
         </>
       )}
       <>
-        <Offcanvas show={isShow} onHide={handleClose} placement='end' style={{ width: "55%" }}>
+        <Offcanvas show={isShow} onHide={handleClose} placement="end" style={{ width: "55%" }}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title></Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Table responsive className='mt-3'>
+            <Table responsive className="mt-3">
               <thead>
                 <tr>
                   <th>stt</th>

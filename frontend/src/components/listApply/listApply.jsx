@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import Tables from "../table/Tables";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllReceivedPostAction } from "../../reducer/actions/userAction";
+import Tables from "../table/Tables";
 
 const ListApply = () => {
   const dispatch = useDispatch();
+  const [page,setPage] = useState()
   const { user } = useSelector((state) => state.user);
 
   const headers = [
@@ -32,7 +33,7 @@ const ListApply = () => {
   }, [dispatch, user]);
   return (
     <div>
-      <Tables post='apply' headers={headers} />
+      <Tables post='apply' headers={headers} page={page} setPage={setPage}/>
     </div>
   );
 };

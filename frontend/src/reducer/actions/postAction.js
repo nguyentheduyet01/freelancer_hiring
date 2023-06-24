@@ -3,30 +3,32 @@ import axios from "../../utils/instance";
 
 export const getAllPostAction = createAsyncThunk(
   "post/getAllPost",
-  async (input = { pagesize: 5, pageindex: 1, search: "", address: "" }) => {
-    let newInput;
-    if (input.address !== "" && input.search === "") {
-      newInput = {
-        pagesize: input.pagesize,
-        pageindex: input.pageindex,
-        address: input.address,
-      };
-      const { data } = await axios.post(`posts/search`, newInput);
-      newInput = data;
-    } else if (input.search !== "" && input.address === "") {
-      newInput = {
-        pagesize: input.pagesize,
-        pageindex: input.pageindex,
-        search: input.search,
-      };
-      const { data } = await axios.post(`posts/search`, newInput);
-      newInput = data;
-    } else {
-      const { data } = await axios.post(`posts/search`, input);
-      newInput = data;
-    }
-    return newInput;
-  },
+  async (input = { pagesize: 5, pageindex: 1 }) => {
+    // let newInput;
+    // if (input.address !== "" && input.search === "") {
+    //   newInput = {
+    //     pagesize: input.pagesize,
+    //     pageindex: input.pageindex,
+    //     address: input.address,
+    //   };
+    //   const { data } = await axios.post(`posts/search`, newInput);
+    //   newInput = data;
+    // } else if (input.search !== "" && input.address === "") {
+    //   newInput = {
+    //     pagesize: input.pagesize,
+    //     pageindex: input.pageindex,
+    //     search: input.search,
+    //   };
+    //   const { data } = await axios.post(`posts/search`, newInput);
+    //   newInput = data;
+    // } else {
+    //   const { data } = await axios.post(`posts/search`, input);
+    //   newInput = data;
+    // }
+    // return newInput;
+    const { data } = await axios.post(`posts/search`, input);
+    return data;
+  }
 );
 
 export const getPostAction = createAsyncThunk("post/getPost", async (id) => {
@@ -67,3 +69,8 @@ export const applyAction = createAsyncThunk("post/apply", async ({ apply, cvId }
   const { data } = await axios.post(`posts/apply`, newApply);
   return data;
 });
+
+// "category": 0,
+//   "paymentMethod": 0,
+//   "workingMethod": 0,
+//   "skill": 0,

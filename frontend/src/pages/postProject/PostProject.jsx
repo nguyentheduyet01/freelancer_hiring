@@ -62,6 +62,7 @@ const PostProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (account === "") {
       navigate("/login?r=posts");
     } else {
@@ -85,38 +86,39 @@ const PostProject = () => {
   useEffect(() => {
     if (success === true) {
       showToastMessageSuccess("Đăng Bài thành công");
+      navigate("/myposts");
     }
     dispatch(clearMessage());
     dispatch(getCategoriesAction());
-  }, [dispatch, success]);
+  }, [dispatch, success, navigate]);
 
   return (
     <>
-      <MetaData title='Create Post' />
+      <MetaData title="Create Post" />
       {isLoad ? (
         <Loader />
       ) : (
-        <Container className='border project p-4' style={{ width: "900px", margin: "0 auto" }}>
-          <h4 style={{ textAlign: "center" }} className='mt-3 mb-3'>
+        <Container className="border project p-4" style={{ width: "900px", margin: "0 auto" }}>
+          <h4 style={{ textAlign: "center" }} className="mt-3 mb-3">
             Đăng Tin
           </h4>
 
           <Row style={{ width: "80%", margin: "0 auto" }}>
             <Form onSubmit={handleSubmit} noValidate validated={validated}>
-              <div className='d-flex flex-row' style={{ width: "100%" }}>
-                <div className='iconPost'>
-                  <img src={icon1} alt='icon1' />
+              <div className="d-flex flex-row" style={{ width: "100%" }}>
+                <div className="iconPost">
+                  <img src={icon1} alt="icon1" />
                 </div>
                 <div style={{ width: "80%", marginLeft: "30px" }}>
                   <h5>Việc cần tuyển</h5>
-                  <Form.Group className='mb-3' controlId='lv'>
+                  <Form.Group className="mb-3" controlId="lv">
                     <Form.Label>Chọn lĩnh vực cần tuyển</Form.Label>
                     <Form.Select
-                      aria-label='Default select example'
+                      aria-label="Default select example"
                       onChange={handleCreatePost}
-                      name='categoryId'
+                      name="categoryId"
                     >
-                      <option value='null'>- Tên Lĩnh Vực -</option>
+                      <option value="null">- Tên Lĩnh Vực -</option>
                       {categories &&
                         categories.map((item, index) => (
                           <option value={item.id} key={index}>
@@ -136,79 +138,79 @@ const PostProject = () => {
                 <option value='3'>Three</option>
               </Form.Select>
             </Form.Group> */}
-                  <Form.Group className='mb-3' controlId='name'>
+                  <Form.Group className="mb-3" controlId="name">
                     <Form.Label>Đặt tên cụ thể cho công việc cần tuyển</Form.Label>
                     <Form.Control
                       required
-                      type='text'
-                      name='title'
-                      placeholder='VD: Thiết kế bán hàng'
+                      type="text"
+                      name="title"
+                      placeholder="VD: Thiết kế bán hàng"
                       onChange={handleCreatePost}
                     />
-                    <Form.Control.Feedback type='invalid'>
+                    <Form.Control.Feedback type="invalid">
                       Vui lòng nhập trường này
                     </Form.Control.Feedback>
                   </Form.Group>
                 </div>
               </div>
-              <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-                <div className='iconPost'>
-                  <img src={icon2} alt='icon1' />
+              <div className="d-flex flex-row mt-3" style={{ width: "100%" }}>
+                <div className="iconPost">
+                  <img src={icon2} alt="icon1" />
                 </div>
                 <div style={{ width: "80%", marginLeft: "30px" }}>
                   <h5>Thông tin đầy đủ về yêu cầu tuyển dụng</h5>
-                  <Form.Group className='mb-3' controlId='lv'>
+                  <Form.Group className="mb-3" controlId="lv">
                     <Form.Label>
                       Nội dung chi tiết, và các đầu việc cần Freelancer thực hiện (càng chi tiết,
                       freelancer càng có đầy đủ thông tin để gửi báo giá chính xác hơn).
                     </Form.Label>
                     <Form.Control
                       required
-                      as='textarea'
+                      as="textarea"
                       rows={4}
-                      name='descriptions'
+                      name="descriptions"
                       onChange={handleCreatePost}
-                      placeholder='Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán...'
+                      placeholder="Ví dụ: Các giao diện website cần thiết kế như trang chủ, xem hàng, thanh toán..."
                     />
-                    <Form.Control.Feedback type='invalid'>
+                    <Form.Control.Feedback type="invalid">
                       Vui lòng nhập trường này
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group className='mb-3' controlId='skill'>
+                  <Form.Group className="mb-3" controlId="skill">
                     <Form.Label>Kỹ năng yêu cầu freelancer phải có</Form.Label>
                     <Form.Control
                       required
-                      as='textarea'
-                      type='text'
+                      as="textarea"
+                      type="text"
                       row={2}
-                      name='requirement'
+                      name="requirement"
                       onChange={handleCreatePost}
-                      placeholder='VD: Thiết kế bán hàng'
+                      placeholder="VD: Thiết kế bán hàng"
                     />
-                    <Form.Control.Feedback type='invalid'>
+                    <Form.Control.Feedback type="invalid">
                       Vui lòng nhập trường này
                     </Form.Control.Feedback>
                   </Form.Group>
                   <div style={{ width: "80%" }}>
-                    <Form.Group className='mb-3' controlId='date'>
+                    <Form.Group className="mb-3" controlId="date">
                       <Form.Label>Hạn cuối nhận chào giá của freelancer</Form.Label>
                       <Form.Control
                         required
-                        type='date'
-                        name='expired'
+                        type="date"
+                        name="expired"
                         onChange={handleCreatePost}
-                        placeholder='VD: Thiết kế bán hàng'
+                        placeholder="VD: Thiết kế bán hàng"
                       />
-                      <Form.Control.Feedback type='invalid'>
+                      <Form.Control.Feedback type="invalid">
                         Vui lòng nhập trường này
                       </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='lh'>
+                    <Form.Group className="mb-3" controlId="lh">
                       <Form.Label>Loại hình làm việc</Form.Label>
                       <Form.Select
-                        aria-label='Default select example'
-                        name='workingMethod'
+                        aria-label="Default select example"
+                        name="workingMethod"
                         onChange={handleCreatePost}
                       >
                         {hts.map((item, index) => {
@@ -237,65 +239,65 @@ const PostProject = () => {
                   </div>
                 </div>
               </div>
-              <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-                <div className='iconPost'>
-                  <img src={icon3} alt='icon1' />
+              <div className="d-flex flex-row mt-3" style={{ width: "100%" }}>
+                <div className="iconPost">
+                  <img src={icon3} alt="icon1" />
                 </div>
                 <div style={{ width: "80%", marginLeft: "30px" }}>
                   <h5>Yêu cầu khác với freelancer</h5>
                   <div style={{ width: "60%" }}>
-                    <Form.Group className='mb-3' controlId='nct'>
+                    <Form.Group className="mb-3" controlId="nct">
                       <Form.Label>Cần tuyển freelancer làm việc tại</Form.Label>
                       <Form.Control
                         required
-                        type='text'
-                        name='address'
+                        type="text"
+                        name="address"
                         onChange={handleCreatePost}
-                        placeholder='Hà Nội'
+                        placeholder="Hà Nội"
                       />
                       {/* <Form.Select aria-label='Default select example'>
                   <option value=''>- Nơi cần tuyển -</option>
                 </Form.Select> */}
-                      <Form.Control.Feedback type='invalid'>
+                      <Form.Control.Feedback type="invalid">
                         Vui lòng nhập trường này
                       </Form.Control.Feedback>
                     </Form.Group>
                   </div>
                 </div>
               </div>
-              <div className='d-flex flex-row mt-3' style={{ width: "100%" }}>
-                <div className='iconPost'>
-                  <img src={icon4} alt='icon1' />
+              <div className="d-flex flex-row mt-3" style={{ width: "100%" }}>
+                <div className="iconPost">
+                  <img src={icon4} alt="icon1" />
                 </div>
                 <div style={{ width: "80%", marginLeft: "30px" }}>
                   <h5>Ngân sách dự kiến chi cho công việc này</h5>
                   <div>
-                    <Form.Group className='mb-3' controlId='httl' style={{ width: "60%" }}>
+                    <Form.Group className="mb-3" controlId="httl" style={{ width: "60%" }}>
                       <Form.Label>Hình thức trả lương</Form.Label>
                       <Form.Select
-                        aria-label='Default select example'
-                        name='paymentMethod'
+                        aria-label="Default select example"
+                        name="paymentMethod"
                         onChange={handleCreatePost}
                       >
-                        <option value='1'>Trả theo dự án</option>
-                        <option value='2'>Trả theo giờ</option>
-                        <option value='3'>Trả theo tháng</option>
+                        <option value="1">Trả theo dự án</option>
+                        <option value="2">Trả theo giờ</option>
+                        <option value="3">Trả theo tháng</option>
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group className='mb-3'>
+                    <Form.Group className="mb-3">
                       <Form.Label>Số tiền tối đa có thể trả</Form.Label>
-                      <div className='d-flex flex-column justify-content-between'>
+                      <div className="d-flex flex-column justify-content-between">
                         <Form.Control
                           required
-                          type='number'
-                          aria-label='Default select example'
+                          type="number"
+                          aria-label="Default select example"
                           style={{ width: "60%" }}
-                          placeholder='Khoảng'
-                          name='budget'
+                          placeholder="Khoảng"
+                          name="budget"
                           onChange={handleCreatePost}
                         />
 
-                        <Form.Control.Feedback type='invalid'>
+                        <Form.Control.Feedback type="invalid">
                           Vui lòng nhập trường này
                         </Form.Control.Feedback>
                       </div>
@@ -306,11 +308,11 @@ const PostProject = () => {
               <Form.Group>
                 <div style={{ width: "20%" }}></div>
                 <Button
-                  variant='warning'
-                  type='submit'
+                  variant="warning"
+                  type="submit"
                   style={{ width: "80%", marginLeft: "111px", fontWeight: "500" }}
                 >
-                  Submit
+                  Đăng bài viết
                 </Button>
               </Form.Group>
             </Form>

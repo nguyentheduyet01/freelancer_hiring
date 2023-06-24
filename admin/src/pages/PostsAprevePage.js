@@ -15,6 +15,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TablePagination,
   TableRow,
   Typography,
 } from "@mui/material";
@@ -38,7 +39,7 @@ const TABLE_HEAD = [
   { id: "descriptions", label: "Mô tả", alignRight: false },
   { id: "requirement", label: "Yêu cầu", alignRight: false },
   { id: "budget", label: "Ngày hết Hạn", alignRight: false },
-  { id: "status", label: "Trang thái", alignRight: false },
+  { id: "status", label: "Trạng thái", alignRight: false },
   { id: "" },
 ];
 
@@ -119,6 +120,15 @@ export default function PostsAprevePage() {
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setPage(0);
+    setRowsPerPage(parseInt(event.target.value, 10));
+  };
+
   useEffect(() => {
     dispatch(clearMessage());
     if (approveSuccess === true) {
@@ -134,11 +144,11 @@ export default function PostsAprevePage() {
       </Helmet>
 
       <Container>
-        <Stack direction='row' alignItems='center' justifyContent='space-between' mb={5}>
-          <Typography variant='h4' gutterBottom>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h4" gutterBottom>
             Quản lý bài đăng
           </Typography>
-          <Button variant='contained' startIcon={<Iconify icon='eva:plus-fill' />}>
+          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             Thêm bài đăng
           </Button>
         </Stack>
@@ -164,87 +174,89 @@ export default function PostsAprevePage() {
                 />
                 <TableBody>
                   {posts?.data?.length !== 0 &&
-                    posts?.data?.map((row) => {
-                      const { id, title, descriptions, status, requirement, budget } = row;
-                      // const selectedUser = selected.indexOf(name) !== -1;
+                    posts?.data
+                      ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      ?.map((row) => {
+                        const { id, title, descriptions, status, requirement, budget } = row;
+                        // const selectedUser = selected.indexOf(name) !== -1;
 
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          // selected={selectedUser}
-                        >
-                          <TableCell component='th' scope='row' padding='2px'>
-                            <Stack direction='row' alignItems='center' spacing={2}>
-                              {/* <Avatar alt={name} src={avatarUrl} /> */}
-                              <Typography variant='subtitle2' noWrap>
-                                <div
-                                  style={{
-                                    color: "black",
-                                    height: "47px",
-                                    width: "200px",
-                                    overflow: "hidden",
-                                    display: "-webkit-box",
-                                    WebkitLineClamp: 1,
-                                    WebkitBoxOrient: "vertical",
-                                  }}
-                                >
-                                  {title}
-                                </div>
-                              </Typography>
-                            </Stack>
-                          </TableCell>
+                        return (
+                          <TableRow
+                            hover
+                            key={id}
+                            tabIndex={-1}
+                            // selected={selectedUser}
+                          >
+                            <TableCell component="th" scope="row" padding="2px">
+                              <Stack direction="row" alignItems="center" spacing={2}>
+                                {/* <Avatar alt={name} src={avatarUrl} /> */}
+                                <Typography variant="subtitle2" noWrap>
+                                  <div
+                                    style={{
+                                      color: "black",
+                                      height: "47px",
+                                      width: "200px",
+                                      overflow: "hidden",
+                                      display: "-webkit-box",
+                                      WebkitLineClamp: 1,
+                                      WebkitBoxOrient: "vertical",
+                                    }}
+                                  >
+                                    {title}
+                                  </div>
+                                </Typography>
+                              </Stack>
+                            </TableCell>
 
-                          <TableCell align='left'>
-                            <div
-                              style={{
-                                color: "black",
-                                height: "47px",
-                                overflow: "hidden",
-                                display: "-webkit-box",
-                                WebkitLineClamp: 2,
-                                WebkitBoxOrient: "vertical",
-                              }}
-                            >
-                              {descriptions}
-                            </div>
-                          </TableCell>
+                            <TableCell align="left">
+                              <div
+                                style={{
+                                  color: "black",
+                                  height: "47px",
+                                  overflow: "hidden",
+                                  display: "-webkit-box",
+                                  WebkitLineClamp: 2,
+                                  WebkitBoxOrient: "vertical",
+                                }}
+                              >
+                                {descriptions}
+                              </div>
+                            </TableCell>
 
-                          <TableCell align='left'>
-                            <div
-                              style={{
-                                color: "black",
-                                height: "47px",
-                                overflow: "hidden",
-                                display: "-webkit-box",
-                                WebkitLineClamp: 2,
-                                WebkitBoxOrient: "vertical",
-                              }}
-                            >
-                              {requirement}
-                            </div>
-                          </TableCell>
+                            <TableCell align="left">
+                              <div
+                                style={{
+                                  color: "black",
+                                  height: "47px",
+                                  overflow: "hidden",
+                                  display: "-webkit-box",
+                                  WebkitLineClamp: 2,
+                                  WebkitBoxOrient: "vertical",
+                                }}
+                              >
+                                {requirement}
+                              </div>
+                            </TableCell>
 
-                          <TableCell align='left'>vnđ{budget}</TableCell>
+                            <TableCell align="left">vnđ{budget}</TableCell>
 
-                          <TableCell align='left'>
-                            <Label color={status === 0 ? "error" : "success"}>
-                              {status === 0 ? "Chờ duyệt" : "Đã duyệt"}
-                            </Label>
-                            {/* {status} */}
-                          </TableCell>
+                            <TableCell align="left">
+                              <Label color={status === 0 ? "error" : "success"}>
+                                {status === 0 ? "Chờ duyệt" : "Đã duyệt"}
+                              </Label>
+                              {/* {status} */}
+                            </TableCell>
 
-                          <TableCell align='right'>
-                            <IconButton
-                              size='small'
-                              // color='inherit'
-                              onClick={() => handleOpenMenu(id)}
-                            ></IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                            <TableCell align="right">
+                              <IconButton
+                                size="small"
+                                // color='inherit'
+                                onClick={() => handleOpenMenu(id)}
+                              ></IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -255,17 +267,17 @@ export default function PostsAprevePage() {
                 {isNotFound && (
                   <TableBody>
                     <TableRow>
-                      <TableCell align='center' colSpan={6} sx={{ py: 3 }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
                         <Paper
                           sx={{
                             textAlign: "center",
                           }}
                         >
-                          <Typography variant='h6' paragraph>
+                          <Typography variant="h6" paragraph>
                             Not found
                           </Typography>
 
-                          <Typography variant='body2'>
+                          <Typography variant="body2">
                             No results found for &nbsp;
                             <strong>&quot;{filterName}&quot;</strong>.
                             <br /> Try checking for typos or using complete words.
@@ -279,15 +291,15 @@ export default function PostsAprevePage() {
             </TableContainer>
           </Scrollbar>
 
-          {/* <TablePagination
+          <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
-            component='div'
-            count={USERLIST.length}
+            component="div"
+            count={posts?.data?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          /> */}
+          />
         </Card>
       </Container>
 
