@@ -47,7 +47,7 @@ const DDFindJob = () => {
           link: "search?q=pasttime",
         },
       ],
-    },
+    }, 
     {
       id: "2",
       title: "Tìm gói dịch vụ",
