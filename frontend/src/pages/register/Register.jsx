@@ -41,90 +41,132 @@ const Register = () => {
 
   return (
     <>
-      <section className='vh-500'>
-        <div className='container py-5 h-60'>
-          <div className='row d-flex align-items-center justify-content-center h-100'>
-            <div className='col-md-8 col-lg-7 col-xl-6'>
-              <Card.Img
-                className='img-fluid'
-                style={{ background: "wheat", borderRadius: "12px" }}
-                alt='Phone image'
-                src={
-                  "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-register-form/draw2.svg"
-                }
-              />
-            </div>
-            <div className='col-md-7 col-lg-5 col-xl-5 offset-xl-1'>
-              <form style={{ width: "70%" }} onSubmit={registerSubmit} method='POST'>
-                <div className='form-outline '>
-                  <input
-                    type='email'
-                    id='form1Example13'
-                    className='form-control'
-                    name='username'
-                    onChange={registerHandle}
-                  />
-                  <label className='form-label' htmlFor='form1Example13'>
-                    Email
-                  </label>
-                </div>
-
-                <div className='form-outline '>
-                  <input
-                    type='password'
-                    id='form1Example23'
-                    className='form-control'
-                    name='password'
-                    onChange={registerHandle}
-                  />
-                  <label className='form-label' htmlFor='form1Example23'>
-                    Mật khẩu
-                  </label>
-                </div>
-
-                <div className='d-flex justify-content-around align-items-center mb-2'>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='checkbox'
-                      value=''
-                      id='form1Example3'
+      <section className="h-100 ">
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col">
+              <div className="card card-registration my-4">
+                <div className="row g-0">
+                  <div className="col-xl-6 d-none d-xl-block">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                      alt="Sample photo"
+                      className="img-fluid"
+                      // style={{"border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"}}
                     />
-                    <label className='form-check-label' htmlFor='form1Example3'>
-                      {" "}
-                      Nhớ{" "}
-                    </label>
                   </div>
-                  <span>Quên mật khẩu?</span>
+                  <div className="col-xl-6">
+                    <div className="card-body p-md-5 text-black">
+                      <h3 className="mb-5 text-uppercase">Đăng Ký</h3>
+
+                      <div className="row">
+                        <div className="">
+                          <div className="form-outline">
+                            <input type="text" id="name" className="form-control form-control-lg" />
+                            <label className="form-label" for="name">
+                              Họ và tên
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="">
+                          <div className="form-outline">
+                            <input
+                              type="text"
+                              id="email"
+                              className="form-control form-control-lg"
+                            />
+                            <label className="form-label" for="email">
+                              Email
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="text" id="sdt" className="form-control form-control-lg" />
+                        <label className="form-label" for="sdt">
+                          Số điện thoại
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="address" className="form-control form-control-lg" />
+                        <label className="form-label" for="address">
+                          Địa chỉ
+                        </label>
+                      </div>
+
+                      <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <h6 className="mb-0 me-4">Giới tính: </h6>
+
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="femaleGender"
+                            value="option1"
+                          />
+                          <label className="form-check-label" for="femaleGender">
+                            Nam
+                          </label>
+                        </div>
+
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="maleGender"
+                            value="option2"
+                          />
+                          <label className="form-check-label" for="maleGender">
+                            Nữ
+                          </label>
+                        </div>
+
+                        <div className="form-check form-check-inline mb-0">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="otherGender"
+                            value="option3"
+                          />
+                          <label className="form-check-label" for="otherGender">
+                            Khác
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="sdt" className="form-control form-control-lg" />
+                        <label className="form-label" for="sdt">
+                          Số điện thoại
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input type="password" id="pass" className="form-control form-control-lg" />
+                        <label className="form-label" for="pass">
+                          Mật khẩu
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input type="password" id="pass" className="form-control form-control-lg" />
+                        <label className="form-label" for="pass">
+                          Xác nhận Mật khẩu
+                        </label>
+                      </div>
+                      <div className="d-flex justify-content-end pt-3">
+                        <button type="button" className="btn btn-warning btn-lg ms-2">
+                          Đăng ký
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <button
-                  type='submit'
-                  className='btn btn-lg btn-block'
-                  style={{ width: "100%", backgroundColor: "#557977", color: "white" }}
-                >
-                  Sign in
-                </button>
-
-                <div className='divider d-flex align-items-center my-2'>
-                  <p className='text-center fw-bold mx-3 mb-0 text-muted'>OR</p>
-                </div>
-
-                <button
-                  className='btn btn-primary'
-                  style={{ backgroundColor: "#3b5998", width: "100%" }}
-                  role='button'
-                >
-                  <i className='fab fa-facebook-f me-2'></i>Continue with Facebook
-                </button>
-                <button
-                  className='btn btn-primary '
-                  style={{ backgroundColor: "#dd4b39", width: "100%", marginTop: "20px" }}
-                  role='button'
-                >
-                  <i className='fab fa-twitter me-2'></i>Continue with Gmail
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
