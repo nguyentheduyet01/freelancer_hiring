@@ -49,9 +49,9 @@ const Login = () => {
                 className='img-fluid'
                 style={{ background: "wheat", borderRadius: "12px" }}
                 alt='Phone image'
-                src={
-                  "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                }
+                  src={
+                    "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                  }
               />
             </div>
             <div className='col-md-7 col-lg-5 col-xl-5 offset-xl-1'>
