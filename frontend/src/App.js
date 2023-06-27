@@ -11,6 +11,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import NotFound from "./pages/NotFound/NotFound";
 import FreelanceSearch from "./pages/Search/FreelanceSearch";
 import Search from "./pages/Search/Search";
+import Freelancer from "./pages/freelancer/Freelancer";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import PostDetail from "./pages/postDetail/PostDetail";
@@ -19,9 +20,8 @@ import ListPost from "./pages/profile/ListPost";
 import Profile from "./pages/profile/Profile";
 import Setting from "./pages/profile/Setting";
 import UpdateProfile from "./pages/profile/UpdateProfile";
-import { getUserAction } from "./reducer/actions/userAction";
-import Freelancer from "./pages/freelancer/Freelancer";
 import Register from "./pages/register/Register";
+import { getUserAction } from "./reducer/actions/userAction";
 
 function App() {
   const dispatch = useDispatch();

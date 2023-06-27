@@ -25,7 +25,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState({ status: "" });
   const { user, skills, isLoad, updateSuccess, statusChange, cvs } = useSelector(
-    (state) => state.user,
+    (state) => state.user
   );
   const pathImage = user?.images?.length > 0 ? user?.images[0] : avatar;
   const date = new Date();
@@ -46,7 +46,7 @@ const Profile = () => {
 
   const downloadCv = async (id) => {
     const link = document.createElement("a");
-    link.href = `http://localhost:8080/api/filedatas/${id}`;
+    link.href = `https://localhost:7001/api/filedatas/${id}`;
 
     const clickEvent = new MouseEvent("click", {
       view: window,
@@ -68,62 +68,62 @@ const Profile = () => {
   }, [dispatch, user, updateSuccess, statusChange]);
   return (
     <>
-      <MetaData title='Profile' />
+      <MetaData title="Profile" />
       {isLoad ? (
         <Loader />
       ) : (
         <Container>
-          <Row className='border p-3 rounded-4 mt-5'>
-            <Col className='d-flex'>
+          <Row className="border p-3 rounded-4 mt-5">
+            <Col className="d-flex">
               <div
-                className='p-2 d-flex flex-column justify-content-center'
+                className="p-2 d-flex flex-column justify-content-center"
                 style={{ width: "20%" }}
               >
                 <img
                   src={pathImage}
-                  alt='avatar'
+                  alt="avatar"
                   style={{ width: "100%" }}
-                  className='rounded-circle'
+                  className="rounded-circle"
                 />
               </div>
-              <div className='d-flex flex-column justify-content-center'>
-                <div className='d-flex'>
+              <div className="d-flex flex-column justify-content-center">
+                <div className="d-flex">
                   <h4>{user?.name}</h4>
-                  <Link to='update'>
-                    <p className='penCircle'>
-                      <img src={pen} alt='pen' style={{ width: "20px" }} />
+                  <Link to="update">
+                    <p className="penCircle">
+                      <img src={pen} alt="pen" style={{ width: "20px" }} />
                     </p>
                   </Link>
                 </div>
                 <div>
-                  <img src={placeholder} alt='placeholder' style={{ width: "25px" }} />
+                  <img src={placeholder} alt="placeholder" style={{ width: "25px" }} />
                   <span style={{ color: "gray" }}>
                     {user?.address} - {date.toLocaleString()}
                   </span>
                 </div>
-                <div className='mt-3'>
-                  <div className='d-flex'>
+                <div className="mt-3">
+                  <div className="d-flex">
                     {skills?.length !== 0 &&
                       skills?.map((skill, index) => (
-                        <button className='skillButton' key={index}>
-                          <Link className='linkSkill'>{skill?.skill?.name}</Link>
+                        <button className="skillButton" key={index}>
+                          <Link className="linkSkill">{skill?.skill?.name}</Link>
                         </button>
                       ))}
                   </div>
                 </div>
               </div>
             </Col>
-            <Col className='d-flex justify-content-center'>
-              <div className='information border px-5 py-4' style={{ width: "75%" }}>
+            <Col className="d-flex justify-content-center">
+              <div className="information border px-5 py-4" style={{ width: "75%" }}>
                 <div>
                   <h4>Thông tin liên lạc</h4>
                   <div>
                     <div>
-                      <img src={email} alt='email' />
+                      <img src={email} alt="email" />
                       <span style={{ marginLeft: "10px" }}>{user?.email}</span>
                     </div>
                     <div>
-                      <img src={phone} alt='phone' />
+                      <img src={phone} alt="phone" />
                       <span style={{ marginLeft: "10px" }}>{user?.phone}</span>
                     </div>
                   </div>
@@ -132,7 +132,7 @@ const Profile = () => {
               </div>
             </Col>
           </Row>
-          <Row className='border p-3 rounded-4 mt-5'>
+          <Row className="border p-3 rounded-4 mt-5">
             <div>
               <div>
                 <h5>Giới thiệu</h5>
@@ -149,23 +149,29 @@ const Profile = () => {
             </div>
             <div></div>
           </Row>
-          <Row className='border p-3 rounded-4 mt-5'>
+          <Row className="border p-3 rounded-4 mt-5">
             <div>
               <div>
                 <h5>Hồ sơ năng lực</h5>
-                <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
+                >
                   {cvs?.data?.length !== 0 &&
                     cvs?.data?.map((item, index) => (
-                      <div key={index} className='cvItem mt-4'>
+                      <div key={index} className="cvItem mt-4">
                         <button
-                          className='skillButton'
+                          className="skillButton"
                           key={index}
                           style={{
                             padding: "10px 3px 0px 3px",
                           }}
                         >
                           <p
-                            className='linkSkill'
+                            className="linkSkill"
                             onClick={() => {
                               downloadCv(item?.id);
                             }}

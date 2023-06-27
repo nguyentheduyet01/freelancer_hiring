@@ -8,10 +8,10 @@ export const getUserAction = createAsyncThunk("user/getUser", async (id) => {
 
 export const getAllUserAction = createAsyncThunk(
   "user/getAllUser",
-  async ({ pagesize = 5, pageindex = 1 }) => {
+  async ({ pagesize = 30, pageindex = 1 }) => {
     const { data } = await axios.get(`users?pagesize=${pagesize}&pageindex=${pageindex}`);
     return data;
-  },
+  }
 );
 
 export const createUserAction = createAsyncThunk("user/createUser", async (user) => {
@@ -38,20 +38,20 @@ export const getAllPostUserAction = createAsyncThunk(
   "user/posts",
   async (id, { pagesize = 5, pageindex = 1 }) => {
     const { data } = await axios.get(
-      `users/${id}/posts?pagesize=${pagesize}&pageindex=${pageindex}`,
+      `users/${id}/posts?pagesize=${pagesize}&pageindex=${pageindex}`
     );
     return data;
-  },
+  }
 );
 
 export const getAllReceivedPostAction = createAsyncThunk(
   "user/posts",
   async (id, { pagesize = 5, pageindex = 1 }) => {
     const { data } = await axios.get(
-      `users/${id}/received?pagesize=${pagesize}&pageindex=${pageindex}`,
+      `users/${id}/received?pagesize=${pagesize}&pageindex=${pageindex}`
     );
     return data;
-  },
+  }
 );
 
 export const userLogoutAction = createAsyncThunk("user/logout", async () => {
