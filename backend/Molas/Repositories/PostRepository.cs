@@ -116,12 +116,11 @@ namespace Molas.Repositories
                 }
 
             }
+            if(data.Count == 1){
+                resultList.Add(data[0]);
+            }
             var result = new ResultDTO();
             result.data = resultList;
-            if(data.Count == 1)
-            {
-                result.data = data[0];
-            }
             return result;
         }
 
